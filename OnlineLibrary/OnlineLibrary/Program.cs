@@ -1,4 +1,6 @@
-﻿int navigate;
+﻿using OnlineLibrary;
+
+int navigate;
 Console.WriteLine("Witaj W bibliotece Online!");
 MainMenu();
 if (navigate == 1)
@@ -31,7 +33,11 @@ if (navigate == 7)
     
 }
 
-
+Book book  = new Book();
+book.Title = "Wiedzmin";
+book.Author = "Andrzej";
+book.Type = book.Types(book.ChooseType());
+Console.WriteLine(book.Type);
 
 
 
