@@ -5,8 +5,49 @@ Console.WriteLine("Witaj W bibliotece Online!");
 MainMenu();
 if (navigate == 1)
 {
-    Console.WriteLine("Dodaj książkę");
+    Library library = new Library();
+    Console.Clear();
+    Console.WriteLine("Podaj ilość książek, które chciałbyś dodać:");
+    library.Capacity = Capacity();
+
+    for (int i = 1; i < library.Capacity+1; i++)
+    {
+        Book book = new Book();
+        book.Type = book.Types(book.ChooseType());
+        Console.Clear();
+        Console.WriteLine($"Wybrany typ to: {book.Type}");
+        Console.WriteLine("\nWprowadź tutuł:");
+        book.Title = Console.ReadLine();
+        Console.WriteLine("\nPodaj autora:");
+        book.Author = Console.ReadLine();
+        Console.Clear();
+        library.AddBook(book);
+    }
+    Console.WriteLine($"Dodane pozycje:");
+    library.PrintLibrary();
+    Console.WriteLine($"\nKsiążki zostały dodane do biblioteki");
 }
+
+int Capacity()
+{
+    int capacity;
+    string check;
+    do
+    {
+        check = Console.ReadLine();
+        if (!int.TryParse(check, out capacity))
+        {
+            Console.WriteLine("Podaj numer");
+        }
+        else if (capacity <= 0)
+        {
+            Console.WriteLine("Podaj wartość większą od zera");
+        }
+
+    } while (!int.TryParse(check, out capacity) || capacity <= 0);
+    return capacity;
+}
+
 if (navigate == 2)
 {
     Console.WriteLine("Przeglądaj ksiązki");
@@ -29,23 +70,17 @@ if (navigate == 6)
 }
 if (navigate == 7)
 {
-    Console.WriteLine("Zamknij program");
+    Console.Clear();
+    Console.WriteLine("Do zobaczenia");
+    Environment.Exit(0);
     
 }
-
-Book book  = new Book();
-book.Title = "Wiedzmin";
-book.Author = "Andrzej";
-book.Type = book.Types(book.ChooseType());
-Console.WriteLine(book.Type);
-
-
 
 void MainMenu()
 {
     
     Console.WriteLine("\nMENU GŁÓWNE");
-    Console.WriteLine("1 Dodaj książke");
+    Console.WriteLine("1 Dodaj książki");
     Console.WriteLine("2 Przeglądaj książki");
     Console.WriteLine("3 Usuń książki");
     Console.WriteLine("4 Dodaj książkę do przeczytanych");
