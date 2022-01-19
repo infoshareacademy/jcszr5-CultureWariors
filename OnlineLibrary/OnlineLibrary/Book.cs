@@ -38,20 +38,23 @@ namespace OnlineLibrary
         {
             int choose;
             string chooseCheck;
+            Console.Clear();
             while (true)
             {
+                
+                Console.WriteLine("Proszę dokonać wyboru kategorii z poniższej listy:");
+                Console.WriteLine("1 Fantastyka");
+                Console.WriteLine("2 Kryminał");
+                Console.WriteLine("3 Romans");
+                Console.WriteLine("4 Naukowa");
+                Console.WriteLine("5 Dramat");
+                Console.WriteLine("6 Dziecięca");
+                Console.WriteLine("7 Obyczajowa");
                 chooseCheck = Console.ReadLine();
                 if (!int.TryParse(chooseCheck, out choose))
                 {
                     Console.Clear();
-                    Console.WriteLine("Proszę dokonać wyboru kategorii z poniższej listy:");
-                    Console.WriteLine("1 Fantastyka");
-                    Console.WriteLine("2 Kryminał");
-                    Console.WriteLine("3 Romans");
-                    Console.WriteLine("4 Naukowa");
-                    Console.WriteLine("5 Dramat");
-                    Console.WriteLine("6 Dziecięca");
-                    Console.WriteLine("7 Obyczajowa");
+                    Console.WriteLine("Proszę wybrać właściwą kategorię");
                 }
 
                 else if (choose <= 0 || choose >= 8)
