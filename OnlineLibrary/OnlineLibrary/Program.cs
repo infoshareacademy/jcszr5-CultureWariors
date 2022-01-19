@@ -1,6 +1,7 @@
 ﻿using OnlineLibrary;
 
 int navigate;
+Library library = new Library();
 Console.WriteLine("Witaj W bibliotece Online!");
 MainMenu();
 if (navigate == 1)
@@ -8,7 +9,6 @@ if (navigate == 1)
     string y;
     do
     {
-        Library library = new Library();
         Console.Clear();
         Console.WriteLine("Podaj ilość książek, które chciałbyś dodać:");
         library.Capacity = Capacity();
