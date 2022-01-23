@@ -2,34 +2,48 @@
 
 int navigate;
 Library library = new Library();
-do
 {
     Console.WriteLine("Witaj W bibliotece Online!");
     MainMenu();
     if (navigate == 1)
     {
 
-        Console.Clear();
-        Console.WriteLine("Podaj ilość książek, które chciałbyś dodać:");
-        library.Capacity = Capacity();
-
-        for (int i = 1; i < library.Capacity + 1; i++)
+        string y;
+        do
         {
-            Book book = new Book();
-            book.Type = book.Types(book.ChooseType());
             Console.Clear();
-            Console.WriteLine($"Wybrany typ to: {book.Type}");
-            Console.WriteLine("\nWprowadź tutuł:");
-            book.Title = Console.ReadLine();
-            Console.WriteLine("\nPodaj autora:");
-            book.Author = Console.ReadLine();
-            Console.Clear();
-            library.AddBook(book);
-        }
+            Console.WriteLine("Podaj ilość książek, które chciałbyś dodać:");
+            library.Capacity = Capacity();
+            for (int i = 1; i < library.Capacity + 1; i++)
+            {
+                Book book = new Book();
+                book.Type = book.Types(book.ChooseType());
+                Console.Clear();
+                Console.WriteLine($"Wybrany typ to: {book.Type}");
+                Console.WriteLine("\nWprowadź tutuł:");
+                book.Title = Console.ReadLine();
+                Console.WriteLine("\nPodaj autora:");
+                book.Author = Console.ReadLine();
+                Console.Clear();
+                library.AddBook(book);
+            }
 
-        Console.WriteLine($"Dodane pozycje:");
-        library.PrintLibrary();
-        Console.WriteLine($"\nKsiążki zostały dodane do biblioteki");
+            Console.WriteLine("Dodane pozycje:");
+            library.PrintLibrary();
+            Console.WriteLine("\nKsiążki zostały dodane do biblioteki");
+            Console.WriteLine("\nWciśnij 'y' jeżeli chcesz powrócić do menu głównego");
+            y = Console.ReadLine();
+            if (y == "y")
+            {
+                Console.Clear();
+                MainMenu();
+                break;
+            }
+            else
+            {
+                Environment.Exit(0);
+            }
+        } while (y == "y");
     }
 
     int Capacity()
@@ -57,12 +71,13 @@ do
     {
         Console.WriteLine("Przeglądaj ksiązki");
         Console.WriteLine("Wybierz typ książki");
-        library.ChooseBookTypeToFind(library.Types(library.ChooseTypeToFind()));
+        library.ChooseBookTypeToFind(library.ChooseTypeToFind());
     }
 
     if (navigate == 3)
     {
         Console.WriteLine("Usuń książkę");
+        library.DeleteBook();
     }
 
     if (navigate == 4)
@@ -87,7 +102,7 @@ do
         Environment.Exit(0);
 
     }
-} while (true);
+}
 
 void MainMenu()
 {

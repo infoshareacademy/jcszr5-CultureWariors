@@ -8,27 +8,9 @@ namespace OnlineLibrary
 {
     public class Book
     {
-        private string title;
-        private string author;
-        private string type;
-
-        public string Title
-        {
-            get { return this.title; }
-            set { this.title = value; }
-        }
-        public string Author{
-            get
-            {
-                return this.author;
-            }
-            set { this.author = value; }
-        }
-        public string Type
-        {
-            get { return this.type; }
-            set { this.type = value; }
-        }
+        public string Title { get; set; }
+        public string Author { get; set; }
+        public string Type { get; set; }
 
         public Book()
         {
@@ -75,22 +57,22 @@ namespace OnlineLibrary
             switch (choose)
             {
                 case 1:
-                    return this.type = "Fantastyka";
+                    return this.Type = "Fantastyka";
                 case 2:
-                   return this.type = "Kryminał";
+                   return this.Type = "Kryminał";
                 case 3:
-                    return this.type = "Romans";
+                    return this.Type = "Romans";
                 case 4:
-                    return this.type = "Naukowa";
+                    return this.Type = "Naukowa";
                 case 5:
-                    return this.type = "Dramat";
+                    return this.Type = "Dramat";
                 case 6:
-                    return this.type = "Dziecięca";
+                    return this.Type = "Dziecięca";
                 case 7:
-                    return this.type = "Obyczajowa";
+                    return this.Type = "Obyczajowa";
             }
 
-            return this.type;
+            return this.Type;
         }
     }
 }

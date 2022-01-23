@@ -8,9 +8,9 @@ using Microsoft.VisualBasic.CompilerServices;
 
 namespace OnlineLibrary
 {
-    public class Library : Book
+    public class Library
     {
-        private int capacity;
+        public int Capacity { get; set; }
         public List<Book> books = new List<Book>();
 
         public void AddBook(Book book)
@@ -18,11 +18,7 @@ namespace OnlineLibrary
             books.Add(book);
         }
 
-        public int Capacity
-        {
-            get { return this.capacity; }
-            set { this.capacity = value; }
-        }
+
 
         public void PrintLibrary()
         {
@@ -34,8 +30,9 @@ namespace OnlineLibrary
             }
         }
 
-        public int ChooseTypeToFind()
+        public string ChooseTypeToFind()
         {
+            string type;
             int choose;
             string chooseCheck;
             Console.Clear();
@@ -63,38 +60,30 @@ namespace OnlineLibrary
                     Console.Clear();
                     Console.WriteLine("Proszę wybrać właściwą kategorię");
                 }
-                else
+
+                switch (choose)
                 {
-                    return choose;
+                    case 1:
+                        return type = "Fantastyka";
+                    case 2:
+                        return type = "Kryminał";
+                    case 3:
+                        return type = "Romans";
+                    case 4:
+                        return type = "Naukowa";
+                    case 5:
+                        return type = "Dramat";
+                    case 6:
+                        return type = "Dziecięca";
+                    case 7:
+                        return type = "Obyczajowa";
+                    case 8:
+                        return type = "All";
                 }
             }
         }
 
-        public string Types(int choose)
-        {
-            string type = "";
-            switch (choose)
-            {
-                case 1:
-                    return type = "Fantastyka";
-                case 2:
-                    return type = "Kryminał";
-                case 3:
-                    return type = "Romans";
-                case 4:
-                    return type = "Naukowa";
-                case 5:
-                    return type = "Dramat";
-                case 6:
-                    return type = "Dziecięca";
-                case 7:
-                    return type = "Obyczajowa";
-                case 8:
-                    return type = "All";
-            }
 
-            return type;
-        }
 
         public void ChooseBookTypeToFind(string type)
         {
@@ -112,10 +101,39 @@ namespace OnlineLibrary
             }
         }
 
+        public void DeleteBook()
+        {
+            string deleteAuthor;
+            string deleteTitle;
+            string sure;
+            int temporaryIndex;
+            Console.WriteLine("Podaj autora i lub tytuł książki");
+            Console.WriteLine("Autor:");
+            deleteAuthor = Console.ReadLine();
+            Console.WriteLine("Tytuł:");
+            deleteTitle = Console.ReadLine();
+            foreach (var book in books)
+            {
+                if (book.Title.Contains(deleteTitle) && book.Author.Contains(deleteAuthor))
+                {
+                    temporaryIndex = books.IndexOf(book);
+                    Console.WriteLine(
+                        $"Znaleziono taką książkę:{books.IndexOf(book)} {book.Title} {book.Author} {book.Type}");
+                    Console.WriteLine("Czy chcesz usunąć tę książkę z biblioteki ? y/n");
+                    sure = Console.ReadLine().ToLower();
+                    if (sure == "y")
+                    {
+                        books.RemoveAt(temporaryIndex);
+                        Console.WriteLine("Książka została usunięta");
+                        break;
+                    }
+                }
+            }
 
-
+        }
     }
 }
+
 
 
         
