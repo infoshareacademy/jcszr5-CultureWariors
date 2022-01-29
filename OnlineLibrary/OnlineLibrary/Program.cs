@@ -72,6 +72,7 @@ while (true)
         Console.Clear();
         Console.WriteLine("Wybierz typ książki");
         library.ChooseBookTypeToFind(library.ChooseTypeToFind());
+        Console.Clear();
         MainMenu();
     }
 
@@ -79,6 +80,7 @@ while (true)
     {
         Console.Clear();
         library.DeleteBook();
+        Console.Clear();
         MainMenu();
     }
 
@@ -100,8 +102,9 @@ while (true)
     {
         Console.Clear();
         string jsonFromFile = File.ReadAllText(@"C:\Users\eweli\Documents\Programing_lovers\ISA\Projekt\jcszr5-CultureWariors\OnlineLibrary\OnlineLibrary\bin\Debug\net6.0\path123.json");
-        List<Library> booksFromFile = JsonSerializer.Deserialize<List<Library>>(jsonFromFile);
+        List<Book> booksFromFile = JsonSerializer.Deserialize<List<Book>>(jsonFromFile);
         Console.WriteLine(booksFromFile[0]);
+        library.books=booksFromFile;
         MainMenu();
     }
 
