@@ -1,18 +1,21 @@
-﻿using OnlineLibrary;
+﻿using System.Text.Json;
+using System.Text.Json.Nodes;
+using OnlineLibrary;
 
 int navigate;
 Library library = new Library();
-do
+Console.WriteLine("Witaj W bibliotece Online!");
+MainMenu();
+while (true)
 {
-    Console.WriteLine("Witaj W bibliotece Online!");
-    MainMenu();
     if (navigate == 1)
     {
+
+        string y;
 
         Console.Clear();
         Console.WriteLine("Podaj ilość książek, które chciałbyś dodać:");
         library.Capacity = Capacity();
-
         for (int i = 1; i < library.Capacity + 1; i++)
         {
             Book book = new Book();
@@ -27,9 +30,20 @@ do
             library.AddBook(book);
         }
 
-        Console.WriteLine($"Dodane pozycje:");
+        Console.WriteLine("Dodane pozycje:");
         library.PrintLibrary();
-        Console.WriteLine($"\nKsiążki zostały dodane do biblioteki");
+        Console.WriteLine("\nKsiążki zostały dodane do biblioteki");
+        Console.WriteLine("\nWciśnij 'y' jeżeli chcesz wrócić do menu głównego");
+        y = Console.ReadLine();
+        if (y == "y")
+        {
+            Console.Clear();
+            MainMenu();
+        }
+        else
+        {
+            Environment.Exit(0);
+        }
     }
 
     int Capacity()
@@ -55,14 +69,19 @@ do
 
     if (navigate == 2)
     {
-        Console.WriteLine("Przeglądaj ksiązki");
+        Console.Clear();
         Console.WriteLine("Wybierz typ książki");
-        library.ChooseBookTypeToFind(library.Types(library.ChooseTypeToFind()));
+        library.ChooseBookTypeToFind(library.ChooseTypeToFind());
+        Console.Clear();
+        MainMenu();
     }
 
     if (navigate == 3)
     {
-        Console.WriteLine("Usuń książkę");
+        Console.Clear();
+        library.DeleteBook();
+        Console.Clear();
+        MainMenu();
     }
 
     if (navigate == 4)
@@ -72,12 +91,21 @@ do
 
     if (navigate == 5)
     {
-        Console.WriteLine("Zapisz Liste");
+        Console.Clear();
+        string json = JsonSerializer.Serialize(library.books);
+        File.WriteAllText(@".\path123.json", json);
+        Console.WriteLine("Ksiązki zostały zapisane");
+        MainMenu();
     }
 
     if (navigate == 6)
     {
-        Console.WriteLine("Wczytaj listę");
+        Console.Clear();
+        string jsonFromFile = File.ReadAllText(@"C:\Users\eweli\Documents\Programing_lovers\ISA\Projekt\jcszr5-CultureWariors\OnlineLibrary\OnlineLibrary\bin\Debug\net6.0\path123.json");
+        List<Book> booksFromFile = JsonSerializer.Deserialize<List<Book>>(jsonFromFile);
+        Console.WriteLine(booksFromFile[0]);
+        library.books=booksFromFile;
+        MainMenu();
     }
 
     if (navigate == 7)
@@ -87,11 +115,13 @@ do
         Environment.Exit(0);
 
     }
-} while (true);
 
+
+
+}
 void MainMenu()
 {
-    
+
     Console.WriteLine("\nMENU GŁÓWNE");
     Console.WriteLine("1 Dodaj książki");
     Console.WriteLine("2 Przeglądaj książki");
@@ -126,4 +156,5 @@ void MainMenu()
     }
 
 }
+
 
