@@ -6,7 +6,7 @@ Admin admin = new Admin();
 UsersList usersList = new UsersList();
 LoginMenu loginMenu = new LoginMenu();
 Library library = new Library();
-string jsonLibraryFromFile = File.ReadAllText(@"D:\jcszr5-CultureWariors\jcszr5-CultureWariors\OnlineLibrary\path123.json");
+string jsonLibraryFromFile = File.ReadAllText(@"D:\jcszr5-CultureWariors\jcszr5-CultureWariors\OnlineLibrary\path123.json"); 
 library.library = JsonSerializer.Deserialize<List<Book>>(jsonLibraryFromFile);
 Login();
 void Login()
@@ -39,7 +39,8 @@ void Login()
                 }
                 else
                 {
-                    Console.WriteLine("Błędne dane do logowania");
+                    Console.Clear();
+                    Console.WriteLine("Błędne dane do logowania\n");
                     break;
                 }
             case 4:
@@ -55,11 +56,11 @@ void AdminUser()
     {
         Console.Clear();
         admin.ShowMenu();
+        string jsonLibrary = JsonSerializer.Serialize(library.library);
         switch (admin.NavigateMenu())
         {
             case 1:
                 library.AddBook(library.CreateBook());
-                string jsonLibrary = JsonSerializer.Serialize(library.library);
                 File.WriteAllText(@"D:\jcszr5-CultureWariors\jcszr5-CultureWariors\OnlineLibrary\path123.json", jsonLibrary);
                 break;
             case 2:
@@ -67,9 +68,12 @@ void AdminUser()
                 break;
             case 3:
                 library.DeleteBook();
+                
+                File.WriteAllText(@"D:\jcszr5-CultureWariors\jcszr5-CultureWariors\OnlineLibrary\path123.json", jsonLibrary);
                 break;
             case 4:
                 library.EditBookFromLibrary();
+                File.WriteAllText(@"D:\jcszr5-CultureWariors\jcszr5-CultureWariors\OnlineLibrary\path123.json", jsonLibrary);
                 break;
             case 7:
                 Console.Clear();

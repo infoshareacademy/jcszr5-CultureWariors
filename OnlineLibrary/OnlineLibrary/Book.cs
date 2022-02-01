@@ -11,6 +11,8 @@ namespace OnlineLibrary
         public string Title { get; set; }
         public string Author { get; set; }
         public string Type { get; set; }
+
+       
         public string ChooseType()
         {
             string choose;
