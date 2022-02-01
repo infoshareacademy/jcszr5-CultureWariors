@@ -10,36 +10,45 @@ namespace OnlineLibrary
 {
     public class Library
     {
-        public int Capacity { get; set; }
-        public List<Book> books = new List<Book>();
-
+        public List<Book> library = new List<Book>();
         public void AddBook(Book book)
         {
-            books.Add(book);
+            Console.Clear();
+            library.Add(book);
+            Console.WriteLine("Pomyślnie dodano ksiąkę, nacisnij dowolny przycisk aby powrócić do menu");
+            Console.ReadKey();
+            Console.Clear();
         }
-
-
-
+        public Book CreateBook()
+        {
+            Book book = new Book();
+            book.Type = book.ChooseType();
+            Console.Clear();
+            Console.WriteLine($"Wybrany typ to: {book.Type}");
+            Console.WriteLine("\nWprowadź tutuł:");
+            book.Title = Console.ReadLine();
+            Console.WriteLine("\nPodaj autora:");
+            book.Author = Console.ReadLine();
+            Console.Clear();
+            return book;
+        }
         public void PrintLibrary()
         {
             int a = 0;
-            foreach (var book in books)
+            foreach (var book in library)
             {
                 a++;
-                Console.WriteLine($"\nTyp: {book.Type}\nTytuł: {book.Title}\nAutor:{book.Author}");
+                Console.WriteLine($"{book.Title} {book.Author} {book.Type}");
             }
         }
-
         public string ChooseTypeToFind()
         {
             string type;
             int choose;
-            string chooseCheck;
             Console.Clear();
             while (true)
             {
-
-                Console.WriteLine("Proszę dokonać wyboru kategorii z poniższej listy:");
+                Console.WriteLine("Proszę dokonać wyboru kategorii z poniższej listy:\n");
                 Console.WriteLine("1 Fantastyka");
                 Console.WriteLine("2 Kryminał");
                 Console.WriteLine("3 Romans");
@@ -48,8 +57,7 @@ namespace OnlineLibrary
                 Console.WriteLine("6 Dziecięca");
                 Console.WriteLine("7 Obyczajowa");
                 Console.WriteLine("8 Wszystkie książki");
-                chooseCheck = Console.ReadLine();
-                if (!int.TryParse(chooseCheck, out choose))
+                if (!int.TryParse(Console.ReadLine(), out choose))
                 {
                     Console.Clear();
                     Console.WriteLine("Proszę wybrać właściwą kategorię");
@@ -82,13 +90,10 @@ namespace OnlineLibrary
                 }
             }
         }
-
-
-
-        public void ChooseBookTypeToFind(string type)
+        public void ShowFoundBooks(string type)
         {
             Console.Clear();
-            foreach (var book in books)
+            foreach (var book in library)
             {
                 if (book.Type.Contains(type))
                 {
@@ -96,40 +101,149 @@ namespace OnlineLibrary
                 }
                 else if (type == "All")
                 {
-                    Console.WriteLine($"{book.Title} {book.Author} {book.Type}");
+                    PrintLibrary();
+                    break;
+                }
+            }
+
+            Console.WriteLine("\nNacisnij dowolny przycisk aby powrócić do menu");
+            Console.ReadKey();
+            Console.Clear();
+        }
+        public int ChooseBook()
+        {
+            int choose;
+            while (true)
+            {
+
+                if (!int.TryParse(Console.ReadLine(), out choose))
+                {
+                    Console.WriteLine("Proszę wybrać numer");
+                }
+                else break;
+            }
+
+            return choose;
+        }
+        public void DeleteBook()
+        {
+            Console.Clear();
+            Console.WriteLine("Wybierz książkę którą chcesz usunąć wpisując jej indeks\n");
+            foreach (var books in library)
+            {
+                int index = library.IndexOf(books);
+                Console.WriteLine($"{index} {books.Title} {books.Author} {books.Type}");
+            }
+
+            while (true)
+                try
+                {
+                    library.RemoveAt(ChooseBook());
+                    break;
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    Console.WriteLine("Błędny indeks");
+                }
+            Console.Clear();
+            Console.WriteLine("Pomyślnie usunięto książkę, nacisnij dowolny przycisk aby powrócić do menu");
+            Console.ReadKey();
+            Console.Clear();
+        }
+        public void EditBookFromLibrary()
+        {
+            Console.WriteLine("Wybierz książkę którą chcesz edytować wpisując jej indeks\n");
+            foreach (var books in library)
+            {
+                int index = library.IndexOf(books);
+                Console.WriteLine($"{index} {books.Title} {books.Author} {books.Type}");
+            }
+
+
+            while (true)
+            {
+                int chosenIndex = ChooseBook();
+                try
+                {
+                    library[chosenIndex].Title = "";
+                    Console.WriteLine("Edytuj tytuł: ");
+                    library[chosenIndex].Title = Console.ReadLine();
+                    Console.WriteLine("Edytuj autora: ");
+                    library[chosenIndex].Author = Console.ReadLine();
+                    library[chosenIndex].Type = ChooseType();
+                    break;
+
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    Console.WriteLine("Błędny indeks");
                 }
             }
         }
 
-        public void DeleteBook()
+        public Book MoveFromLibraryToFavourites()
         {
-            string deleteAuthor;
-            string deleteTitle;
-            string sure;
-            int temporaryIndex;
-            Console.WriteLine("Podaj autora i lub tytuł książki");
-            Console.WriteLine("Autor:");
-            deleteAuthor = Console.ReadLine();
-            Console.WriteLine("Tytuł:");
-            deleteTitle = Console.ReadLine();
-            foreach (var book in books)
+            Console.Clear();
+            Console.WriteLine("Wybierz książkę którą chcesz dodać do wypożyczonych wpisując jej indeks\n");
+            foreach (var books in library)
             {
-                if (book.Title.Contains(deleteTitle) && book.Author.Contains(deleteAuthor))
+                int index = library.IndexOf(books);
+                Console.WriteLine($"{index} {books.Title} {books.Author} {books.Type}");
+            }
+            while (true)
+            {
+                int chooseBook = ChooseBook();
+                try
                 {
-                    temporaryIndex = books.IndexOf(book);
-                    Console.WriteLine(
-                        $"Znaleziono taką książkę:{books.IndexOf(book)} {book.Title} {book.Author} {book.Type}");
-                    Console.WriteLine("Czy chcesz usunąć tę książkę z biblioteki ? y/n");
-                    sure = Console.ReadLine().ToLower();
-                    if (sure == "y")
-                    {
-                        books.RemoveAt(temporaryIndex);
-                        Console.WriteLine("Książka została usunięta");
-                        break;
-                    }
+                    return library[chooseBook];
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    Console.WriteLine("Błędny indeks");
                 }
             }
+        }
+        public string ChooseType()
+        {
+            string choose;
+            string type;
+            Console.Clear();
+            while (true)
+            {
 
+                Console.WriteLine("Proszę dokonać wyboru kategorii z poniższej listy:\n");
+                Console.WriteLine("1 Fantastyka");
+                Console.WriteLine("2 Kryminał");
+                Console.WriteLine("3 Romans");
+                Console.WriteLine("4 Naukowa");
+                Console.WriteLine("5 Dramat");
+                Console.WriteLine("6 Dziecięca");
+                Console.WriteLine("7 Obyczajowa");
+                choose = Console.ReadLine();
+                switch (choose)
+                {
+                    case "1":
+                        return type = "Fantastyka";
+                    case "2":
+                        return type = "Kryminał";
+                    case "3":
+                        return type = "Romans";
+                    case "4":
+                        return type = "Naukowa";
+                    case "5":
+                        return type = "Dramat";
+                    case "6":
+                        return type = "Dziecięca";
+                    case "7":
+                        return type = "Obyczajowa";
+                    default:
+                        Console.WriteLine("Proszę wybrać właściwą kategorię");
+                        continue;
+
+                }
+
+
+            }
         }
     }
 }

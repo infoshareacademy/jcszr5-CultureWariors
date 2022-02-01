@@ -11,20 +11,14 @@ namespace OnlineLibrary
         public string Title { get; set; }
         public string Author { get; set; }
         public string Type { get; set; }
-
-        public Book()
+        public string ChooseType()
         {
-
-        }
-        public int ChooseType()
-        {
-            int choose;
-            string chooseCheck;
+            string choose;
+            string type;
             Console.Clear();
             while (true)
             {
-                
-                Console.WriteLine("Proszę dokonać wyboru kategorii z poniższej listy:");
+                Console.WriteLine("Proszę dokonać wyboru kategorii z poniższej listy:\n");
                 Console.WriteLine("1 Fantastyka");
                 Console.WriteLine("2 Kryminał");
                 Console.WriteLine("3 Romans");
@@ -32,47 +26,31 @@ namespace OnlineLibrary
                 Console.WriteLine("5 Dramat");
                 Console.WriteLine("6 Dziecięca");
                 Console.WriteLine("7 Obyczajowa");
-                chooseCheck = Console.ReadLine();
-                if (!int.TryParse(chooseCheck, out choose))
+                choose = Console.ReadLine();
+                switch (choose)
                 {
-                    Console.Clear();
-                    Console.WriteLine("Proszę wybrać właściwą kategorię");
+                    case "1":
+                        return type = "Fantastyka";
+                    case "2":
+                        return type = "Kryminał";
+                    case "3":
+                        return type = "Romans";
+                    case "4":
+                        return type = "Naukowa";
+                    case "5":
+                        return type = "Dramat";
+                    case "6":
+                        return type = "Dziecięca";
+                    case "7":
+                        return type = "Obyczajowa";
+                    default:
+                        Console.WriteLine("Proszę wybrać właściwą kategorię");
+                        continue;
+
                 }
 
-                else if (choose <= 0 || choose >= 8)
-                {
-                    Console.Clear();
-                    Console.WriteLine("Proszę wybrać właściwą kategorię");
-                }
-                else
-                {
-                    return choose;
-                }
+
             }
-            
-        }
-
-        public string Types(int choose)
-        {
-            switch (choose)
-            {
-                case 1:
-                    return this.Type = "Fantastyka";
-                case 2:
-                   return this.Type = "Kryminał";
-                case 3:
-                    return this.Type = "Romans";
-                case 4:
-                    return this.Type = "Naukowa";
-                case 5:
-                    return this.Type = "Dramat";
-                case 6:
-                    return this.Type = "Dziecięca";
-                case 7:
-                    return this.Type = "Obyczajowa";
-            }
-
-            return this.Type;
         }
     }
 }
