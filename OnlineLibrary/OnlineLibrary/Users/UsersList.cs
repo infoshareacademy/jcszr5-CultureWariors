@@ -8,8 +8,11 @@ namespace OnlineLibrary
 {
     public class UsersList
     {
-        private List<RegularUser> users = new List<RegularUser>();
-
+        public List<RegularUser> Users { get; set; }
+        public UsersList()
+        {
+            Users = new List<RegularUser>();
+        }
         public void AddUser()
         {
             Console.Clear();
@@ -19,7 +22,7 @@ namespace OnlineLibrary
             string password = Console.ReadLine();
             Console.Clear();
             RegularUser user = new RegularUser(username, password);
-            users.Add(user);
+            Users.Add(user);
             Console.WriteLine("Pomyślnie dodano użytkownika, naciśnij dowolny przycisk aby kontynuować");
             Console.ReadKey();
             Console.Clear();
@@ -38,7 +41,7 @@ namespace OnlineLibrary
 
         public RegularUser GetRegularUser(string username, string password)
         {
-            foreach (var user in users)
+            foreach (var user in Users)
             {
                 if (user.Username == username && user.Password == password)
                 {
@@ -51,7 +54,7 @@ namespace OnlineLibrary
         }
         public bool UserLoginCheck(string username, string password)
         {
-            foreach (var user in users)
+            foreach (var user in Users)
             {
                 if (user.Username == username && user.Password == password)
                 {
