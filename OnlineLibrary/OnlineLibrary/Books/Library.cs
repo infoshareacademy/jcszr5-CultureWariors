@@ -63,6 +63,7 @@ namespace OnlineLibrary
         public void ShowFoundBooks(BookType type)
         {
             Console.Clear();
+            
             foreach (var book in library)
             {
                 if (book.Type == type)
@@ -160,7 +161,6 @@ namespace OnlineLibrary
         public BookType ChooseType()
         {
             string choose;
-            string type;
             Console.Clear();
             while (true)
             {

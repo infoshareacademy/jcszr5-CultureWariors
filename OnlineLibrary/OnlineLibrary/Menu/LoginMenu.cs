@@ -54,11 +54,7 @@ namespace OnlineLibrary
         
         public void ShowMenu()
         {
-            Console.WriteLine("Witaj w bibliotece online\n");
-            Console.WriteLine("1 Zaloguj się");
-            Console.WriteLine("2 Zarejestruj się");
-            Console.WriteLine("3 Administrator");
-            Console.WriteLine("4 Wyjdź");
+            ConsoleMessages.LoginMenu();
         }
 
         public int NavigateMenu()

@@ -19,6 +19,14 @@ namespace OnlineLibrary
             Console.WriteLine("6 Dziecięca");
             Console.WriteLine("7 Obyczajowa");
         }
+        public static void LoginMenu()
+        {
+            Console.WriteLine("Witaj w bibliotece online\n");
+            Console.WriteLine("1 Zaloguj się");
+            Console.WriteLine("2 Zarejestruj się");
+            Console.WriteLine("3 Administrator");
+            Console.WriteLine("4 Wyjdź");
+        }
         public static void AdminMenu()
         {
             Console.WriteLine("MENU GŁÓWNE\n");
