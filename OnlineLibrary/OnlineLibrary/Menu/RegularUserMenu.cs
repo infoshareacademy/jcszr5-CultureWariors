@@ -40,6 +40,7 @@ namespace OnlineLibrary
         public int NavigateMenu()
         {
             int navigate;
+            Console.Clear();
             while (true)
             {
                 if (!int.TryParse(Console.ReadLine(), out navigate))

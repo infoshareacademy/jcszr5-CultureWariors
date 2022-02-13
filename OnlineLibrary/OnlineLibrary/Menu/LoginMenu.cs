@@ -24,6 +24,7 @@ namespace OnlineLibrary
                         }
                         else
                         {
+                            Console.Clear();
                             Console.WriteLine("Błędne dane do logowania");
                             break;
                         }
