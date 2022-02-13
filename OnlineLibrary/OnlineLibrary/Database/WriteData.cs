@@ -12,13 +12,13 @@ namespace OnlineLibrary
         public static void WriteLibraryToFile(Library library)
         {
             string jsonLibrary = JsonSerializer.Serialize(library.library);
-            File.WriteAllText(@"D:\jcszr5-CultureWariors\jcszr5-CultureWariors\OnlineLibrary\path123.json", jsonLibrary);
+            File.WriteAllText(@"..\..\..\Data\path123.json", jsonLibrary);
             
         }
         public static void WriteUsersToFile(UsersList userslist)
         {
             string jsonUsers = JsonSerializer.Serialize(userslist.Users);
-            File.WriteAllText(@"D:\jcszr5-CultureWariors\jcszr5-CultureWariors\OnlineLibrary\path1234.json", jsonUsers);
+            File.WriteAllText(@"..\..\..\Data\path123.json", jsonUsers);
         }
     }
 }
