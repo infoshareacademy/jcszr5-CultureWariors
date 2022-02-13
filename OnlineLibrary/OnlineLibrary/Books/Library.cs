@@ -91,22 +91,31 @@ namespace OnlineLibrary
                 {
                     Console.WriteLine("Proszę wybrać numer");
                 }
+                
                 else break;
             }
-            return choose;
+            return choose-1;
         }
         public void DeleteBookFromLibrary()
         {
             Console.Clear();
-            PrintBooksWithTextBefore("Wybierz książkę którą chcesz usunąć wpisując jej indeks\n");
+            PrintBooksWithTextBefore("Wybierz książkę którą chcesz usunąć wpisując jej indeks\nlub wybrać 0 aby powrócić\n");
+            
             while (true)
                 try
                 {
-                    library.RemoveAt(ChooseBook());
+                    int choice = ChooseBook();
+                    if(choice == -1)
+                    {
+                        return;
+                    }
+                    library.RemoveAt(choice);
+                    
                     break;
                 }
                 catch (ArgumentOutOfRangeException)
                 {
+                    
                     ConsoleMessages.WrongIndex();
                 }
             Console.Clear();
@@ -117,18 +126,23 @@ namespace OnlineLibrary
         public void EditBookFromLibrary()
         {
             Console.Clear();
-            PrintBooksWithTextBefore("Wybierz książkę którą chcesz edytować wpisując jej indeks\n");
+            PrintBooksWithTextBefore("Wybierz książkę którą chcesz edytować wpisując jej indeks\nlub 0 aby powrócić\n");
+            
             while (true)
             {
-                int chosenIndex = ChooseBook();
+                int choice = ChooseBook();
+                if (choice == -1)
+                {
+                    return;
+                }
                 try
                 {
-                    library[chosenIndex].Title = "";
+                    library[choice].Type = ChooseType();
+                    Console.Clear();
                     Console.WriteLine("Edytuj tytuł: ");
-                    library[chosenIndex].Title = Console.ReadLine();
+                    library[choice].Title = Console.ReadLine();
                     Console.WriteLine("Edytuj autora: ");
-                    library[chosenIndex].Author = Console.ReadLine();
-                    library[chosenIndex].Type = ChooseType();
+                    library[choice].Author = Console.ReadLine();
                     break;
 
                 }
@@ -144,13 +158,17 @@ namespace OnlineLibrary
         public Book MoveFromLibraryToFavourites()
         {
             Console.Clear();
-            PrintBooksWithTextBefore("Wybierz książkę którą chcesz dodać do wypożyczonych wpisując jej indeks\n");
+            PrintBooksWithTextBefore("Wybierz książkę którą chcesz dodać do wypożyczonych wpisując jej indeks\nlub wybrać 0 aby powrócić\n");
             while (true)
             {
-                int chooseBook = ChooseBook();
+                int choice = ChooseBook();
+                if(choice == -1)
+                {
+                    return null;
+                }
                 try
                 {
-                    return library[chooseBook];
+                    return library[choice];
                 }
                 catch (ArgumentOutOfRangeException)
                 {
@@ -192,13 +210,15 @@ namespace OnlineLibrary
 
             }
         }
+        
+       
         public void PrintBooksWithTextBefore(string message)
         {
             Console.WriteLine(message);
             foreach (Book book in library)
             {
                 int index = library.IndexOf(book);
-                Console.WriteLine($"{index} {book.Title} {book.Author} {book.Type}");
+                Console.WriteLine($"{index+1} {book.Title} {book.Author} {book.Type}");
             }
         }
     }

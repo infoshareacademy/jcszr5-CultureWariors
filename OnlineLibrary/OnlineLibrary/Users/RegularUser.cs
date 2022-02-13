@@ -17,6 +17,10 @@ namespace OnlineLibrary
         public void AddBookToFavourites(Book book)
         {
             Console.Clear();
+            if (book == null)
+            {
+                return;
+            }
             favouriteBooks.Add(book);
             ConsoleMessages.SuccesMessage("dodano");
             Console.ReadKey();
