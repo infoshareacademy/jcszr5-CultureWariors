@@ -42,6 +42,7 @@ namespace OnlineLibrary
         {
             ConsoleMessages.AdminMenu();
         }
+        
         public int NavigateMenu()
         {
             int navigate;
