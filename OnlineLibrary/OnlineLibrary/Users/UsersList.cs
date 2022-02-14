@@ -15,13 +15,7 @@ namespace OnlineLibrary
         }
         public void AddUser()
         {
-            Console.Clear();
-            Console.WriteLine("Wprowadź nazwę użytkownika: ");
-            string username = Console.ReadLine();
-            Console.WriteLine("Wprowadź hasło: ");
-            string password = Console.ReadLine();
-            Console.Clear();
-            RegularUser user = new RegularUser(username, password);
+            RegularUser user = CreateUser();
             Users.Add(user);
             Console.WriteLine("Pomyślnie dodano użytkownika, naciśnij dowolny przycisk aby kontynuować");
             Console.ReadKey();
@@ -62,6 +56,36 @@ namespace OnlineLibrary
                 }
             }
             return false;
+        }
+        public RegularUser CreateUser()
+        {
+            string username;
+            string password;
+            Console.Clear();
+            while (true)
+            {
+                Console.WriteLine("Wprowadź nazwę użytkownika: ");
+                username = Console.ReadLine();
+                Console.WriteLine("Wprowadź hasło: ");
+                password = Console.ReadLine();
+                if (username.Length < 5 && password.Length < 5)
+                {
+                    Console.WriteLine("Zbyt krótka nazwa użytkownika lub hasło");
+                }
+
+                else if (Users.Where(u => u.Username == username).Any()) //LINQ fun
+                {
+                    Console.WriteLine("Taki użytkownik już istnieje");
+                }
+                else break;
+
+            }
+            RegularUser user = new RegularUser(username, password);
+            Console.Clear();
+            return user;
+            
+            
+            
         }
     }
 }
