@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OnlineLibrary
+﻿namespace OnlineLibrary
 {
     public class Book
     {
@@ -12,7 +6,7 @@ namespace OnlineLibrary
         public string Author { get; set; }
         public BookType Type { get; set; }
 
-        public Book(BookType type,string title,string author)
+        public Book(BookType type, string title, string author)
         {
             Title = title;
             Author = author;
@@ -21,22 +15,11 @@ namespace OnlineLibrary
         public static Book CreateBook()
         {
             Console.Clear();
-            Book book = new Book(ChooseType(),GetTitle(),GetAuthor());
+            Book book = new Book(ChooseType(), Helper.GetTitle(), Helper.GetAuthor()); ;
             Console.Clear();
             return book;
         }
-        public static string GetAuthor()
-        {
-            Console.Clear();
-            Console.WriteLine("Wprowadź autora:");
-            return Console.ReadLine();
-        }
-        public static string GetTitle()
-        {
-            Console.Clear();
-            Console.WriteLine("Wprowadź nazwę książki:");
-            return Console.ReadLine();
-        }
+        
         public static BookType ChooseType()
         {
             Console.Clear();
@@ -60,7 +43,7 @@ namespace OnlineLibrary
                     case "7":
                         return BookType.Obyczajowa;
                     default:
-                        Console.WriteLine("Proszę wybrać właściwą kategorię");
+                        ConsoleMessages.ChooseTheRightCategory();
                         continue;
                 }
             }

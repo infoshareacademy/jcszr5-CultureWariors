@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OnlineLibrary
+﻿namespace OnlineLibrary
 {
-    public class RegularUserMenu:IMenu
+    public class RegularUserMenu : IMenu
     {
-        public void RegularUser(RegularUser regularUser,Library library)
+        public void RegularUser(RegularUser regularUser, Library library)
         {
-            
+
             Console.Clear();
             while (true)
             {
@@ -29,24 +23,23 @@ namespace OnlineLibrary
                     case 4:
                         Console.Clear();
                         return;
-                        
+
                 }
             }
         }
-            public void ShowMenu()
+        public void ShowMenu()
         {
             ConsoleMessages.RegularUserMenu();
         }
         public int NavigateMenu()
         {
             int navigate;
-            
+
             while (true)
             {
                 if (!int.TryParse(Console.ReadLine(), out navigate))
                 {
-                    Console.WriteLine("Podałeś błędną komendę!");
-                    Console.WriteLine("Podaj numer od 1-4:");
+                    ConsoleMessages.UserAndLoginWrongCommand();
                 }
                 else
                 {
@@ -54,8 +47,7 @@ namespace OnlineLibrary
                     {
                         break;
                     }
-                    Console.WriteLine("Podałeś błędną komendę!");
-                    Console.WriteLine("Podaj numer od 1-4:");
+                    ConsoleMessages.UserAndLoginWrongCommand();
                 }
             }
             return navigate;

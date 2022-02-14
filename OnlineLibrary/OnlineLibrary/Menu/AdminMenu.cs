@@ -29,7 +29,7 @@ namespace OnlineLibrary
                         library.EditBookFromLibrary();
                         WriteData.WriteLibraryToFile(library);
                         break;
-                    case 7:
+                    case 5:
                         Console.Clear();
                         return;
 
@@ -42,7 +42,7 @@ namespace OnlineLibrary
         {
             ConsoleMessages.AdminMenu();
         }
-        
+
         public int NavigateMenu()
         {
             int navigate;
@@ -50,8 +50,7 @@ namespace OnlineLibrary
             {
                 if (!int.TryParse(Console.ReadLine(), out navigate))
                 {
-                    Console.WriteLine("Podałeś błędną komendę!");
-                    Console.WriteLine("Podaj numer od 1-7:");
+                    ConsoleMessages.AdminWrongCommand();
                 }
                 else
                 {
@@ -59,8 +58,7 @@ namespace OnlineLibrary
                     {
                         break;
                     }
-                    Console.WriteLine("Podałeś błędną komendę!");
-                    Console.WriteLine("Podaj numer od 1-7:");
+                    ConsoleMessages.AdminWrongCommand();
                 }
             }
             return navigate;

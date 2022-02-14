@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OnlineLibrary
+﻿namespace OnlineLibrary
 {
     public class Admin : User
     {
@@ -15,14 +9,10 @@ namespace OnlineLibrary
         }
         public bool AdminLogin()
         {
-            string usernameCheck;
-            string passwordCheck;
+            string username = Helper.GetUsername();
+            string password = Helper.GetPassword();
             Console.Clear();
-            Console.WriteLine("Username:");
-            usernameCheck = Console.ReadLine();
-            Console.WriteLine("Password:");
-            passwordCheck = Console.ReadLine();
-            if (usernameCheck == Username && passwordCheck == Password)
+            if (username == Username && password == Password)
             {
                 return true;
             }

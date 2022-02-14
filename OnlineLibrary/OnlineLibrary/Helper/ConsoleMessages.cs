@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OnlineLibrary
+﻿namespace OnlineLibrary
 {
-     public static class ConsoleMessages
+    public static class ConsoleMessages
     {
         public static void ChooseCategoryMessage()
         {
@@ -34,9 +28,7 @@ namespace OnlineLibrary
             Console.WriteLine("2: Przeglądaj książki");
             Console.WriteLine("3: Usuń książki");
             Console.WriteLine("4: Edytuj książki");
-            Console.WriteLine("5: Zapisz listę");
-            Console.WriteLine("6: Wczytaj listę");
-            Console.WriteLine("7: Zamknij program");
+            Console.WriteLine("5: Zamknij program");
             Console.WriteLine("\nCo chcesz zrobić? :");
         }
         public static void RegularUserMenu()
@@ -57,6 +49,20 @@ namespace OnlineLibrary
         {
             Console.WriteLine($"Pomyślnie {done} książkę, nacisnij dowolny przycisk aby powrócić do menu");
         }
-
+        public static void WrongLoginOrPassword()
+        {
+            Console.Clear();
+            Console.WriteLine("Błędne dane do logowania\n");
+        }
+        public static void UserAndLoginWrongCommand()
+        {
+            Console.WriteLine("Podałeś błędną komendę!");
+            Console.WriteLine("Podaj numer od 1-4:");
+        }
+        public static void AdminWrongCommand()
+        {
+            Console.WriteLine("Podałeś błędną komendę!");
+            Console.WriteLine("Podaj numer od 1-5:");
+        }
     }
 }

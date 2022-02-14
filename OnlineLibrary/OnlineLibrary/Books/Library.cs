@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.VisualBasic.CompilerServices;
-
-namespace OnlineLibrary
+﻿namespace OnlineLibrary
 {
     public class Library
     {
@@ -25,7 +17,7 @@ namespace OnlineLibrary
             foreach (var book in library)
             {
                 a++;
-                Console.WriteLine($"{book.Title} {book.Author} {book.Type}");
+                Console.WriteLine($"{a}.{book.Title}, {book.Author}, {book.Type}");
             }
         }
         public BookType ChooseTypeToFind()
@@ -63,7 +55,7 @@ namespace OnlineLibrary
         public void ShowFoundBooks(BookType type)
         {
             Console.Clear();
-            
+
             foreach (var book in library)
             {
                 if (book.Type == type)
@@ -91,31 +83,31 @@ namespace OnlineLibrary
                 {
                     Console.WriteLine("Proszę wybrać numer");
                 }
-                
+
                 else break;
             }
-            return choose-1;
+            return choose - 1;
         }
         public void DeleteBookFromLibrary()
         {
             Console.Clear();
             PrintBooksWithTextBefore("Wybierz książkę którą chcesz usunąć wpisując jej indeks\nlub wybrać 0 aby powrócić\n");
-            
+
             while (true)
                 try
                 {
                     int choice = ChooseBook();
-                    if(choice == -1)
+                    if (choice == -1)
                     {
                         return;
                     }
                     library.RemoveAt(choice);
-                    
+
                     break;
                 }
                 catch (ArgumentOutOfRangeException)
                 {
-                    
+
                     ConsoleMessages.WrongIndex();
                 }
             Console.Clear();
@@ -127,7 +119,7 @@ namespace OnlineLibrary
         {
             Console.Clear();
             PrintBooksWithTextBefore("Wybierz książkę którą chcesz edytować wpisując jej indeks\nlub 0 aby powrócić\n");
-            
+
             while (true)
             {
                 int choice = ChooseBook();
@@ -162,7 +154,7 @@ namespace OnlineLibrary
             while (true)
             {
                 int choice = ChooseBook();
-                if(choice == -1)
+                if (choice == -1)
                 {
                     return null;
                 }
@@ -200,7 +192,7 @@ namespace OnlineLibrary
                         return BookType.Dziecięca;
                     case "7":
                         return BookType.Obyczajowa;
-                    
+
                     default:
                         ConsoleMessages.ChooseTheRightCategory();
                         continue;
@@ -210,15 +202,15 @@ namespace OnlineLibrary
 
             }
         }
-        
-       
+
+
         public void PrintBooksWithTextBefore(string message)
         {
             Console.WriteLine(message);
             foreach (Book book in library)
             {
                 int index = library.IndexOf(book);
-                Console.WriteLine($"{index+1} {book.Title} {book.Author} {book.Type}");
+                Console.WriteLine($"{index + 1} {book.Title} {book.Author} {book.Type}");
             }
         }
     }
@@ -226,9 +218,9 @@ namespace OnlineLibrary
 
 
 
-        
-    
 
-    
-    
+
+
+
+
 

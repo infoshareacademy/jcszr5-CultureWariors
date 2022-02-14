@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OnlineLibrary
+﻿namespace OnlineLibrary
 {
     public class LoginMenu : IMenu
     {
-        public void Login(AdminMenu adminMenu, RegularUserMenu regularUserMenu, Admin admin, Library library,UsersList usersList)
+        public void Login(AdminMenu adminMenu, RegularUserMenu regularUserMenu, Admin admin, Library library, UsersList usersList)
         {
             while (true)
             {
@@ -16,7 +10,7 @@ namespace OnlineLibrary
                 switch (NavigateMenu())
                 {
                     case 1:
-                        RegularUser user = usersList.GetRegularUser(usersList.EnterUsername(), usersList.EnterPassword());
+                        RegularUser user = usersList.GetRegularUser(Helper.GetUsername(), Helper.GetPassword());
                         if (user != null)
                         {
                             regularUserMenu.RegularUser(user, library);
@@ -24,8 +18,7 @@ namespace OnlineLibrary
                         }
                         else
                         {
-                            Console.Clear();
-                            Console.WriteLine("Błędne dane do logowania");
+                            ConsoleMessages.WrongLoginOrPassword();
                             break;
                         }
                     case 2:
@@ -40,8 +33,7 @@ namespace OnlineLibrary
                         }
                         else
                         {
-                            Console.Clear();
-                            Console.WriteLine("Błędne dane do logowania\n");
+                            ConsoleMessages.WrongLoginOrPassword();
                             break;
                         }
                     case 4:
@@ -51,8 +43,8 @@ namespace OnlineLibrary
                 }
             }
         }
-            
-        
+
+
         public void ShowMenu()
         {
             ConsoleMessages.LoginMenu();
@@ -65,8 +57,7 @@ namespace OnlineLibrary
             {
                 if (!int.TryParse(Console.ReadLine(), out navigate))
                 {
-                    Console.WriteLine("Podałeś błędną komendę!");
-                    Console.WriteLine("Podaj numer od 1-4:");
+                    ConsoleMessages.UserAndLoginWrongCommand();
                 }
                 else
                 {
@@ -74,8 +65,7 @@ namespace OnlineLibrary
                     {
                         break;
                     }
-                    Console.WriteLine("Podałeś błędną komendę!");
-                    Console.WriteLine("Podaj numer od 1-4:");
+                    ConsoleMessages.UserAndLoginWrongCommand();
                 }
             }
             return navigate;

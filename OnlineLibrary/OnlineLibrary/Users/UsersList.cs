@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OnlineLibrary
+﻿namespace OnlineLibrary
 {
     public class UsersList
     {
@@ -16,25 +10,19 @@ namespace OnlineLibrary
         public void AddUser()
         {
             RegularUser user = CreateUser();
-            Users.Add(user);
-            Console.WriteLine("Pomyślnie dodano użytkownika, naciśnij dowolny przycisk aby kontynuować");
-            Console.ReadKey();
-            Console.Clear();
-        }
-        public string EnterUsername()
-        {
-            Console.Clear();
-            Console.WriteLine("Username:");
-            return Console.ReadLine();
-        }
-        public string EnterPassword()
-        {
-            Console.WriteLine("Password:");
-            return Console.ReadLine();
-        }
+            if (user != null)
+            {
+                Users.Add(user);
+                Console.WriteLine("Pomyślnie dodano użytkownika, naciśnij dowolny przycisk aby kontynuować");
+                Console.ReadKey();
+                Console.Clear();
+            }
+            else return;
 
+        }
         public RegularUser GetRegularUser(string username, string password)
         {
+
             foreach (var user in Users)
             {
                 if (user.Username == username && user.Password == password)
@@ -46,17 +34,7 @@ namespace OnlineLibrary
             return null;
 
         }
-        public bool UserLoginCheck(string username, string password)
-        {
-            foreach (var user in Users)
-            {
-                if (user.Username == username && user.Password == password)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
+
         public RegularUser CreateUser()
         {
             string username;
@@ -68,24 +46,18 @@ namespace OnlineLibrary
                 username = Console.ReadLine();
                 Console.WriteLine("Wprowadź hasło: ");
                 password = Console.ReadLine();
-                if (username.Length < 5 && password.Length < 5)
+                if (Helper.CreateUserValidation(username, password, Users))
                 {
-                    Console.WriteLine("Zbyt krótka nazwa użytkownika lub hasło");
+                    RegularUser user = new RegularUser(username, password);
+                    Console.Clear();
+                    return user;
                 }
-
-                else if (Users.Where(u => u.Username == username).Any()) //LINQ fun
+                else
                 {
-                    Console.WriteLine("Taki użytkownik już istnieje");
+                    return null;
                 }
-                else break;
-
             }
-            RegularUser user = new RegularUser(username, password);
-            Console.Clear();
-            return user;
-            
-            
-            
+
         }
     }
 }
