@@ -27,15 +27,14 @@
             {
                 ConsoleMessages.ChooseCategoryMessage();
                 Console.WriteLine("8 Wszystkie książki");
-                //Console.WriteLine("\nWciśnij \"0\" aby wrócić do menu.");
+                Console.WriteLine("\nWciśnij \"0\" jeżeli chcesz wrócić do menu.");
 
                 switch (Console.ReadLine())
                 {
-                    //case "0":
-                    //    ConsoleMessages.RegularUserMenu();
-                    //    continue;
+                    case "0":
+                        return BookType.Powrót;
                     case "1":
-                        return BookType.Fantastyka; ;
+                        return BookType.Fantastyka; 
                     case "2":
                         return BookType.Kryminał;
                     case "3":
@@ -49,11 +48,12 @@
                     case "7":
                         return BookType.Obyczajowa;
                     case "8":
-                        return BookType.All;
+                        return BookType.Wszystkie;
                     default:
                         ConsoleMessages.ChooseTheRightCategory();
-                        continue;
+                        break;
                 }
+              
                 Console.Clear();
             }
         }
@@ -67,15 +67,18 @@
                 {
                     Console.WriteLine($"{book.Title} {book.Author} {book.Type}");
                 }
-                else if (type == BookType.All)
+                else if (type == BookType.Wszystkie)
                 {
                     PrintLibrary();
                     break;
                 }
+                else if (type == BookType.Powrót)
+                {
+                    return;
+                }
             }
-
-            Console.WriteLine("\nNacisnij dowolny przycisk aby powrócić do menu");
-            Console.ReadKey();
+           
+            ConsoleMessages.ChooseAnyKey();
             Console.Clear();
         }
         public int ChooseBook()

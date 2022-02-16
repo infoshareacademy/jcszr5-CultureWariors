@@ -38,6 +38,11 @@
             Console.WriteLine("3: Zobacz wypożyczane książki");
             Console.WriteLine("4: Powróć do ekranu logowania");
         }
+        public static void ChooseAnyKey()
+        {
+            Console.WriteLine("\nNacisnij dowolny przycisk aby powrócić do menu");
+            Console.ReadKey();
+        }
         public static void ChooseTheRightCategory()
         {
             Console.WriteLine("Proszę wybrać właściwą kategorię");
