@@ -9,8 +9,8 @@
         Dramat,
         Dziecięca,
         Obyczajowa,
-        All,
-        Back
+        Wszystkie,
+        Powrót
     }
 
 }

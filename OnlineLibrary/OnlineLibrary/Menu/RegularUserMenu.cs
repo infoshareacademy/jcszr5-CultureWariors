@@ -23,6 +23,7 @@
                     case 4:
                         Console.Clear();
                         return;
+
                 }
             }
         }
@@ -38,7 +39,7 @@
             {
                 if (!int.TryParse(Console.ReadLine(), out navigate))
                 {
-                    ConsoleMessages.WrongCommand("4");
+                    ConsoleMessages.UserWrongCommand();
                 }
                 else
                 {
@@ -46,7 +47,7 @@
                     {
                         break;
                     }
-                    ConsoleMessages.WrongCommand("4");
+                    ConsoleMessages.UserWrongCommand();
                 }
             }
             return navigate;

@@ -8,6 +8,7 @@
             Console.Clear();
             library.Add(book);
             ConsoleMessages.SuccesMessage("dodano");
+            Console.ReadKey();
             Console.Clear();
         }
         public void PrintLibrary()
@@ -26,12 +27,14 @@
             {
                 ConsoleMessages.ChooseCategoryMessage();
                 Console.WriteLine("8 Wszystkie książki");
+                Console.WriteLine("\nWciśnij \"0\" jeżeli chcesz wrócić do menu.");
+
                 switch (Console.ReadLine())
                 {
                     case "0":
-                        return BookType.Back;
+                        return BookType.Powrót;
                     case "1":
-                        return BookType.Fantastyka; ;
+                        return BookType.Fantastyka; 
                     case "2":
                         return BookType.Kryminał;
                     case "3":
@@ -45,11 +48,12 @@
                     case "7":
                         return BookType.Obyczajowa;
                     case "8":
-                        return BookType.All;
+                        return BookType.Wszystkie;
                     default:
                         ConsoleMessages.ChooseTheRightCategory();
-                        continue;
+                        break;
                 }
+              
                 Console.Clear();
             }
         }
@@ -63,16 +67,17 @@
                 {
                     Console.WriteLine($"{book.Title} {book.Author} {book.Type}");
                 }
-                else if (type == BookType.All)
+                else if (type == BookType.Wszystkie)
                 {
                     PrintLibrary();
                     break;
-
                 }
-                else if (type == BookType.Back)
+                else if (type == BookType.Powrót)
+                {
                     return;
-
+                }
             }
+           
             ConsoleMessages.ChooseAnyKey();
             Console.Clear();
         }
@@ -115,16 +120,16 @@
                 }
             Console.Clear();
             ConsoleMessages.SuccesMessage("usunięto");
+            Console.ReadKey();
             Console.Clear();
         }
         public void EditBookFromLibrary()
         {
-
             Console.Clear();
+            PrintBooksWithTextBefore("Wybierz książkę którą chcesz edytować wpisując jej indeks\nlub 0 aby powrócić\n");
 
             while (true)
             {
-                PrintBooksWithTextBefore("Wybierz książkę którą chcesz edytować wpisując jej indeks\nlub 0 aby powrócić\n");
                 int choice = ChooseBook();
                 if (choice == -1)
                 {
@@ -132,54 +137,29 @@
                 }
                 try
                 {
-                    var check = library[choice];
+                    library[choice].Type = ChooseType();
                     Console.Clear();
-                    Console.WriteLine($"Wybrana książka {library[choice].Title}\n ");
-                    ConsoleMessages.WhatToEdit();
-                    switch (Console.ReadLine())
-                    {
-                        case "1":
-                            Console.WriteLine("Edytuj typ książki");
-                            library[choice].Type = ChooseType();
-                            Console.Clear();
-                            ConsoleMessages.SuccesMessage("edytowano");
-                            return;
-                        case "2":
-                            Console.WriteLine("Edytuj tytuł ksiązki");
-                            library[choice].Title = Console.ReadLine();
-                            Console.Clear();
-                            ConsoleMessages.SuccesMessage("edytowano");
-
-                            return;
-                        case "3":
-                            Console.WriteLine("Edytuj autora: ");
-                            library[choice].Author = Console.ReadLine();
-                            Console.Clear();
-                            ConsoleMessages.SuccesMessage("edytowano");
-                            return;
-                        case "0":
-                            return;
-                        default:
-                            ConsoleMessages.WrongCommand("3");
-                            break;
-
-
-                    }
+                    Console.WriteLine("Edytuj tytuł: ");
+                    library[choice].Title = Console.ReadLine();
+                    Console.WriteLine("Edytuj autora: ");
+                    library[choice].Author = Console.ReadLine();
+                    break;
 
                 }
                 catch (ArgumentOutOfRangeException)
                 {
                     ConsoleMessages.WrongIndex();
                 }
-
             }
+            Console.Clear();
+            ConsoleMessages.SuccesMessage("edytowano");
         }
 
         public Book MoveFromLibraryToFavourites()
         {
             Console.Clear();
             PrintBooksWithTextBefore("Wybierz książkę którą chcesz dodać do wypożyczonych wpisując jej indeks\nlub wybrać 0 aby powrócić\n");
-            while(true)
+            while (true)
             {
                 int choice = ChooseBook();
                 if (choice == -1)
@@ -231,6 +211,7 @@
             }
         }
 
+
         public void PrintBooksWithTextBefore(string message)
         {
             Console.WriteLine(message);
@@ -242,8 +223,6 @@
         }
     }
 }
-    
-
 
 
 

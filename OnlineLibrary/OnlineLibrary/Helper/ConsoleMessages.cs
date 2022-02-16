@@ -15,7 +15,6 @@
         }
         public static void LoginMenu()
         {
-            Console.WriteLine("Witaj w bibliotece online\n");
             Console.WriteLine("1 Zaloguj się");
             Console.WriteLine("2 Zarejestruj się");
             Console.WriteLine("3 Administrator");
@@ -33,11 +32,16 @@
         }
         public static void RegularUserMenu()
         {
-            Console.WriteLine("MENU GŁÓWNE\n");
+            Console.Clear();
             Console.WriteLine("1: Przeglądaj książki");
             Console.WriteLine("2: Dodaj książki do wypożyczenia");
             Console.WriteLine("3: Zobacz wypożyczane książki");
             Console.WriteLine("4: Powróć do ekranu logowania");
+        }
+        public static void ChooseAnyKey()
+        {
+            Console.WriteLine("\nNacisnij dowolny przycisk aby powrócić do menu");
+            Console.ReadKey();
         }
         public static void ChooseTheRightCategory()
         {
@@ -48,29 +52,32 @@
         public static void SuccesMessage(string done)
         {
             Console.WriteLine($"Pomyślnie {done} książkę, nacisnij dowolny przycisk aby powrócić do menu");
-            Console.ReadKey();
         }
         public static void WrongLoginOrPassword()
         {
             Console.Clear();
             Console.WriteLine("Błędne dane do logowania\n");
         }
-        public static void ChooseAnyKey()
+        public static void UserAndLoginWrongCommand()
         {
-            Console.WriteLine("\nNacisnij dowolny przycisk aby powrócić do menu");
-            Console.ReadKey();
-        }
-        public static void WhatToEdit()
-        {
-            Console.WriteLine("Co chcesz edytować?");
-            Console.WriteLine("1. Typ książki");
-            Console.WriteLine("2. Tytuł książki");
-            Console.WriteLine("3. Autora książki");
-        }
-        public static void WrongCommand(string choice)
-        {
+            Console.Clear();
             Console.WriteLine("Podałeś błędną komendę!");
-            Console.WriteLine($"Podaj numer od 1-{choice}:");
+            Console.WriteLine("Podaj numer od 1-4:\n");
+            ConsoleMessages.LoginMenu();
+        }
+        public static void UserWrongCommand()
+        {
+            Console.Clear();
+            Console.WriteLine("Podałeś błędną komendę!");
+            Console.WriteLine("Podaj numer od 1-4:\n");
+            ConsoleMessages.RegularUserMenu();
+        }
+        public static void AdminWrongCommand()
+        {
+            Console.Clear();
+            Console.WriteLine("Podałeś błędną komendę!");
+            Console.WriteLine("Podaj numer od 1-5:\n");
+            ConsoleMessages.AdminMenu();
         }
     }
 }
