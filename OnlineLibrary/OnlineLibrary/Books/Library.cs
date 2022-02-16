@@ -139,13 +139,14 @@
                     switch (Console.ReadLine())
                     {
                         case "1":
-                            library[choice]();
-                            Console.Clear Console.Clear();
+                            Console.WriteLine("Edytuj typ książki");
+                            library[choice].Type = ChooseType();
+                            Console.Clear();
                             ConsoleMessages.SuccesMessage("edytowano");
                             return;
                         case "2":
-                            Console.WriteLine;
-                            library[choice].Title = Console.ReadLine = Console.ReadLine();
+                            Console.WriteLine("Edytuj tytuł ksiązki");
+                            library[choice].Title = Console.ReadLine();
                             Console.Clear();
                             ConsoleMessages.SuccesMessage("edytowano");
 
@@ -178,7 +179,7 @@
         {
             Console.Clear();
             PrintBooksWithTextBefore("Wybierz książkę którą chcesz dodać do wypożyczonych wpisując jej indeks\nlub wybrać 0 aby powrócić\n");
-            (true)
+            while(true)
             {
                 int choice = ChooseBook();
                 if (choice == -1)
@@ -241,8 +242,8 @@
         }
     }
 }
-    }
-}
+    
+
 
 
 
