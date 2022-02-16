@@ -50,7 +50,7 @@ namespace OnlineLibrary
             {
                 if (!int.TryParse(Console.ReadLine(), out navigate))
                 {
-                    ConsoleMessages.AdminWrongCommand();
+                    ConsoleMessages.WrongCommand("5");
                 }
                 else
                 {
@@ -58,7 +58,7 @@ namespace OnlineLibrary
                     {
                         break;
                     }
-                    ConsoleMessages.AdminWrongCommand();
+                    ConsoleMessages.WrongCommand("5");
                 }
             }
             return navigate;

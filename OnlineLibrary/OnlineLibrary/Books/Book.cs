@@ -19,7 +19,7 @@
             Console.Clear();
             return book;
         }
-        
+
         public static BookType ChooseType()
         {
             Console.Clear();

@@ -8,7 +8,6 @@
             Console.Clear();
             library.Add(book);
             ConsoleMessages.SuccesMessage("dodano");
-            Console.ReadKey();
             Console.Clear();
         }
         public void PrintLibrary()
@@ -29,6 +28,8 @@
                 Console.WriteLine("8 Wszystkie książki");
                 switch (Console.ReadLine())
                 {
+                    case "0":
+                        return BookType.Back;
                     case "1":
                         return BookType.Fantastyka; ;
                     case "2":
@@ -66,11 +67,13 @@
                 {
                     PrintLibrary();
                     break;
-                }
-            }
 
-            Console.WriteLine("\nNacisnij dowolny przycisk aby powrócić do menu");
-            Console.ReadKey();
+                }
+                else if (type == BookType.Back)
+                    return;
+
+            }
+            ConsoleMessages.ChooseAnyKey();
             Console.Clear();
         }
         public int ChooseBook()
@@ -112,16 +115,16 @@
                 }
             Console.Clear();
             ConsoleMessages.SuccesMessage("usunięto");
-            Console.ReadKey();
             Console.Clear();
         }
         public void EditBookFromLibrary()
         {
+
             Console.Clear();
-            PrintBooksWithTextBefore("Wybierz książkę którą chcesz edytować wpisując jej indeks\nlub 0 aby powrócić\n");
 
             while (true)
             {
+                PrintBooksWithTextBefore("Wybierz książkę którą chcesz edytować wpisując jej indeks\nlub 0 aby powrócić\n");
                 int choice = ChooseBook();
                 if (choice == -1)
                 {
@@ -129,29 +132,53 @@
                 }
                 try
                 {
-                    library[choice].Type = ChooseType();
+                    var check = library[choice];
                     Console.Clear();
-                    Console.WriteLine("Edytuj tytuł: ");
-                    library[choice].Title = Console.ReadLine();
-                    Console.WriteLine("Edytuj autora: ");
-                    library[choice].Author = Console.ReadLine();
-                    break;
+                    Console.WriteLine($"Wybrana książka {library[choice].Title}\n ");
+                    ConsoleMessages.WhatToEdit();
+                    switch (Console.ReadLine())
+                    {
+                        case "1":
+                            library[choice]();
+                            Console.Clear Console.Clear();
+                            ConsoleMessages.SuccesMessage("edytowano");
+                            return;
+                        case "2":
+                            Console.WriteLine;
+                            library[choice].Title = Console.ReadLine = Console.ReadLine();
+                            Console.Clear();
+                            ConsoleMessages.SuccesMessage("edytowano");
+
+                            return;
+                        case "3":
+                            Console.WriteLine("Edytuj autora: ");
+                            library[choice].Author = Console.ReadLine();
+                            Console.Clear();
+                            ConsoleMessages.SuccesMessage("edytowano");
+                            return;
+                        case "0":
+                            return;
+                        default:
+                            ConsoleMessages.WrongCommand("3");
+                            break;
+
+
+                    }
 
                 }
                 catch (ArgumentOutOfRangeException)
                 {
                     ConsoleMessages.WrongIndex();
                 }
+
             }
-            Console.Clear();
-            ConsoleMessages.SuccesMessage("edytowano");
         }
 
         public Book MoveFromLibraryToFavourites()
         {
             Console.Clear();
             PrintBooksWithTextBefore("Wybierz książkę którą chcesz dodać do wypożyczonych wpisując jej indeks\nlub wybrać 0 aby powrócić\n");
-            while (true)
+            (true)
             {
                 int choice = ChooseBook();
                 if (choice == -1)
@@ -203,7 +230,6 @@
             }
         }
 
-
         public void PrintBooksWithTextBefore(string message)
         {
             Console.WriteLine(message);
@@ -213,6 +239,8 @@
                 Console.WriteLine($"{index + 1} {book.Title} {book.Author} {book.Type}");
             }
         }
+    }
+}
     }
 }
 

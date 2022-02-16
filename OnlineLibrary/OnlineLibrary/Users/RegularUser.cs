@@ -17,7 +17,6 @@
             }
             favouriteBooks.Add(book);
             ConsoleMessages.SuccesMessage("dodano");
-            Console.ReadKey();
             Console.Clear();
         }
 

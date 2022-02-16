@@ -35,7 +35,7 @@
         }
         //Przeniosłem get author i get title w celu ponownego użycia
         //przy wyszukiwaniu książki po autorze lub tytule
-        public static string GetAuthor() 
+        public static string GetAuthor()
         {
             Console.Clear();
             Console.WriteLine("Wprowadź autora:");

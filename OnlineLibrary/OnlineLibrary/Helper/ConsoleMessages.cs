@@ -48,21 +48,29 @@
         public static void SuccesMessage(string done)
         {
             Console.WriteLine($"Pomyślnie {done} książkę, nacisnij dowolny przycisk aby powrócić do menu");
+            Console.ReadKey();
         }
         public static void WrongLoginOrPassword()
         {
             Console.Clear();
             Console.WriteLine("Błędne dane do logowania\n");
         }
-        public static void UserAndLoginWrongCommand()
+        public static void ChooseAnyKey()
         {
-            Console.WriteLine("Podałeś błędną komendę!");
-            Console.WriteLine("Podaj numer od 1-4:");
+            Console.WriteLine("\nNacisnij dowolny przycisk aby powrócić do menu");
+            Console.ReadKey();
         }
-        public static void AdminWrongCommand()
+        public static void WhatToEdit()
+        {
+            Console.WriteLine("Co chcesz edytować?");
+            Console.WriteLine("1. Typ książki");
+            Console.WriteLine("2. Tytuł książki");
+            Console.WriteLine("3. Autora książki");
+        }
+        public static void WrongCommand(string choice)
         {
             Console.WriteLine("Podałeś błędną komendę!");
-            Console.WriteLine("Podaj numer od 1-5:");
+            Console.WriteLine($"Podaj numer od 1-{choice}:");
         }
     }
 }

@@ -57,7 +57,7 @@
             {
                 if (!int.TryParse(Console.ReadLine(), out navigate))
                 {
-                    ConsoleMessages.UserAndLoginWrongCommand();
+                    ConsoleMessages.WrongCommand("4");
                 }
                 else
                 {
@@ -65,7 +65,7 @@
                     {
                         break;
                     }
-                    ConsoleMessages.UserAndLoginWrongCommand();
+                    ConsoleMessages.WrongCommand("4");
                 }
             }
             return navigate;
