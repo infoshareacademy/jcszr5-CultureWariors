@@ -58,26 +58,14 @@
             Console.Clear();
             Console.WriteLine("Błędne dane do logowania\n");
         }
-        public static void UserAndLoginWrongCommand()
+        
+        public static void WrongCommand(string choice)
         {
-            Console.Clear();
+            
             Console.WriteLine("Podałeś błędną komendę!");
-            Console.WriteLine("Podaj numer od 1-4:\n");
-            ConsoleMessages.LoginMenu();
+            Console.WriteLine($"Podaj numer od 1-{choice}:\n");
+            
         }
-        public static void UserWrongCommand()
-        {
-            Console.Clear();
-            Console.WriteLine("Podałeś błędną komendę!");
-            Console.WriteLine("Podaj numer od 1-4:\n");
-            ConsoleMessages.RegularUserMenu();
-        }
-        public static void AdminWrongCommand()
-        {
-            Console.Clear();
-            Console.WriteLine("Podałeś błędną komendę!");
-            Console.WriteLine("Podaj numer od 1-5:\n");
-            ConsoleMessages.AdminMenu();
-        }
+        
     }
 }
