@@ -37,6 +37,10 @@
                             break;
                         }
                     case 4:
+                        library.AboutLibrary();
+                        break;
+                        
+                    case 5:
                         Console.WriteLine("Do widzenia!");
                         Environment.Exit(0);
                         break;
@@ -61,7 +65,7 @@
                 }
                 else
                 {
-                    if (navigate >= 1 && navigate <= 4)
+                    if (navigate >= 1 && navigate <= 5)
                     {
                         break;
                     }
