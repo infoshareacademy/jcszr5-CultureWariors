@@ -15,7 +15,6 @@
         }
         public static void LoginMenu()
         {
-            Console.WriteLine("Witaj w bibliotece online\n");
             Console.WriteLine("1 Zaloguj się");
             Console.WriteLine("2 Zarejestruj się");
             Console.WriteLine("3 Administrator");
@@ -56,13 +55,17 @@
         }
         public static void UserAndLoginWrongCommand()
         {
+            Console.Clear();
             Console.WriteLine("Podałeś błędną komendę!");
-            Console.WriteLine("Podaj numer od 1-4:");
+            Console.WriteLine("Podaj numer od 1-4:\n");
+            ConsoleMessages.LoginMenu();
         }
         public static void AdminWrongCommand()
         {
+            Console.Clear();
             Console.WriteLine("Podałeś błędną komendę!");
-            Console.WriteLine("Podaj numer od 1-5:");
+            Console.WriteLine("Podaj numer od 1-5:\n");
+            ConsoleMessages.AdminMenu();
         }
     }
 }
