@@ -27,8 +27,13 @@
             {
                 ConsoleMessages.ChooseCategoryMessage();
                 Console.WriteLine("8 Wszystkie książki");
+                //Console.WriteLine("\nWciśnij \"0\" aby wrócić do menu.");
+
                 switch (Console.ReadLine())
                 {
+                    //case "0":
+                    //    ConsoleMessages.RegularUserMenu();
+                    //    continue;
                     case "1":
                         return BookType.Fantastyka; ;
                     case "2":

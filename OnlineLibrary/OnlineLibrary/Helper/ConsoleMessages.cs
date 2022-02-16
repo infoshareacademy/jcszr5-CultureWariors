@@ -32,7 +32,7 @@
         }
         public static void RegularUserMenu()
         {
-            Console.WriteLine("MENU GŁÓWNE\n");
+            Console.Clear();
             Console.WriteLine("1: Przeglądaj książki");
             Console.WriteLine("2: Dodaj książki do wypożyczenia");
             Console.WriteLine("3: Zobacz wypożyczane książki");
@@ -59,6 +59,13 @@
             Console.WriteLine("Podałeś błędną komendę!");
             Console.WriteLine("Podaj numer od 1-4:\n");
             ConsoleMessages.LoginMenu();
+        }
+        public static void UserWrongCommand()
+        {
+            Console.Clear();
+            Console.WriteLine("Podałeś błędną komendę!");
+            Console.WriteLine("Podaj numer od 1-4:\n");
+            ConsoleMessages.RegularUserMenu();
         }
         public static void AdminWrongCommand()
         {
