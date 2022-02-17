@@ -37,6 +37,10 @@
                             break;
                         }
                     case 4:
+                        library.AboutLibrary();
+                        break;
+                        
+                    case 5:
                         Console.WriteLine("Do widzenia!");
                         Environment.Exit(0);
                         break;
@@ -57,15 +61,15 @@
             {
                 if (!int.TryParse(Console.ReadLine(), out navigate))
                 {
-                    ConsoleMessages.UserAndLoginWrongCommand();
+                    ConsoleMessages.WrongCommand("4");
                 }
                 else
                 {
-                    if (navigate >= 1 && navigate <= 4)
+                    if (navigate >= 1 && navigate <= 5)
                     {
                         break;
                     }
-                    ConsoleMessages.UserAndLoginWrongCommand();
+                    ConsoleMessages.WrongCommand("4");
                 }
             }
             return navigate;

@@ -42,8 +42,10 @@
             Console.Clear();
             while (true)
             {
+                Console.Clear();
                 Console.WriteLine("Wprowadź nazwę użytkownika: ");
                 username = Console.ReadLine();
+                Console.Clear();
                 Console.WriteLine("Wprowadź hasło: ");
                 password = Console.ReadLine();
                 if (Helper.CreateUserValidation(username, password, Users))

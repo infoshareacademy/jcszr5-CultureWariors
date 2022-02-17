@@ -15,11 +15,11 @@
         }
         public static void LoginMenu()
         {
-            Console.WriteLine("Witaj w bibliotece online\n");
             Console.WriteLine("1 Zaloguj się");
             Console.WriteLine("2 Zarejestruj się");
             Console.WriteLine("3 Administrator");
-            Console.WriteLine("4 Wyjdź");
+            Console.WriteLine("4 O bibliotece");
+            Console.WriteLine("5 Wyjdź");
         }
         public static void AdminMenu()
         {
@@ -33,11 +33,16 @@
         }
         public static void RegularUserMenu()
         {
-            Console.WriteLine("MENU GŁÓWNE\n");
+            Console.Clear();
             Console.WriteLine("1: Przeglądaj książki");
             Console.WriteLine("2: Dodaj książki do wypożyczenia");
             Console.WriteLine("3: Zobacz wypożyczane książki");
             Console.WriteLine("4: Powróć do ekranu logowania");
+        }
+        public static void ChooseAnyKey()
+        {
+            Console.WriteLine("\nNacisnij dowolny przycisk aby powrócić do menu");
+            Console.ReadKey();
         }
         public static void ChooseTheRightCategory()
         {
@@ -48,21 +53,43 @@
         public static void SuccesMessage(string done)
         {
             Console.WriteLine($"Pomyślnie {done} książkę, nacisnij dowolny przycisk aby powrócić do menu");
+            Console.ReadKey();
         }
         public static void WrongLoginOrPassword()
         {
             Console.Clear();
             Console.WriteLine("Błędne dane do logowania\n");
         }
-        public static void UserAndLoginWrongCommand()
+        
+        public static void WrongCommand(string choice)
         {
+            
             Console.WriteLine("Podałeś błędną komendę!");
-            Console.WriteLine("Podaj numer od 1-4:");
+            Console.WriteLine($"Podaj numer od 1-{choice}:\n");
+            
         }
-        public static void AdminWrongCommand()
+        public static void BookEditMenu()
         {
-            Console.WriteLine("Podałeś błędną komendę!");
-            Console.WriteLine("Podaj numer od 1-5:");
+            Console.WriteLine("1.Edytuj całą książkę");
+            Console.WriteLine("2.Edytuj tytuł");
+            Console.WriteLine("3.Edytuj autora");
+            Console.WriteLine("4.Edytuj typ książki");
+            Console.WriteLine("\nWciśnij \"0\" jeżeli chcesz wrócić do menu.");
+
+        }
+        public static void Statistics(int allBooks,int fantasy,int criminals, int romanse, int science,int drama, int kids, int novels )
+        {
+            Console.Clear();
+            Console.WriteLine("Biblioteka została stworzona przez zespół CULTURE WARRIORS!\n");
+            Console.WriteLine($"W zasobach biblioteki znajduje się {allBooks} książęk!");
+            Console.WriteLine($"Fantastyka: {fantasy} pozycji");
+            Console.WriteLine($"Kryminały: {criminals} pozycji");
+            Console.WriteLine($"Romanse: {romanse} pozycji");
+            Console.WriteLine($"Naukowe: {science} pozycji");
+            Console.WriteLine($"Dramaty: {drama} pozycji");
+            Console.WriteLine($"Dziecięce: {kids} pozycji");
+            Console.WriteLine($"Obyczajowe: {novels} pozycji");
+            Console.WriteLine($"\n\nDzisiaj jest {DateTime.Now}");
         }
     }
 }

@@ -35,7 +35,7 @@
         }
         //Przeniosłem get author i get title w celu ponownego użycia
         //przy wyszukiwaniu książki po autorze lub tytule
-        public static string GetAuthor() 
+        public static string GetAuthor()
         {
             Console.Clear();
             Console.WriteLine("Wprowadź autora:");
@@ -46,6 +46,26 @@
             Console.Clear();
             Console.WriteLine("Wprowadź nazwę książki:");
             return Console.ReadLine();
+        }
+        public static int Navigate()
+        {
+            int navigate;
+            while (true)
+            {
+                if (!int.TryParse(Console.ReadLine(), out navigate))
+                {
+                    ConsoleMessages.WrongCommand("4");
+                }
+                else
+                {
+                    if (navigate >= 0 && navigate <= 4)
+                    {
+                        break;
+                    }
+                    ConsoleMessages.WrongCommand("4");
+                }
+            }
+            return navigate;
         }
     }
 }

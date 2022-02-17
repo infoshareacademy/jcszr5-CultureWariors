@@ -1,5 +1,6 @@
 ﻿using OnlineLibrary;
 
+Console.WriteLine("Witaj w bibliotece online\n");
 Admin admin = new Admin();
 AdminMenu adminMenu = new AdminMenu();
 UsersList usersList = new UsersList();

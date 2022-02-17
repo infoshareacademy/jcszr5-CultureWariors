@@ -50,15 +50,15 @@ namespace OnlineLibrary
             {
                 if (!int.TryParse(Console.ReadLine(), out navigate))
                 {
-                    ConsoleMessages.AdminWrongCommand();
+                    ConsoleMessages.WrongCommand("5");
                 }
-                else
+                else 
                 {
-                    if (navigate >= 1 && navigate <= 7)
+                    if (navigate >= 1 && navigate <= 5)
                     {
                         break;
                     }
-                    ConsoleMessages.AdminWrongCommand();
+                    ConsoleMessages.WrongCommand("5");
                 }
             }
             return navigate;
