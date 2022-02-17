@@ -231,18 +231,31 @@
             var kids = library
                 .Count(book => book.Type == BookType.Dziecięca);
             var novels = library
-                .Count(book => book.Type != BookType.Obyczajowa);
+                .Count(book => book.Type == BookType.Obyczajowa);
 
 
             ConsoleMessages.Statistics(allBooks, fantasy, criminals, romanse, science, drama, kids, novels);
             Console.WriteLine("\nNacisnij dowolny przycisk aby powrócić do menu");
             Console.ReadKey();
             Console.Clear();
-
-
-
-
-
+        }
+        public void ShowMeWhatYouGot()
+        {
+            var random = new Random();
+            var happynumber = random.Next(library.Count());
+            var blindchoose = library[happynumber];
+            Console.Clear();
+            Console.WriteLine("Zobaczmy...");
+            Thread.Sleep(700);
+            Console.WriteLine("Co by Ci zaproponować...");
+            Thread.Sleep(700);
+            Console.WriteLine("Hmmm....");
+            Thread.Sleep(700);
+            Console.WriteLine("Może to ?\n\n");
+            Console.WriteLine($"\n{blindchoose.Title} {blindchoose.Author} {blindchoose.Type}\n");
+            Console.WriteLine("\nNacisnij dowolny przycisk aby powrócić do menu");
+            Console.ReadKey();
+            Console.Clear();
         }
     }
 }

@@ -38,7 +38,8 @@
             Console.WriteLine("1: Przeglądaj książki");
             Console.WriteLine("2: Dodaj książki do wypożyczenia");
             Console.WriteLine("3: Zobacz wypożyczane książki");
-            Console.WriteLine("4: Powróć do ekranu logowania");
+            Console.WriteLine("4: Zaskocz mnie!");
+            Console.WriteLine("5: Powróć do ekranu logowania");
         }
         public static void ChooseTheRightCategory()
         {

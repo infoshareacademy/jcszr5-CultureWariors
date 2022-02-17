@@ -21,6 +21,9 @@
                         regularUser.ShowFavouritesBooks();
                         break;
                     case 4:
+                        library.ShowMeWhatYouGot();
+                        break;
+                    case 5:
                         Console.Clear();
                         return;
 
@@ -43,7 +46,7 @@
                 }
                 else
                 {
-                    if (navigate >= 1 && navigate <= 4)
+                    if (navigate >= 1 && navigate <= 5)
                     {
                         break;
                     }
