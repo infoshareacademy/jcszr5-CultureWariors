@@ -244,18 +244,7 @@
             var random = new Random();
             var happynumber = random.Next(library.Count());
             var blindchoose = library[happynumber];
-            Console.Clear();
-            Console.WriteLine("Zobaczmy...");
-            Thread.Sleep(700);
-            Console.WriteLine("Co by Ci zaproponować...");
-            Thread.Sleep(700);
-            Console.WriteLine("Hmmm....");
-            Thread.Sleep(700);
-            Console.WriteLine("Może to ?\n\n");
-            Console.WriteLine($"\n{blindchoose.Title} {blindchoose.Author} {blindchoose.Type}\n");
-            Console.WriteLine("\nNacisnij dowolny przycisk aby powrócić do menu");
-            Console.ReadKey();
-            Console.Clear();
+           ConsoleMessages.RandomBookMessage(blindchoose);
         }
     }
 }
