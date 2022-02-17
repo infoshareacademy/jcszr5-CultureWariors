@@ -248,6 +248,37 @@
                 Console.WriteLine($"{index + 1} {book.Title} {book.Author} {book.Type}");
             }
         }
+
+        public void AboutLibrary()
+        {
+            var allBooks = library
+                .Count();
+            var fantasy = library
+                .Count(book => book.Type == BookType.Fantastyka);
+            var criminals = library
+                .Count(book => book.Type == BookType.Kryminał);
+            var romanse = library
+                .Count(book => book.Type == BookType.Romans);
+            var science = library
+                .Count(book => book.Type == BookType.Naukowa);
+            var drama = library
+                .Count(book => book.Type == BookType.Dramat);
+            var kids = library
+                .Count(book => book.Type == BookType.Dziecięca);
+            var novels = library
+                .Count(book => book.Type != BookType.Obyczajowa);
+
+
+            ConsoleMessages.Statistics(allBooks, fantasy, criminals, romanse, science, drama, kids, novels);
+            Console.WriteLine("\nNacisnij dowolny przycisk aby powrócić do menu");
+            Console.ReadKey();
+            Console.Clear();
+
+
+
+
+
+        }
     }
 }
 

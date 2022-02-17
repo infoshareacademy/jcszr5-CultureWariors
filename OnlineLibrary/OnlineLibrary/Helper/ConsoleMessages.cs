@@ -18,7 +18,8 @@
             Console.WriteLine("1 Zaloguj się");
             Console.WriteLine("2 Zarejestruj się");
             Console.WriteLine("3 Administrator");
-            Console.WriteLine("4 Wyjdź");
+            Console.WriteLine("4 O bibliotece");
+            Console.WriteLine("5 Wyjdź");
         }
         public static void AdminMenu()
         {
@@ -76,6 +77,19 @@
             Console.WriteLine("\nWciśnij \"0\" jeżeli chcesz wrócić do menu.");
 
         }
-        
+        public static void Statistics(int allBooks,int fantasy,int criminals, int romanse, int science,int drama, int kids, int novels )
+        {
+            Console.Clear();
+            Console.WriteLine("Biblioteka została stworzona przez zespół CULTURE WARRIORS!\n");
+            Console.WriteLine($"W zasobach biblioteki znajduje się {allBooks} książęk!");
+            Console.WriteLine($"Fantastyka: {fantasy} pozycji");
+            Console.WriteLine($"Kryminały: {criminals} pozycji");
+            Console.WriteLine($"Romanse: {romanse} pozycji");
+            Console.WriteLine($"Naukowe: {science} pozycji");
+            Console.WriteLine($"Dramaty: {drama} pozycji");
+            Console.WriteLine($"Dziecięce: {kids} pozycji");
+            Console.WriteLine($"Obyczajowe: {novels} pozycji");
+            Console.WriteLine($"\n\nDzisiaj jest {DateTime.Now}");
+        }
     }
 }
