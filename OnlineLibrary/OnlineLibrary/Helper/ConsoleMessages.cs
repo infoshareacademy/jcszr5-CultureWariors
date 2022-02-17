@@ -52,6 +52,7 @@
         public static void SuccesMessage(string done)
         {
             Console.WriteLine($"Pomyślnie {done} książkę, nacisnij dowolny przycisk aby powrócić do menu");
+            Console.ReadKey();
         }
         public static void WrongLoginOrPassword()
         {
@@ -65,6 +66,15 @@
             Console.WriteLine("Podałeś błędną komendę!");
             Console.WriteLine($"Podaj numer od 1-{choice}:\n");
             
+        }
+        public static void BookEditMenu()
+        {
+            Console.WriteLine("1.Edytuj całą książkę");
+            Console.WriteLine("2.Edytuj tytuł");
+            Console.WriteLine("3.Edytuj autora");
+            Console.WriteLine("4.Edytuj typ książki");
+            Console.WriteLine("\nWciśnij \"0\" jeżeli chcesz wrócić do menu.");
+
         }
         
     }

@@ -47,6 +47,26 @@
             Console.WriteLine("Wprowadź nazwę książki:");
             return Console.ReadLine();
         }
+        public static int Navigate()
+        {
+            int navigate;
+            while (true)
+            {
+                if (!int.TryParse(Console.ReadLine(), out navigate))
+                {
+                    ConsoleMessages.WrongCommand("4");
+                }
+                else
+                {
+                    if (navigate >= 0 && navigate <= 4)
+                    {
+                        break;
+                    }
+                    ConsoleMessages.WrongCommand("4");
+                }
+            }
+            return navigate;
+        }
     }
 }
 
