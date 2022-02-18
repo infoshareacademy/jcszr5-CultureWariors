@@ -29,13 +29,9 @@
             return Console.ReadLine();
         }
 
-        public static SecureString GetPassword()
+        public static string GetPassword()
         {
-            //SecureString secureString = GetPassword();
-            //string Haslo = new System.Net.NetworkCredential(string.Empty, secureString).Password;
-            //Console.WriteLine(Haslo);
-            //Console.ReadKey(true);
-
+            Console.Clear();
             Console.WriteLine("Wprowadz hasło:");
             SecureString password = new SecureString();
             char sign = new char();
@@ -46,18 +42,16 @@
                 if (!char.IsControl(key.KeyChar))
                 {
                     password.AppendChar(key.KeyChar);
-                    Console.WriteLine("*");
+                    Console.Write("*");
                 }
                 else if (key.Key == ConsoleKey.Backspace && password.Length > 0)
                     password.RemoveAt(password.Length - 1);
-                Console.WriteLine("\b \b");
             }
 
             while (key.Key != ConsoleKey.Enter);
             {
-                Console.WriteLine("Haslo: ");
-                return password;
-
+                string stringPassword = new System.Net.NetworkCredential(string.Empty, password).Password;
+                return stringPassword;
             }
 
         }
