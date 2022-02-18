@@ -1,4 +1,5 @@
-﻿namespace OnlineLibrary
+﻿using System.Security;
+    namespace OnlineLibrary
 {
     public static class Helper
     {
@@ -24,15 +25,43 @@
         public static string GetUsername()
         {
             Console.Clear();
-            Console.WriteLine("Username:");
+            Console.WriteLine("Nazwa użytkownika:");
             return Console.ReadLine();
         }
-        public static string GetPassword()
+
+        public static SecureString GetPassword()
         {
-            Console.Clear();
-            Console.WriteLine("Password:");
-            return Console.ReadLine();
+            //SecureString secureString = GetPassword();
+            //string Haslo = new System.Net.NetworkCredential(string.Empty, secureString).Password;
+            //Console.WriteLine(Haslo);
+            //Console.ReadKey(true);
+
+            Console.WriteLine("Wprowadz hasło:");
+            SecureString password = new SecureString();
+            char sign = new char();
+            ConsoleKeyInfo key;
+            do
+            {
+                key = Console.ReadKey(true);
+                if (!char.IsControl(key.KeyChar))
+                {
+                    password.AppendChar(key.KeyChar);
+                    Console.WriteLine("*");
+                }
+                else if (key.Key == ConsoleKey.Backspace && password.Length > 0)
+                    password.RemoveAt(password.Length - 1);
+                Console.WriteLine("\b \b");
+            }
+
+            while (key.Key != ConsoleKey.Enter);
+            {
+                Console.WriteLine("Haslo: ");
+                return password;
+
+            }
+
         }
+
         //Przeniosłem get author i get title w celu ponownego użycia
         //przy wyszukiwaniu książki po autorze lub tytule
         public static string GetAuthor()

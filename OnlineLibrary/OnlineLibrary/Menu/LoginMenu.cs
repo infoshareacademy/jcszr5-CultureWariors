@@ -1,4 +1,5 @@
-﻿namespace OnlineLibrary
+﻿using System.Security;
+namespace OnlineLibrary
 {
     public class LoginMenu : IMenu
     {
@@ -10,6 +11,7 @@
                 switch (NavigateMenu())
                 {
                     case 1:
+
                         RegularUser user = usersList.GetRegularUser(Helper.GetUsername(), Helper.GetPassword());
                         if (user != null)
                         {
