@@ -45,7 +45,10 @@
                     Console.Write("*");
                 }
                 else if (key.Key == ConsoleKey.Backspace && password.Length > 0)
+                {
                     password.RemoveAt(password.Length - 1);
+                    Console.Write("\b \b");
+                }
             }
 
             while (key.Key != ConsoleKey.Enter);
