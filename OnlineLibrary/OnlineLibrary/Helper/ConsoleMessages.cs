@@ -25,20 +25,22 @@
         {
             Console.WriteLine("MENU GŁÓWNE\n");
             Console.WriteLine("1: Dodaj książki");
-            Console.WriteLine("2: Przeglądaj książki");
-            Console.WriteLine("3: Usuń książki");
-            Console.WriteLine("4: Edytuj książki");
-            Console.WriteLine("5: Zamknij program");
+            Console.WriteLine("2: Wyszukaj książkę po tytule lub autorze");
+            Console.WriteLine("3: Przeglądaj książki po kategorii");
+            Console.WriteLine("4: Usuń książki");
+            Console.WriteLine("5: Edytuj książki");
+            Console.WriteLine("6: Zamknij program");
             Console.WriteLine("\nCo chcesz zrobić? :");
         }
         public static void RegularUserMenu()
         {
             Console.Clear();
             Console.WriteLine("1: Przeglądaj książki");
-            Console.WriteLine("2: Dodaj książki do wypożyczenia");
-            Console.WriteLine("3: Zobacz wypożyczane książki");
-            Console.WriteLine("4: Zaskocz mnie!");
-            Console.WriteLine("5: Powróć do ekranu logowania");
+            Console.WriteLine("2: Wyszukaj książkę po tytule lub autorze");
+            Console.WriteLine("3: Dodaj książki do wypożyczenia");
+            Console.WriteLine("4: Zobacz wypożyczane książki");
+            Console.WriteLine("5: Zaskocz mnie!");
+            Console.WriteLine("6: Powróć do ekranu logowania");
         }
         public static void ChooseAnyKey()
         {

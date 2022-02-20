@@ -12,18 +12,21 @@
                 switch (NavigateMenu())
                 {
                     case 1:
-                        library.ShowFoundBooks(library.ChooseTypeToFind());
+                        library.ShowFoundBooksByType(library.ChooseTypeToFind());
                         break;
                     case 2:
-                        regularUser.AddBookToFavourites(library.MoveFromLibraryToFavourites());
+                        library.ShowFoundBooksByString(library.EnterStringToFind());
                         break;
                     case 3:
-                        regularUser.ShowFavouritesBooks();
+                        regularUser.AddBookToFavourites(library.MoveFromLibraryToFavourites());
                         break;
                     case 4:
-                        library.ShowMeWhatYouGot();
+                        regularUser.ShowFavouritesBooks();
                         break;
                     case 5:
+                        library.ShowMeWhatYouGot();
+                        break;
+                    case 6:
                         Console.Clear();
                         return;
 
@@ -42,16 +45,16 @@
             {
                 if (!int.TryParse(Console.ReadLine(), out navigate))
                 {
-                    ConsoleMessages.WrongCommand("5");
+                    ConsoleMessages.WrongCommand("6");
 
                 }
                 else
                 {
-                    if (navigate >= 1 && navigate <= 5)
+                    if (navigate >= 1 && navigate <= 6)
                     {
                         break;
                     }
-                    ConsoleMessages.WrongCommand("5");
+                    ConsoleMessages.WrongCommand("6");
                 }
             }
             return navigate;

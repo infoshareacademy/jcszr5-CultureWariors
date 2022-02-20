@@ -19,17 +19,20 @@ namespace OnlineLibrary
                         WriteData.WriteLibraryToFile(library);
                         break;
                     case 2:
-                        library.ShowFoundBooks(library.ChooseTypeToFind());
+                        library.ShowFoundBooksByString(library.EnterStringToFind());
                         break;
                     case 3:
+                        library.ShowFoundBooksByType(library.ChooseTypeToFind());
+                        break;
+                    case 4:
                         library.DeleteBookFromLibrary();
                         WriteData.WriteLibraryToFile(library);
                         break;
-                    case 4:
+                    case 5:
                         library.EditBookFromLibrary();
                         WriteData.WriteLibraryToFile(library);
                         break;
-                    case 5:
+                    case 6:
                         Console.Clear();
                         return;
 
@@ -50,15 +53,15 @@ namespace OnlineLibrary
             {
                 if (!int.TryParse(Console.ReadLine(), out navigate))
                 {
-                    ConsoleMessages.WrongCommand("5");
+                    ConsoleMessages.WrongCommand("6");
                 }
                 else 
                 {
-                    if (navigate >= 1 && navigate <= 5)
+                    if (navigate >= 1 && navigate <= 6)
                     {
                         break;
                     }
-                    ConsoleMessages.WrongCommand("5");
+                    ConsoleMessages.WrongCommand("6");
                 }
             }
             return navigate;

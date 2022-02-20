@@ -57,7 +57,38 @@
                 Console.Clear();
             }
         }
-        public void ShowFoundBooks(BookType type)
+        public string EnterStringToFind()
+        {
+            Console.Clear();
+            Console.WriteLine("Podaj autora lub tytuł:");
+            string nameOrAuthor = Console.ReadLine();
+            return nameOrAuthor;
+
+        }
+        public void ShowFoundBooksByString(string nameOrAuthor)
+        {
+            var foundBooksTitle = library.Where(b => b.Title.ToLower().Contains(nameOrAuthor.ToLower())).ToList();
+            var foundBooksAuthor = library.Where(b => b.Author.ToLower().Contains(nameOrAuthor.ToLower())).ToList();
+            if (foundBooksTitle.Count()!=0) 
+            {
+                foreach (var book in foundBooksTitle)
+                {
+                    Console.WriteLine($"{book.Title} {book.Author} {book.Type}");
+                } 
+            }
+            else if(foundBooksAuthor.Count() != 0)
+            {
+                foreach (var book in foundBooksAuthor)
+                {
+                    Console.WriteLine($"{book.Title} {book.Author} {book.Type}");
+                }
+            }
+            else Console.WriteLine("Brak takich książek");
+            ConsoleMessages.ChooseAnyKey();
+            Console.Clear();
+
+        }
+        public void ShowFoundBooksByType(BookType type)
         {
             Console.Clear();
 
