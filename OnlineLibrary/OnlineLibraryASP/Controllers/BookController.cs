@@ -6,10 +6,11 @@ namespace OnlineLibraryASP.Controllers
 {
     public class BookController : Controller
     {
-        private BookService _bookService;
-        public BookController()
+        private IBookService _bookService;
+        public BookController(IBookService bookService)
         {
-            _bookService = new BookService();
+            //_bookService = new BookService();
+            _bookService = bookService;
         }
         // GET: BookController
         public ActionResult Index()

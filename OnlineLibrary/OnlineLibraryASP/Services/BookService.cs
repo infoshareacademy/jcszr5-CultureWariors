@@ -2,9 +2,13 @@
 
 namespace OnlineLibraryASP.Services
 {
-    public class BookService
+    public class BookService : IBookService
     {
-        
+        public BookService(IBookRepository bookRepository)
+        {
+            this.bookRepository = bookRepository;
+        }
+
         public static int BooksCounter;
         public static List<Book> Books = new List<Book>
         {
@@ -33,8 +37,11 @@ namespace OnlineLibraryASP.Services
                 PublicationDate = 1960
     }
         };
-            public List<Book> GetAll()
+        private readonly IBookRepository bookRepository;
+
+        public List<Book> GetAll()
         {
+            bookRepository.GetAll();
             return Books;
         }
         public Book GetById(int id)
