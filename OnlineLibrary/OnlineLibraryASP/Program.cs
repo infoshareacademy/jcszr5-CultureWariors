@@ -1,3 +1,4 @@
+using OnlineLibraryASP.Repositories;
 using OnlineLibraryASP.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<IBookService, BookService>();
+builder.Services.AddSingleton<IBookRepository, BookRepository>();
 
 
 var app = builder.Build();
