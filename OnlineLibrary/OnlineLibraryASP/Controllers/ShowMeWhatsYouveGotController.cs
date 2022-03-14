@@ -1,39 +1,36 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using OnlineLibraryASP.Models;
 using OnlineLibraryASP.Services;
 
 namespace OnlineLibraryASP.Controllers
 {
-    public class BookController : Controller
+    public class ShowMeWhatsYouveGotController : Controller
     {
-        private IBookService _bookService;
-        public BookController(IBookService bookService)
+        private IBookService _bookservice;
+        public ShowMeWhatsYouveGotController(IBookService bookService)
         {
-            //_bookService = new BookService();
-            _bookService = bookService;
+               _bookservice = bookService;
         }
-        // GET: BookController
+
+        // Wyświetlenie zakładki zaskocz mnie! - wybierz rodzaj
         public ActionResult Index()
         {
-            var model = _bookService.GetAll();
-            return View(model);
+            return View();
         }
 
-        // GET: BookController/Details/5
+        // GET: ShowMeWhatsYouveGotController/Details/5
         public ActionResult Details(int id)
         {
-            var model = _bookService.GetById(id);
-            return View(model);
+            return View();
         }
 
-        // GET: BookController/Create
+        // GET: ShowMeWhatsYouveGotController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: BookController/Create
+        // POST: ShowMeWhatsYouveGotController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -48,43 +45,34 @@ namespace OnlineLibraryASP.Controllers
             }
         }
 
-        // GET: BookController/Edit/5
+        // GET: ShowMeWhatsYouveGotController/Edit/5
         public ActionResult Edit(int id)
         {
-            var model = _bookService.GetById(id);
-            return View(model);
+            return View();
         }
 
-        // POST: BookController/Edit/5
+        // POST: ShowMeWhatsYouveGotController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Book model)
+        public ActionResult Edit(int id, IFormCollection collection)
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return View(model);
-
-                }
-                _bookService.Update(model);
-
                 return RedirectToAction(nameof(Index));
             }
-
             catch
             {
                 return View();
             }
         }
 
-        // GET: BookController/Delete/5
+        // GET: ShowMeWhatsYouveGotController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: BookController/Delete/5
+        // POST: ShowMeWhatsYouveGotController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
