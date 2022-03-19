@@ -36,10 +36,17 @@ namespace OnlineLibraryASP.Controllers
         // POST: BookController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Book model)
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+
+                _bookService.Create(model);
+
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -78,19 +85,25 @@ namespace OnlineLibraryASP.Controllers
             }
         }
 
-        // GET: BookController/Delete/5
+        // GET: MeetingController/Delete/5
+        [Route("delete/{id:int}")]
         public ActionResult Delete(int id)
         {
-            return View();
+            var model = _bookService.GetById(id);
+
+            return View(model);
         }
 
-        // POST: BookController/Delete/5
+        // POST: MeetingController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        [Route("delete/{id:int}")]
+        public ActionResult Delete(int id, Book model)
         {
             try
             {
+                _bookService.Delete(id);
+
                 return RedirectToAction(nameof(Index));
             }
             catch
