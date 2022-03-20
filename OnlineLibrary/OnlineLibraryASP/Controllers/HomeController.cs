@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineLibraryASP.Models;
-using OnlineLibraryASP.Services;
+using OnlineLibrary.BLL.Models;
+using OnlineLibrary.BLL.Services;
 using System.Diagnostics;
 
 namespace OnlineLibraryASP.Controllers

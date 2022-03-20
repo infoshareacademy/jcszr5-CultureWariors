@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OnlineLibraryASP.Models;
+using OnlineLibrary.BLL.Models;
 
 namespace OnlineLibraryASP
 {
