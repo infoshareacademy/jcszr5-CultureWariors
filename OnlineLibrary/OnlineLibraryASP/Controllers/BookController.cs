@@ -110,6 +110,12 @@ namespace OnlineLibraryASP.Controllers
             {
                 return View();
             }
+
+        }
+        public IActionResult About()
+        {
+           var model = _bookService.GetAll();
+            return View(model);
         }
     }
 }

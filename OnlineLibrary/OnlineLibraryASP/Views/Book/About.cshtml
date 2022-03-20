@@ -1,0 +1,59 @@
+﻿@using OnlineLibraryASP.Enums
+@model IEnumerable<OnlineLibraryASP.Models.Book>
+
+
+
+@{
+    ViewData["Title"] = "About";
+}
+
+<h1>O Bibliotece</h1>
+
+<p>
+    Biblioteka została wykonana przez zespół Culture Warriors!
+</p>
+<p>W zbiorach biblioteki znajduje się</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               <label asp-for="First().BookType">Gatunek</label>
+            </th>
+            <th>
+                Ilość
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var AAA in Enum.GetNames(typeof(BookType))) 
+{
+        <tr>
+            <td>
+               @AAA
+            </td>
+            <td>    
+                    @{
+
+                        int i = 0;
+
+                        foreach(var book in Model)
+                        {
+
+                            if (book.BookType.ToString() == AAA)
+                            {
+                                
+                                i++;
+                            }
+
+                        }
+                    }
+                    @i
+                    
+                    
+
+            </td>
+          
+        </tr>
+}
+    </tbody>
+</table>

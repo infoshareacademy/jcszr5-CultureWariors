@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineLibraryASP.Models;
+using OnlineLibraryASP.Services;
 using System.Diagnostics;
 
 namespace OnlineLibraryASP.Controllers
@@ -13,6 +14,7 @@ namespace OnlineLibraryASP.Controllers
             _logger = logger;
         }
 
+
         public IActionResult Index()
         {
             return View();
@@ -22,6 +24,8 @@ namespace OnlineLibraryASP.Controllers
         {
             return View();
         }
+
+     
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
