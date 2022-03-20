@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineLibraryASP.Models;
+using OnlineLibraryASP.Services;
 using System.Diagnostics;
 
 namespace OnlineLibraryASP.Controllers
@@ -12,12 +14,13 @@ namespace OnlineLibraryASP.Controllers
             _logger = logger;
         }
 
+
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult ShowMeWhatsYouveGot()
         {
             return View();
         }

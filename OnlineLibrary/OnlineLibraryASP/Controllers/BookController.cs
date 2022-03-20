@@ -103,33 +103,44 @@ namespace OnlineLibraryASP.Controllers
                 _bookService.Update(model);
                 return RedirectToAction(nameof(Index));
             }
+
             catch
             {
                 return View();
             }
         }
 
-        // GET: BookController/Delete/5
+        // GET: MeetingController/Delete/5
+        [Route("delete/{id:int}")]
         public ActionResult Delete(int id)
         {
             var model = _bookService.GetById(id);
+
             return View(model);
         }
 
-        // POST: BookController/Delete/5
+        // POST: MeetingController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("delete/{id:int}")]
         public ActionResult Delete(int id, Book model)
         {
             try
             {
                 _bookService.Delete(id);
+
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
                 return View();
             }
+
+        }
+        public IActionResult About()
+        {
+           var model = _bookService.GetAll();
+            return View(model);
         }
     }
 }

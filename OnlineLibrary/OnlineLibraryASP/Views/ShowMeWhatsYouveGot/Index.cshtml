@@ -1,0 +1,19 @@
+﻿@using OnlineLibraryASP.Enums
+@model OnlineLibraryASP.Models.Book
+
+@{
+    ViewData["Title"] = "ShowMeWhatsYouveGot";
+}
+
+<h1>Zaraz Coś znajdziemy!</h1>
+
+<p>
+<div class="form-group">
+                 <label asp-for="BookType" class="control-label">Co Cię interesuje?</label>
+                <select asp-for="BookType" asp-items="Html.GetEnumSelectList<BookType>()" class="form-control">
+                    <option selected="selected" value="">Wszystko jedno</option>
+                </select>
+            </div>
+</p>
+
+

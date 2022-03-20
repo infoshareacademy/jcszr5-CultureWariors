@@ -32,6 +32,7 @@ namespace OnlineLibrary.BLL.Repositories
                 BookType = BookType.Fantastyka,
                 PublicationDate = 1960
     }
+
         };
         public List<Book> GetAll()
         {
