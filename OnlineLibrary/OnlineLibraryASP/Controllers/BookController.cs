@@ -25,11 +25,11 @@ namespace OnlineLibraryASP.Controllers
             
             if (!String.IsNullOrEmpty(searchString))
             {
-                books = books.Where(b=>b.Title.ToLower().Contains(searchString.ToLower())).ToList();
+                books = _bookService.SearchByTitle(searchString);
             }
             if (!String.IsNullOrEmpty(bookType))
             {
-               books = books.Where(b => b.BookType.ToString().Contains(bookType)).ToList();
+               books = _bookService.SearchByType(bookType);
             }
             var bookTypeVM = new BookTypeViewModel
             {

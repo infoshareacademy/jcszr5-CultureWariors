@@ -31,5 +31,15 @@ namespace OnlineLibrary.BLL.Services
         {
             _bookRepository.Delete(id);
         }
+        public List<Book> SearchByTitle(string title)
+        {
+            return _bookRepository.GetAll().Where(b => b.Title.ToLower().Contains(title.ToLower())).ToList();
+        }
+        public List<Book> SearchByType(string type)
+        {
+            return _bookRepository.GetAll().Where(b => b.BookType.ToString().Contains(type)).ToList();
+        }
+
     }
 }
+
