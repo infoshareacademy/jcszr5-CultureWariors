@@ -1,4 +1,5 @@
-﻿using OnlineLibraryASP.Models;
+﻿using OnlineLibraryASP.Enums;
+using OnlineLibraryASP.Models;
 
 namespace OnlineLibraryASP.Repositories
 {
@@ -31,6 +32,7 @@ namespace OnlineLibraryASP.Repositories
                 BookType = Enums.BookType.Fantastyka,
                 PublicationDate = 1960
     }
+
         };
         public List<Book> GetAll()
         {
