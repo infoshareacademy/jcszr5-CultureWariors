@@ -1,7 +1,14 @@
+using OnlineLibrary.BLL.Repositories;
+using OnlineLibrary.BLL.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddTransient<IBookService, BookService>();
+builder.Services.AddSingleton<IBookRepository, BookRepository>();
+
 
 var app = builder.Build();
 
