@@ -1,6 +1,6 @@
-﻿using OnlineLibraryASP.Models;
+﻿using OnlineLibrary.BLL.Models;
 
-namespace OnlineLibraryASP.Services
+namespace OnlineLibrary.BLL.Services
 {
     public interface IBookService
     {

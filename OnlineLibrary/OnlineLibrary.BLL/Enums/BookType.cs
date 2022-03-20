@@ -1,4 +1,4 @@
-﻿namespace OnlineLibraryASP.Enums
+﻿namespace OnlineLibrary.BLL.Enums
 {
     public enum BookType
     {

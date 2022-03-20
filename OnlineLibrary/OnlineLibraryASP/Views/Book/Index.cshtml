@@ -1,4 +1,5 @@
-﻿@model IEnumerable<OnlineLibraryASP.Models.Book>
+﻿@using OnlineLibrary.BLL.Enums
+@model OnlineLibraryASP.ViewModels.BookTypeViewModel
 
 @{
     ViewData["Title"] = "Books";
@@ -9,27 +10,40 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<form asp-controller="Book" asp-action="Index" method="get">
+    <p>
+        
+        <select asp-for="BookType" asp-items="Model.Types">
+            <option value="">All</option>
+        </select>
+        
+
+        Title: <input type="text" name="SearchString" />
+        <input type="submit" value="Filter" />
+
+    </p>
+</form>
 <table class="table">
     <thead>
         <tr>
             
             <th>
-                <label asp-for="First().Title"> </label>
+                <label asp-for="Books.First().Title"> </label>
             </th>
             <th>
-                <label asp-for="First().Author"></label>
+                <label asp-for="Books.First().Author"></label>
             </th>
             <th>
-                <label asp-for="First().BookType"></label>
+                <label asp-for="Books.First().BookType"></label>
             </th>
             <th>
-                <label asp-for="First().PublicationDate"></label>
+                <label asp-for="Books.First().PublicationDate"></label>
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Books) {
         <tr>
            
             <td>

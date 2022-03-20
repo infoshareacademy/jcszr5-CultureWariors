@@ -1,7 +1,7 @@
-﻿using OnlineLibraryASP.Models;
-using OnlineLibraryASP.Repositories;
+﻿using OnlineLibrary.BLL.Models;
+using OnlineLibrary.BLL.Repositories;
 
-namespace OnlineLibraryASP.Services
+namespace OnlineLibrary.BLL.Services
 {
     public class BookService : IBookService
     {

@@ -1,8 +1,9 @@
-﻿using OnlineLibraryASP.Models;
+﻿using OnlineLibrary.BLL.Enums;
+using OnlineLibrary.BLL.Models;
 
-namespace OnlineLibraryASP.Repositories
+namespace OnlineLibrary.BLL.Repositories
 {
-    public class BookRepository:IBookRepository
+    public class BookRepository : IBookRepository
     {
         private static int BooksCounter;
         private static List<Book> Books = new List<Book>
@@ -12,7 +13,7 @@ namespace OnlineLibraryASP.Repositories
                 Id = 1,
                 Title = "Wiedźmin",
                 Author = "Sapkowski",
-                BookType = Enums.BookType.Fantastyka,
+                BookType = BookType.Fantastyka,
                 PublicationDate = 1999
             },
             new Book
@@ -20,7 +21,7 @@ namespace OnlineLibraryASP.Repositories
                 Id = 2,
                 Title = "Lalka",
                 Author = "Prus",
-                BookType = Enums.BookType.Obyczajowa,
+                BookType = BookType.Obyczajowa,
                 PublicationDate = 1889
             },
             new Book
@@ -28,7 +29,7 @@ namespace OnlineLibraryASP.Repositories
                 Id = 3,
                 Title = "Władca Pierścieni",
                 Author = "Tolkien",
-                BookType = Enums.BookType.Fantastyka,
+                BookType = BookType.Fantastyka,
                 PublicationDate = 1960
     }
         };
@@ -62,7 +63,7 @@ namespace OnlineLibraryASP.Repositories
             book.Author = model.Author;
             book.BookType = model.BookType;
             book.PublicationDate = model.PublicationDate;
-            
+
         }
     }
 }

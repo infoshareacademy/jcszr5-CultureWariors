@@ -1,5 +1,5 @@
-using OnlineLibraryASP.Repositories;
-using OnlineLibraryASP.Services;
+using OnlineLibrary.BLL.Repositories;
+using OnlineLibrary.BLL.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
