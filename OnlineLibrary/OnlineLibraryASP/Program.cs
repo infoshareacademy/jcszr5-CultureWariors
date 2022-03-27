@@ -1,10 +1,15 @@
+using Microsoft.EntityFrameworkCore;
 using OnlineLibrary.BLL.Repositories;
 using OnlineLibrary.BLL.Services;
+using OnlineLibraryASP;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<BookContext>(options => options.UseSqlServer(
+    builder.Configuration.GetConnectionString("DefaultConnection")
+    ));
 
 builder.Services.AddTransient<IBookService, BookService>();
 builder.Services.AddSingleton<IBookRepository, BookRepository>();
