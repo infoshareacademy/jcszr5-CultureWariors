@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OnlineLibrary.BLL.Repositories
 {
-    public class AuthorRepository
+    public class AuthorRepository : IAuthorRepository
     {
         
         private static int AuthorCounter;
