@@ -8,7 +8,8 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<IBookService, BookService>();
 builder.Services.AddSingleton<IBookRepository, BookRepository>();
-
+builder.Services.AddSingleton<IUserRepository, UserRepository>();
+builder.Services.AddTransient<IUserService, UserService>();
 
 var app = builder.Build();
 

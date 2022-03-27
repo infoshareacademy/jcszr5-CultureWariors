@@ -30,11 +30,11 @@ namespace OnlineLibrary.BLL.Models
     //    public string Comment { get; set; }
     //}
 
-    public class BookRent
-    {
-        public string UserId { get; set; }
-        public string BookId { get; set; }
-        public DateTime From { get; set; }
-        public DateTime To { get; set; }
-    }
+    //public class BookRent
+    //{
+    //    public string UserId { get; set; }
+    //    public string BookId { get; set; }
+    //    public DateTime From { get; set; }
+    //    public DateTime To { get; set; }
+    //}
 }
