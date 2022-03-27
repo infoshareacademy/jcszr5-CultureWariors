@@ -11,7 +11,8 @@ namespace OnlineLibrary.BLL.Models
         public string Title { get; set; }
         [Required(ErrorMessage = "Please book author")]
         [StringLength(maximumLength: 30, MinimumLength = 2)]
-        public string Author { get; set; }
+        public Author Author { get; set; }
+        public int AuthorId { get; set; }
         [Display(Name = "Book type")]
         public BookType BookType { get; set; }
         [Display(Name = "Publication Date")]

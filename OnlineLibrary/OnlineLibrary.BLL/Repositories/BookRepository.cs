@@ -12,7 +12,7 @@ namespace OnlineLibrary.BLL.Repositories
             {
                 Id = 1,
                 Title = "Wiedźmin",
-                Author = "Sapkowski",
+                AuthorId = 1,
                 BookType = BookType.Fantastyka,
                 PublicationDate = 1999
             },
@@ -20,7 +20,7 @@ namespace OnlineLibrary.BLL.Repositories
             {
                 Id = 2,
                 Title = "Lalka",
-                Author = "Prus",
+                AuthorId = 2,
                 BookType = BookType.Obyczajowa,
                 PublicationDate = 1889
             },
@@ -28,7 +28,7 @@ namespace OnlineLibrary.BLL.Repositories
             {
                 Id = 3,
                 Title = "Władca Pierścieni",
-                Author = "Tolkien",
+                AuthorId = 3,
                 BookType = BookType.Fantastyka,
                 PublicationDate = 1960
     }
