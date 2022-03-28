@@ -1,61 +1,38 @@
 ﻿using OnlineLibrary.BLL.Enums;
 using OnlineLibrary.BLL.Models;
+using OnlineLibrary.BLL.Services;
+using OnlineLibraryASP;
 
 namespace OnlineLibrary.BLL.Repositories
 {
     public class BookRepository : IBookRepository
     {
-        private static int BooksCounter;
-        private static List<Book> Books = new List<Book>
+        private readonly BookContext _context;
+        private readonly IAuthorService _authorService;
+        public BookRepository(BookContext context,IAuthorService authorService)
         {
-            new Book
-            {
-                Id = 1,
-                Title = "Wiedźmin",
-                AuthorId = 1,
-                BookType = BookType.Fantastyka,
-                PublicationDate = 1999
-            },
-            new Book
-            {
-                Id = 2,
-                Title = "Lalka",
-                AuthorId = 2,
-                BookType = BookType.Obyczajowa,
-                PublicationDate = 1889
-            },
-            new Book
-            {
-                Id = 3,
-                Title = "Władca Pierścieni",
-                AuthorId = 3,
-                BookType = BookType.Fantastyka,
-                PublicationDate = 1960
-    }
-
-        };
+            _authorService = authorService;
+            _context = context;
+        }
         public List<Book> GetAll()
         {
-            return Books;
+            return _context.Books.ToList();
         }
         public void Create(Book book)
         {
-            book.Id = GetNextId();
-            Books.Add(book);
+            book.Author = _authorService.GetById(book.AuthorId);
+            _context.Books.Add(book);
+            _context.SaveChanges();
         }
-        public int GetNextId()
-        {
-            BooksCounter += 1;
-            return BooksCounter;
-        }
+        
         public Book GetById(int id)
         {
-            return Books.FirstOrDefault(c => c.Id == id);
+            return _context.Books.FirstOrDefault(c => c.Id == id);
         }
         public void Delete(int id)
         {
             var book = GetById(id);
-            Books.Remove(book);
+            _context.Books.Remove(book);
         }
         public void Update(Book model)
         {
@@ -64,7 +41,6 @@ namespace OnlineLibrary.BLL.Repositories
             book.Author = model.Author;
             book.BookType = model.BookType;
             book.PublicationDate = model.PublicationDate;
-
         }
     }
 }

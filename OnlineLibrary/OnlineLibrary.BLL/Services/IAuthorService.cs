@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OnlineLibrary.BLL.Services
 {
-    internal interface IAuthorService
+    public interface IAuthorService
     {
         public List<Author> GetAll();
         public Author GetById(int id);

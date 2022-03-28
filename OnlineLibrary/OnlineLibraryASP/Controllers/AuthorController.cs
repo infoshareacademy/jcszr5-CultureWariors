@@ -1,58 +1,65 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OnlineLibrary.BLL.Models;
 using OnlineLibrary.BLL.Services;
 
 namespace OnlineLibraryASP.Controllers
 {
-    public class UserController : Controller
+    public class AuthorController : Controller
     {
-        private readonly IUserService _userService;
-        public UserController(IUserService userService)
+        private readonly IAuthorService _authorService;
+        public AuthorController(IAuthorService authorService)
         {
-            _userService = userService;
+            _authorService = authorService;
         }
-        // GET: UserController
+        // GET: HomeController1
         public ActionResult Index()
         {
-            var model = _userService.GetAll();
+            var model = _authorService.GetAll();
             return View(model);
         }
 
-        // GET: UserController/Details/5
+        // GET: HomeController1/Details/5
         public ActionResult Details(int id)
         {
-            var model = _userService.GetById(id);
-            return View(model);
+            return View();
         }
 
-        // GET: UserController/Create
+        // GET: HomeController1/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: UserController/Create
+        // POST: HomeController1/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Author model)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
+            
+            
+                try
+                {
+                    if (!ModelState.IsValid)
+                    {
+                        return View(model);
+                    }
+                    _authorService.Create(model);
+                    return RedirectToAction(nameof(Index));
+                }
+                catch
+                {
+                    return View();
+                }
             }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: UserController/Edit/5
+        // GET: HomeController1/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: UserController/Edit/5
+        // POST: HomeController1/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -67,13 +74,13 @@ namespace OnlineLibraryASP.Controllers
             }
         }
 
-        // GET: UserController/Delete/5
+        // GET: HomeController1/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: UserController/Delete/5
+        // POST: HomeController1/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

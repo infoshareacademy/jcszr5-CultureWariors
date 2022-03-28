@@ -31,7 +31,10 @@
                 <label asp-for="Books.First().Title"> </label>
             </th>
             <th>
-                <label asp-for="Books.First().Author"></label>
+                <label asp-for="Books.First().Author.Name"></label>
+            </th>
+            <th>
+                <label asp-for="Books.First().Author.Surname"></label>
             </th>
             <th>
                 <label asp-for="Books.First().BookType"></label>
@@ -50,7 +53,10 @@
                 @item.Title
             </td>
             <td>
-                @item.Author
+                @item.Author.Name
+            </td>
+            <td>
+                @item.Author.Surname
             </td>
             <td>
                 @item.BookType

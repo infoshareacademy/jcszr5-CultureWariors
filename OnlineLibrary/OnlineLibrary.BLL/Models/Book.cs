@@ -9,10 +9,9 @@ namespace OnlineLibrary.BLL.Models
         [Required(ErrorMessage = "Please book title")]
         [StringLength(maximumLength: 30, MinimumLength = 1)]
         public string Title { get; set; }
-        [Required(ErrorMessage = "Please book author")]
-        [StringLength(maximumLength: 30, MinimumLength = 2)]
-        public Author Author { get; set; }
         public int AuthorId { get; set; }
+        public virtual Author Author { get; set; }
+        
         [Display(Name = "Book type")]
         public BookType BookType { get; set; }
         [Display(Name = "Publication Date")]

@@ -11,7 +11,7 @@ namespace OnlineLibrary.BLL.Repositories
     {
         public List<Author> GetAll();
         public void Create(Author author);
-        public int GetNextId();
+        
         public Author GetById(int id);
         public void Delete(int id);
         public void Update(Author model);

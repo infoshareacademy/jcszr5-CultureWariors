@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OnlineLibrary.BLL.Services
 {
-    internal class AuthorService : IAuthorService
+    public class AuthorService : IAuthorService
     {
         private readonly IAuthorRepository _authorRepository;
         public AuthorService(IAuthorRepository authorRepository)

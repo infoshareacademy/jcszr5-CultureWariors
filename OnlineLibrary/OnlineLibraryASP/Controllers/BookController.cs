@@ -11,10 +11,12 @@ namespace OnlineLibraryASP.Controllers
     public class BookController : Controller
     {
         private IBookService _bookService;
-        public BookController(IBookService bookService)
+        private IAuthorService _authorService;
+        public BookController(IBookService bookService,IAuthorService authorService)
         {
             //_bookService = new BookService();
             _bookService = bookService;
+            _authorService = authorService;
         }
         // GET: BookController
         public ActionResult Index(string bookType, string searchString)
@@ -50,7 +52,7 @@ namespace OnlineLibraryASP.Controllers
         // GET: BookController/Create
         public ActionResult Create()
         {
-            
+            ViewData["AuthorId"] = new SelectList(_authorService.GetAll(), "Id", "Surname");
             //var vm = new CreateRentViewModel()
             //{
             //    Books = _bookService.GetAll(),
@@ -66,13 +68,16 @@ namespace OnlineLibraryASP.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Book model)
-        {
+         {
+            
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return View(model);
-                }
+
+                //if (!ModelState.IsValid)
+                //{
+                //    return View(model);
+                //}
+                
                 _bookService.Create(model);
                 return RedirectToAction(nameof(Index));
             }
@@ -80,7 +85,9 @@ namespace OnlineLibraryASP.Controllers
             {
                 return View();
             }
+            ViewData["AuthorId"] = new SelectList(_authorService.GetAll(), "Id", "Surname", model.AuthorId);
         }
+        
 
         // GET: BookController/Edit/5
         public ActionResult Edit(int id)

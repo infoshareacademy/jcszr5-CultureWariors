@@ -1,23 +1,27 @@
-﻿@model IEnumerable<OnlineLibrary.BLL.Models.User>
+﻿@model IEnumerable<OnlineLibrary.BLL.Models.Author>
 
 @{
-    ViewData["Title"] = "Użytkownicy";
+    ViewData["Title"] = "Index";
 }
 
-<h1>Użytkownicy</h1>
+<h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Dodaj autora</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                <label asp-for="First().Login"> </label>
+                <label asp-for="First().Name">Imię</label>
             </th>
             <th>
-                <label asp-for="First().Rented"> </label>
+                <label asp-for="First().Surname">Nazwisko</label>
             </th>
+            <th>
+                <label asp-for="First().BooksWriten">Książki w bazie</label>
+            </th>
+            
             <th></th>
         </tr>
     </thead>
@@ -25,10 +29,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @item.Login
+                @item.Name
             </td>
             <td>
-                @item.Rented.Count()
+                @item.Surname
+            </td>
+            <td>
+                @item.BooksWriten.Count()
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>

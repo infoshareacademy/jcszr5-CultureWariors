@@ -6,9 +6,11 @@ namespace OnlineLibrary.BLL.Services
     public class BookService : IBookService
     {
         private readonly IBookRepository _bookRepository;
-        public BookService(IBookRepository bookRepository)
+        private readonly IAuthorService _authorService;
+        public BookService(IBookRepository bookRepository,IAuthorService authorService)
         {
             _bookRepository = bookRepository;
+            _authorService = authorService;
         }
 
         public List<Book> GetAll()
@@ -21,7 +23,9 @@ namespace OnlineLibrary.BLL.Services
         }
         public void Create(Book book)
         {
+            
             _bookRepository.Create(book);
+            
         }
         public void Update(Book model)
         {
