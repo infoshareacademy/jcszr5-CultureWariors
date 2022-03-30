@@ -8,14 +8,17 @@ namespace OnlineLibraryASP.Controllers
     public class AuthorController : Controller
     {
         private readonly IAuthorService _authorService;
-        public AuthorController(IAuthorService authorService)
+        private readonly IBookService _bookService;
+        public AuthorController(IAuthorService authorService,IBookService bookService)
         {
             _authorService = authorService;
+            _bookService = bookService;
         }
         // GET: HomeController1
         public ActionResult Index()
         {
             var model = _authorService.GetAll();
+            
             return View(model);
         }
 

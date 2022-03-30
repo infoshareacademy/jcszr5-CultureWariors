@@ -21,7 +21,12 @@ namespace OnlineLibrary.BLL.Repositories
 
         public List<Author> GetAll()
         {
-            return _context.Authors.ToList();
+            var authors =  _context.Authors.ToList();
+            foreach(var author in authors)
+            {
+                _context.Entry(author).Collection(a => a.BooksWriten).Load();
+            }
+            return authors;
         }
         public void Create(Author author)
         {
@@ -44,9 +49,8 @@ namespace OnlineLibrary.BLL.Repositories
             var author = GetById(model.Id);
             author.Name = model.Name;
             author.Surname = model.Surname;
-            
-
         }
+        
     }
 }
     

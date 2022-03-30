@@ -8,20 +8,25 @@ namespace OnlineLibrary.BLL.Repositories
     public class BookRepository : IBookRepository
     {
         private readonly BookContext _context;
-        private readonly IAuthorService _authorService;
-        public BookRepository(BookContext context,IAuthorService authorService)
+        
+        public BookRepository(BookContext context)
         {
-            _authorService = authorService;
+            
             _context = context;
         }
         public List<Book> GetAll()
         {
-            return _context.Books.ToList();
+            var books = _context.Books.ToList();
+            foreach (var book in books)
+            {
+                _context.Entry(book).Reference(b=>b.Author).Load();
+            }
+            return books;
         }
         public void Create(Book book)
         {
-            book.Author = _authorService.GetById(book.AuthorId);
-            _context.Books.Add(book);
+            _context.Add(book);
+            
             _context.SaveChanges();
         }
         
