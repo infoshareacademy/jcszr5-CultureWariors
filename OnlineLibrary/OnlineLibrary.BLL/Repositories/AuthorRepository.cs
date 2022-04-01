@@ -1,4 +1,5 @@
-﻿using OnlineLibrary.BLL;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineLibrary.BLL;
 using OnlineLibrary.BLL.Models;
 using OnlineLibraryASP;
 using System;
@@ -21,11 +22,7 @@ namespace OnlineLibrary.BLL.Repositories
 
         public List<Author> GetAll()
         {
-            var authors =  _context.Authors.ToList();
-            foreach(var author in authors)
-            {
-                _context.Entry(author).Collection(a => a.BooksWriten).Load();
-            }
+            var authors = _context.Authors.Include(b => b.BooksWriten).ToList();
             return authors;
         }
         public void Create(Author author)

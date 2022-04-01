@@ -1,4 +1,5 @@
-﻿using OnlineLibrary.BLL.Enums;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineLibrary.BLL.Enums;
 using OnlineLibrary.BLL.Models;
 using OnlineLibrary.BLL.Services;
 using OnlineLibraryASP;
@@ -16,11 +17,8 @@ namespace OnlineLibrary.BLL.Repositories
         }
         public List<Book> GetAll()
         {
-            var books = _context.Books.ToList();
-            foreach (var book in books)
-            {
-                _context.Entry(book).Reference(b=>b.Author).Load();
-            }
+            var books = _context.Books.Include(b=>b.Author).ToList();
+            
             return books;
         }
         public void Create(Book book)

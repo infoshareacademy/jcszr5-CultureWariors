@@ -30,7 +30,10 @@ namespace OnlineLibraryASP
                 .WithMany()
                 .HasForeignKey("AuthorId");
 
-            modelBuilder.Entity<Author>().HasMany(b => b.BooksWriten).WithOne(m => m.Author).HasForeignKey(m=>m.AuthorId);
+            modelBuilder.Entity<Author>()
+                .HasMany(b => b.BooksWriten)
+                .WithOne(m => m.Author)
+                .HasForeignKey(m=>m.AuthorId);
                 
             
 
