@@ -5,20 +5,21 @@
     ViewData["Title"] = "Books";
 }
 
-<h1>Index</h1>
+<h1>Książki</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Dodaj książkę</a>
 </p>
 <form asp-controller="Book" asp-action="Index" method="get">
     <p>
         
         <select asp-for="BookType" asp-items="Model.Types">
-            <option value="">All</option>
+            <option value="">Wszystkie</option>
         </select>
         
 
-        Title: <input type="text" name="SearchString" />
+        Tytuł: <input type="text" name="SearchString" />
+        Autor: <input type="text" name="SearchAuthor" />
         <input type="submit" value="Filter" />
 
     </p>
@@ -28,19 +29,17 @@
         <tr>
             
             <th>
-                <label asp-for="Books.First().Title"> </label>
+                <label asp-for="Books.First().Title">Tytuł</label>
             </th>
             <th>
-                <label asp-for="Books.First().Author.Name"></label>
+                <label asp-for="Books.First().Author.Name">Autor</label>
+            </th>
+            
+            <th>
+                <label asp-for="Books.First().BookType">Kategoria</label>
             </th>
             <th>
-                <label asp-for="Books.First().Author.Surname"></label>
-            </th>
-            <th>
-                <label asp-for="Books.First().BookType"></label>
-            </th>
-            <th>
-                <label asp-for="Books.First().PublicationDate"></label>
+                <label asp-for="Books.First().PublicationDate">Data publikacji</label>
             </th>
             <th></th>
         </tr>
@@ -55,9 +54,7 @@
             <td>
                 @item.Author.Name
             </td>
-            <td>
-                @item.Author.Surname
-            </td>
+            
             <td>
                 @item.BookType
             </td>
@@ -65,9 +62,9 @@
                 @item.PublicationDate
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a>
+                <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
             </td>
         </tr>
 }

@@ -19,7 +19,7 @@ namespace OnlineLibraryASP.Controllers
             _authorService = authorService;
         }
         // GET: BookController
-        public ActionResult Index(string bookType, string searchString)
+        public ActionResult Index(string bookType, string searchString,string searchAuthor)
         {
             var typeQuery = _bookService.GetAll().Select(b => b.BookType.ToString()).ToList();
             var books = _bookService.GetAll();
@@ -32,6 +32,10 @@ namespace OnlineLibraryASP.Controllers
             if (!String.IsNullOrEmpty(bookType))
             {
                books = _bookService.SearchByType(bookType);
+            }
+            if (!String.IsNullOrEmpty(searchAuthor))
+            {
+                books= _bookService.SearchByAuthor(searchAuthor);
             }
             var bookTypeVM = new BookTypeViewModel
             {
@@ -52,7 +56,7 @@ namespace OnlineLibraryASP.Controllers
         // GET: BookController/Create
         public ActionResult Create()
         {
-            ViewData["AuthorId"] = new SelectList(_authorService.GetAll(), "Id", "Surname");
+            ViewData["AuthorId"] = new SelectList(_authorService.GetAll(), "Id", "Name");
             //var vm = new CreateRentViewModel()
             //{
             //    Books = _bookService.GetAll(),
@@ -69,15 +73,15 @@ namespace OnlineLibraryASP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Book model)
          {
-            
+            //model.Author = _authorService.GetById(model.AuthorId);
             try
             {
 
-                //if (!ModelState.IsValid)
-                //{
-                //    return View(model);
-                //}
-                
+                //    if (!ModelState.IsValid)
+                //    {
+                //        return View(model);
+                //    }
+
                 _bookService.Create(model);
                 return RedirectToAction(nameof(Index));
             }
@@ -92,6 +96,7 @@ namespace OnlineLibraryASP.Controllers
         // GET: BookController/Edit/5
         public ActionResult Edit(int id)
         {
+            ViewData["AuthorId"] = new SelectList(_authorService.GetAll(), "Id", "Name");
             var model = _bookService.GetById(id);
             return View(model);
         }
@@ -103,10 +108,10 @@ namespace OnlineLibraryASP.Controllers
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return View(model);
-                }
+                //if (!ModelState.IsValid)
+                //{
+                //    return View(model);
+                //}
                 _bookService.Update(model);
                 return RedirectToAction(nameof(Index));
             }

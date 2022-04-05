@@ -7,7 +7,7 @@ namespace OnlineLibrary.BLL.Models
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "Please book title")]
-        [StringLength(maximumLength: 30, MinimumLength = 1)]
+        [StringLength(maximumLength: 100, MinimumLength = 1)]
         public string Title { get; set; }
         public int AuthorId { get; set; }
         public virtual Author Author { get; set; }

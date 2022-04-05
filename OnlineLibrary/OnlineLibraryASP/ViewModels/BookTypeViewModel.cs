@@ -9,5 +9,6 @@ namespace OnlineLibraryASP.ViewModels
         public SelectList? Types { get; set; }
         public string? BookType { get; set; }
         public string? SearchString { get; set; }
+        public string? SearchAuthor { get; set; }
     }
 }

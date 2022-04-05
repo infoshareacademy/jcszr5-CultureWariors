@@ -1,10 +1,9 @@
 ﻿@using OnlineLibrary.BLL.Enums
 @using OnlineLibrary.BLL.Models
-@using OnlineLibraryASP.ViewModels
 @model Book
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
+                <label asp-for="Title" class="control-label">Tytuł</label>
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
@@ -14,18 +13,18 @@
                 
             </div>
             <div class="form-group">
-                <label asp-for="BookType" class="control-label"></label>
+                <label asp-for="BookType" class="control-label">Kategoria</label>
                 <select asp-for="BookType" asp-items="Html.GetEnumSelectList<BookType>()" class="form-control">
-                    <option selected="selected" value="">Please select</option>
+                    <option selected="selected" value="">Wybierz</option>
                 </select>
                 <span asp-validation-for="BookType" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PublicationDate" class="control-label"></label>
+                <label asp-for="PublicationDate" class="control-label">Data publikacji</label>
                 <input asp-for="PublicationDate" class="form-control" />
                 <span asp-validation-for="PublicationDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Zapisz" class="btn btn-primary" />
                 </div>
                 </div>

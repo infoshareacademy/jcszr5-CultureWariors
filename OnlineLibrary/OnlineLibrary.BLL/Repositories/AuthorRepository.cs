@@ -34,18 +34,19 @@ namespace OnlineLibrary.BLL.Repositories
         
         public Author GetById(int id)
         {
-            return _context.Authors.FirstOrDefault(c => c.Id == id);
+            return _context.Authors.Include(a=>a.BooksWriten).FirstOrDefault(c => c.Id == id);
         }
         public void Delete(int id)
         {
             var author = GetById(id);
             _context.Authors.Remove(author);
+            _context.SaveChanges();
         }
         public void Update(Author model)
         {
             var author = GetById(model.Id);
             author.Name = model.Name;
-            author.Surname = model.Surname;
+            _context.SaveChanges();
         }
         
     }

@@ -12,8 +12,6 @@ namespace OnlineLibrary.BLL.Models
 
         public string Name { get; set; }
 
-        public string Surname { get; set; }
-
         public virtual ICollection<Book> BooksWriten { get; set; }
         public Author()
         {

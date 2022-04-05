@@ -4,7 +4,7 @@
 
 namespace OnlineLibrary.BLL.Migrations
 {
-    public partial class initial : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,8 +14,7 @@ namespace OnlineLibrary.BLL.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -28,11 +27,10 @@ namespace OnlineLibrary.BLL.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     AuthorId = table.Column<int>(type: "int", nullable: false),
                     BookType = table.Column<int>(type: "int", nullable: false),
-                    PublicationDate = table.Column<int>(type: "int", nullable: false),
-                    AuthorId1 = table.Column<int>(type: "int", nullable: true)
+                    PublicationDate = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -43,22 +41,12 @@ namespace OnlineLibrary.BLL.Migrations
                         principalTable: "Authors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Books_Authors_AuthorId1",
-                        column: x => x.AuthorId1,
-                        principalTable: "Authors",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Books_AuthorId",
                 table: "Books",
                 column: "AuthorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Books_AuthorId1",
-                table: "Books",
-                column: "AuthorId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

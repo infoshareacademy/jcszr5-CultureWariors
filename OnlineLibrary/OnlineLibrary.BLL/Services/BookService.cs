@@ -43,6 +43,10 @@ namespace OnlineLibrary.BLL.Services
         {
             return _bookRepository.GetAll().Where(b => b.BookType.ToString().Contains(type)).ToList();
         }
+        public List<Book> SearchByAuthor(string author)
+        {
+            return _bookRepository.GetAll().Where(b=>b.Author.Name.ToLower().Contains(author.ToLower())).ToList();
+        }
 
     }
 }

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Autorzy</h1>
 
 <p>
     <a asp-action="Create">Dodaj autora</a>
@@ -15,9 +15,7 @@
             <th>
                 <label asp-for="First().Name">Imię</label>
             </th>
-            <th>
-                <label asp-for="First().Surname">Nazwisko</label>
-            </th>
+            
             <th>
                 <label asp-for="First().BooksWriten">Książki w bazie</label>
             </th>
@@ -31,9 +29,7 @@
             <td>
                 @item.Name
             </td>
-            <td>
-                @item.Surname
-            </td>
+            
             <td>
                 @item.BooksWriten.Count()
             </td>

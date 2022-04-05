@@ -25,7 +25,8 @@ namespace OnlineLibraryASP.Controllers
         // GET: HomeController1/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var model = _authorService.GetById(id);
+            return View(model);
         }
 
         // GET: HomeController1/Create
@@ -59,16 +60,22 @@ namespace OnlineLibraryASP.Controllers
         // GET: HomeController1/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var model = _authorService.GetById(id);
+            return View(model);
         }
 
         // POST: HomeController1/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Author model)
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                _authorService.Update(model);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -80,16 +87,19 @@ namespace OnlineLibraryASP.Controllers
         // GET: HomeController1/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var model = _authorService.GetById(id);
+
+            return View(model);
         }
 
         // POST: HomeController1/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Author model)
         {
             try
             {
+                _authorService.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

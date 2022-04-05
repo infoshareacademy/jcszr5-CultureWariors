@@ -11,5 +11,6 @@ namespace OnlineLibrary.BLL.Services
         public void Delete(int id);
         public List<Book> SearchByTitle(string title);
         public List<Book> SearchByType(string type);
+        public List<Book> SearchByAuthor(string author);
     }
 }

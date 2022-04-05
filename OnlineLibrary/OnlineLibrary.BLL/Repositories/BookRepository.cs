@@ -30,7 +30,7 @@ namespace OnlineLibrary.BLL.Repositories
         
         public Book GetById(int id)
         {
-            return _context.Books.FirstOrDefault(c => c.Id == id);
+            return _context.Books.Include(b=>b.Author).FirstOrDefault(c => c.Id == id);
         }
         public void Delete(int id)
         {
@@ -44,6 +44,7 @@ namespace OnlineLibrary.BLL.Repositories
             book.Author = model.Author;
             book.BookType = model.BookType;
             book.PublicationDate = model.PublicationDate;
+            _context.SaveChanges();
         }
     }
 }
