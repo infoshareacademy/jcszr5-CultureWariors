@@ -12,5 +12,6 @@ namespace OnlineLibrary.BLL.Services
         public List<Book> SearchByTitle(string title);
         public List<Book> SearchByType(string type);
         public List<Book> SearchByAuthor(string author);
+        public List<Book> GetTheSameBooks(string book);
     }
 }

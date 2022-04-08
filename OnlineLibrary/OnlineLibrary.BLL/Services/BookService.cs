@@ -46,6 +46,11 @@ namespace OnlineLibrary.BLL.Services
         public List<Book> SearchByAuthor(string author)
         {
             return _bookRepository.GetAll().Where(b=>b.Author.Name.ToLower().Contains(author.ToLower())).ToList();
+        } 
+        public List<Book> GetTheSameBooks(string book)
+        {
+            return _bookRepository.GetAll().GroupBy(b => b.Author).SelectMany(a => a.Skip(1)).ToList();
+
         }
 
     }
