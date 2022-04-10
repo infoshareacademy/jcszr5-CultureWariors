@@ -22,9 +22,9 @@ namespace OnlineLibraryASP.Controllers
         public ActionResult Index(string bookType, string searchString,string searchAuthor)
         {
             var typeQuery = _bookService.GetAll().Select(b => b.BookType.ToString()).ToList();
-            var books = _bookService.GetAll();
-                
-            
+            var books = _bookService.GetAll().GroupBy(x => x.Title).Select(y => y.First()).ToList();
+
+
             if (!String.IsNullOrEmpty(searchString))
             {
                 books = _bookService.SearchByTitle(searchString);
