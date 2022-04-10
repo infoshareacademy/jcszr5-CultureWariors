@@ -4,7 +4,7 @@
 
 namespace OnlineLibrary.BLL.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

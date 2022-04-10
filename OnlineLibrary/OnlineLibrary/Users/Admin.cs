@@ -8,16 +8,16 @@ namespace OnlineLibrary
         {
 
         }
-        public bool AdminLogin()
-        {
-            string username = Helper.GetUsername();
-            string password = Helper.GetPassword();
-            Console.Clear();
-            if (username == Username && password == Password)
-            {
-                return true;
-            }
-            return false;
-        }
+        //public bool AdminLogin()
+        //{
+        //    string username = Helper.GetUsername();
+        //    string password = Helper.GetPassword();
+        //    Console.Clear();
+        //    if (username == Username && password == Password)
+        //    {
+        //        return true;
+        //    }
+        //    return false;
+        //}
     }
 }

@@ -19,7 +19,7 @@ namespace OnlineLibraryASP
             //optionsBuilder.UseLazyLoadingProxies();
 
             optionsBuilder
-                .UseSqlServer("Server=localhost;Database=LibraryDb;Trusted_Connection=True;MultipleActiveResultSets=True;");
+                .UseSqlServer("Server=DESKTOP-C21RB03;Database=LibraryDb;Trusted_Connection=True;MultipleActiveResultSets=True;");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
