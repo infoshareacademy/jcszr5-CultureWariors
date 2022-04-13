@@ -19,20 +19,14 @@ namespace OnlineLibraryASP.Controllers
         // Wyświetlenie zakładki zaskocz mnie! - wybierz rodzaj
         public ActionResult Index()
         {
+            
             return View();
         }
 
         
         public ActionResult Roll(BookType bookType)
         {
-            Random random = new Random();
-            var selected =_bookservice.GetAll()
-                .Where(b=> b.BookType == bookType)
-                .ToList();
-            var happynumber = random.Next(selected.Count());
-            var blindchoose = selected[happynumber];
-            var id = blindchoose.Id;
-            var model =_bookservice.GetById(id);
+          var model= _bookservice.RandomBook(bookType);
             
             return View(model);
         }

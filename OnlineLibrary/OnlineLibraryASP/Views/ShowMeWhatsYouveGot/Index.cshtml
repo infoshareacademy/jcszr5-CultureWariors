@@ -9,11 +9,14 @@
 
 <p>
 <div class="form-group">
+    <form asp-action="Roll" >
                  <label class="control-label">Co Cię interesuje?</label>
-                <select asp-items="Html.GetEnumSelectList<BookType>()" class="form-control">
-                    <option selected="selected" value="">Wszystko jedno</option>
+                <select asp-for= "BookType" asp-items="Html.GetEnumSelectList<BookType>()" class="form-control">
+                   
                 </select>
-                 <form asp-action="Roll" >
+                 
+                     
+
         <input type="submit" value="Losuj" class="btn btn-primary col-12" />
         <br>
     </form>

@@ -1,5 +1,7 @@
-﻿using OnlineLibrary.BLL.Models;
+﻿using OnlineLibrary.BLL.Enums;
+using OnlineLibrary.BLL.Models;
 using OnlineLibrary.BLL.Repositories;
+using System.Web.Mvc;
 
 namespace OnlineLibrary.BLL.Services
 {
@@ -47,6 +49,43 @@ namespace OnlineLibrary.BLL.Services
         {
             return _bookRepository.GetAll().Where(b=>b.Author.Name.ToLower().Contains(author.ToLower())).ToList();
         }
+
+        public Book RandomBook(BookType bookType)
+        {
+
+            Random random = new Random();
+            var selected = _bookRepository.GetAll()
+                .Where(b => b.BookType == bookType)
+                .ToList();
+            var happynumber = random.Next(selected.Count());
+            var blindchoose = selected[happynumber];
+            var id = blindchoose.Id;
+            
+
+            return _bookRepository.GetById(id);
+
+        }
+
+
+        //public static SelectList TypeListGenerator()
+        //{
+        //    ViewData["TypeOfBook"]
+        //    var _bookTypes = from BookType d in Enum.GetValues(typeof(BookType))
+        //                     select new { ID = (int)d, Name = d.ToString() };
+        //    return new SelectList (_bookTypes, "ID", "Name");
+        //}
+
+        //private void PopulateViewdata4selectLists(BookType bookType)
+        //{
+        //    ViewData["Typy"] = from BookType d in Enum.GetValues(typeof(BookType))
+        //                       select new SelectListItem
+        //                       {
+        //                           Value = ((int)d).ToString(),
+        //                           Text = d.ToString(),
+        //                           Selected =bookType == d
+        //                       }
+        //}
+
 
     }
 }

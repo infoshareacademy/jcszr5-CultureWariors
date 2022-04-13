@@ -11,7 +11,7 @@ using OnlineLibraryASP;
 namespace OnlineLibrary.BLL.Migrations
 {
     [DbContext(typeof(BookContext))]
-    [Migration("20220408203128_init")]
+    [Migration("20220411091704_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
