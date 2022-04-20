@@ -54,9 +54,21 @@ namespace OnlineLibrary.BLL.Services
         {
 
             Random random = new Random();
-            var selected = _bookRepository.GetAll()
+            List<Book> selected = new List<Book>();
+            
+            if ((int)bookType == 99)
+            {
+                selected = _bookRepository.GetAll().ToList();
+
+            }
+            else
+                {
+                   selected = _bookRepository.GetAll()
                 .Where(b => b.BookType == bookType)
                 .ToList();
+                }
+           
+            
             var happynumber = random.Next(selected.Count());
             var blindchoose = selected[happynumber];
             var id = blindchoose.Id;
@@ -65,28 +77,6 @@ namespace OnlineLibrary.BLL.Services
             return _bookRepository.GetById(id);
 
         }
-
-
-        //public static SelectList TypeListGenerator()
-        //{
-        //    ViewData["TypeOfBook"]
-        //    var _bookTypes = from BookType d in Enum.GetValues(typeof(BookType))
-        //                     select new { ID = (int)d, Name = d.ToString() };
-        //    return new SelectList (_bookTypes, "ID", "Name");
-        //}
-
-        //private void PopulateViewdata4selectLists(BookType bookType)
-        //{
-        //    ViewData["Typy"] = from BookType d in Enum.GetValues(typeof(BookType))
-        //                       select new SelectListItem
-        //                       {
-        //                           Value = ((int)d).ToString(),
-        //                           Text = d.ToString(),
-        //                           Selected =bookType == d
-        //                       }
-        //}
-
-
     }
 }
 

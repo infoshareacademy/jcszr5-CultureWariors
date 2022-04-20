@@ -12,11 +12,9 @@
     <form asp-action="Roll" >
                  <label class="control-label">Co Cię interesuje?</label>
                 <select asp-for= "BookType" asp-items="Html.GetEnumSelectList<BookType>()" class="form-control">
-                   
+                <option value="99">Wszystko jedno</option> <!-- notice value="99" -->
                 </select>
                  
-                     
-
         <input type="submit" value="Losuj" class="btn btn-primary col-12" />
         <br>
     </form>
