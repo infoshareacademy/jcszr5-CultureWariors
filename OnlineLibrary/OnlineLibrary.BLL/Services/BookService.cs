@@ -50,32 +50,30 @@ namespace OnlineLibrary.BLL.Services
             return _bookRepository.GetAll().Where(b=>b.Author.Name.ToLower().Contains(author.ToLower())).ToList();
         }
 
-        public Book RandomBook(BookType bookType)
+        public Book RandomBookByAll()
         {
+            var selected = _bookRepository.GetAll().ToList();
+            return Randomizer(selected);
+        }
 
+        public Book RandomBookByCategory(BookType bookType)
+        {
+            var selected = _bookRepository.GetAll()
+            .Where(b => b.BookType == bookType)
+            .ToList();
+
+            return Randomizer(selected);
+
+        }
+
+        private Book Randomizer(List<Book> selected)
+        {
             Random random = new Random();
-            List<Book> selected = new List<Book>();
-            
-            if ((int)bookType == 99)
-            {
-                selected = _bookRepository.GetAll().ToList();
-
-            }
-            else
-                {
-                   selected = _bookRepository.GetAll()
-                .Where(b => b.BookType == bookType)
-                .ToList();
-                }
-           
-            
             var happynumber = random.Next(selected.Count());
             var blindchoose = selected[happynumber];
             var id = blindchoose.Id;
-            
 
             return _bookRepository.GetById(id);
-
         }
     }
 }

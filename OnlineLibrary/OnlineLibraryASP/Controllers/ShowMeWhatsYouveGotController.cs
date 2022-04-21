@@ -26,22 +26,23 @@ namespace OnlineLibraryASP.Controllers
         
         public ActionResult Roll(BookType bookType)
         {
-          var model= _bookservice.RandomBook(bookType);
+          var model= _bookservice.RandomBookByCategory(bookType);
             
             return View(model);
         }
 
-        // GET: ShowMeWhatsYouveGotController/Create
-        public ActionResult Create()
+        public ActionResult RollAllCategory()
         {
-            return View();
+            var model = _bookservice.RandomBookByAll();
+
+            return View(model);
         }
 
-       
 
-        
 
-        
-        
+
+
+
+
     }
 }
