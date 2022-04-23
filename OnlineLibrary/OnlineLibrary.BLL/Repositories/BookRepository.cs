@@ -36,12 +36,13 @@ namespace OnlineLibrary.BLL.Repositories
         {
             var book = GetById(id);
             _context.Books.Remove(book);
+            _context.SaveChanges();
         }
         public void Update(Book model)
         {
             var book = GetById(model.Id);
             book.Title = model.Title;
-            book.Author = model.Author;
+            book.AuthorId = model.AuthorId;
             book.BookType = model.BookType;
             book.PublicationDate = model.PublicationDate;
             _context.SaveChanges();
