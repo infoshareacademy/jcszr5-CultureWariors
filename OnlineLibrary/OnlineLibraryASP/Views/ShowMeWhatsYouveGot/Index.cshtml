@@ -9,10 +9,26 @@
 
 <p>
 <div class="form-group">
-                 <label asp-for="BookType" class="control-label">Co Cię interesuje?</label>
-                <select asp-for="BookType" asp-items="Html.GetEnumSelectList<BookType>()" class="form-control">
-                    <option selected="selected" value="">Wszystko jedno</option>
+    <form asp-action="Roll" >
+                 <label class="control-label">Co Cię interesuje?</label>
+                <select asp-for= "BookType" asp-items="Html.GetEnumSelectList<BookType>()" class="form-control">
                 </select>
+                 
+        <input type="submit" value="Losuj" class="btn btn-primary col-12" />
+        </form>
+        </div>
+        <div>
+            <p>Lub spróbuj szczęścia!</p>
+            </div>
+        
+ <div>
+    <form asp-action="RollAllCategory">
+        <input type="submit" value="Szczęśliwy traf" class="btn btn-primary mb1 bg-maroon col-12" />
+    </form>
+    <br />
+    <form asp-controller="Home" asp-action="Index">
+        <button type="submit" class="btn btn-secondary col-12">Powrót</button>
+    </form>
             </div>
 </p>
 

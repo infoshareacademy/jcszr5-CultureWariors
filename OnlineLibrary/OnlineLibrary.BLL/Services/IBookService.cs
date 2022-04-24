@@ -1,4 +1,5 @@
-﻿using OnlineLibrary.BLL.Models;
+﻿using OnlineLibrary.BLL.Enums;
+using OnlineLibrary.BLL.Models;
 
 namespace OnlineLibrary.BLL.Services
 {
@@ -12,5 +13,7 @@ namespace OnlineLibrary.BLL.Services
         public List<Book> SearchByTitle(string title);
         public List<Book> SearchByType(string type);
         public List<Book> SearchByAuthor(string author);
+        public Book RandomBookByCategory(BookType bookType);
+        public Book RandomBookByAll();
     }
 }

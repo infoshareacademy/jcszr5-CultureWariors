@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OnlineLibrary.BLL.Enums;
+using OnlineLibrary.BLL.Models;
 using OnlineLibrary.BLL.Services;
 
 namespace OnlineLibraryASP.Controllers
@@ -7,84 +9,40 @@ namespace OnlineLibraryASP.Controllers
     public class ShowMeWhatsYouveGotController : Controller
     {
         private IBookService _bookservice;
-        public ShowMeWhatsYouveGotController(IBookService bookService)
+        private IAuthorService _authorservice;
+        public ShowMeWhatsYouveGotController(IBookService bookService, IAuthorService authorservice)
         {
-               _bookservice = bookService;
+            _bookservice = bookService;
+            _authorservice = authorservice;
         }
 
         // Wyświetlenie zakładki zaskocz mnie! - wybierz rodzaj
         public ActionResult Index()
         {
+            
             return View();
         }
 
-        // GET: ShowMeWhatsYouveGotController/Details/5
-        public ActionResult Details(int id)
+        
+        public ActionResult Roll(BookType bookType)
         {
-            return View();
+          var model= _bookservice.RandomBookByCategory(bookType);
+            
+            return View(model);
         }
 
-        // GET: ShowMeWhatsYouveGotController/Create
-        public ActionResult Create()
+        public ActionResult RollAllCategory()
         {
-            return View();
+            var model = _bookservice.RandomBookByAll();
+
+            return View(model);
         }
 
-        // POST: ShowMeWhatsYouveGotController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: ShowMeWhatsYouveGotController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
 
-        // POST: ShowMeWhatsYouveGotController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: ShowMeWhatsYouveGotController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
-        // POST: ShowMeWhatsYouveGotController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+
+
     }
 }

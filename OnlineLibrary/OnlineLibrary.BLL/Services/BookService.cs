@@ -1,5 +1,7 @@
-﻿using OnlineLibrary.BLL.Models;
+﻿using OnlineLibrary.BLL.Enums;
+using OnlineLibrary.BLL.Models;
 using OnlineLibrary.BLL.Repositories;
+using System.Web.Mvc;
 
 namespace OnlineLibrary.BLL.Services
 {
@@ -48,6 +50,31 @@ namespace OnlineLibrary.BLL.Services
             return _bookRepository.GetAll().Where(b=>b.Author.Name.ToLower().Contains(author.ToLower())).ToList();
         }
 
+        public Book RandomBookByAll()
+        {
+            var selected = _bookRepository.GetAll().ToList();
+            return Randomizer(selected);
+        }
+
+        public Book RandomBookByCategory(BookType bookType)
+        {
+            var selected = _bookRepository.GetAll()
+            .Where(b => b.BookType == bookType)
+            .ToList();
+
+            return Randomizer(selected);
+
+        }
+
+        private Book Randomizer(List<Book> selected)
+        {
+            Random random = new Random();
+            var happynumber = random.Next(selected.Count());
+            var blindchoose = selected[happynumber];
+            var id = blindchoose.Id;
+
+            return _bookRepository.GetById(id);
+        }
     }
 }
 

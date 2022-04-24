@@ -10,34 +10,34 @@ namespace OnlineLibrary
                 ShowMenu();
                 switch (NavigateMenu())
                 {
-                    case 1:
+                    //case 1:
 
-                        RegularUser user = usersList.GetRegularUser(Helper.GetUsername(), Helper.GetPassword());
-                        if (user != null)
-                        {
-                            regularUserMenu.RegularUser(user, library);
-                            break;
-                        }
-                        else
-                        {
-                            ConsoleMessages.WrongLoginOrPassword();
-                            break;
-                        }
+                    //    RegularUser user = usersList.GetRegularUser(Helper.GetUsername(), Helper.GetPassword());
+                    //    if (user != null)
+                    //    {
+                    //        regularUserMenu.RegularUser(user, library);
+                    //        break;
+                    //    }
+                    //    else
+                    //    {
+                    //        ConsoleMessages.WrongLoginOrPassword();
+                    //        break;
+                    //    }
                     case 2:
                         usersList.AddUser();
                         WriteData.WriteUsersToFile(usersList);
                         break;
-                    case 3:
-                        if (admin.AdminLogin())
-                        {
-                            adminMenu.AdminUser(admin, library);
-                            break;
-                        }
-                        else
-                        {
-                            ConsoleMessages.WrongLoginOrPassword();
-                            break;
-                        }
+                    //case 3:
+                    //    if (admin.AdminLogin())
+                    //    {
+                    //        adminMenu.AdminUser(admin, library);
+                    //        break;
+                    //    }
+                        //else
+                        //{
+                        //    ConsoleMessages.WrongLoginOrPassword();
+                        //    break;
+                        //}
                     case 4:
                         library.AboutLibrary();
                         break;

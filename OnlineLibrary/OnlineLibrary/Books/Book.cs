@@ -12,13 +12,13 @@
             Author = author;
             Type = type;
         }
-        public static Book CreateBook()
-        {
-            Console.Clear();
-            Book book = new Book(ChooseType(), Helper.GetTitle(), Helper.GetAuthor()); ;
-            Console.Clear();
-            return book;
-        }
+        //public static Book CreateBook()
+        //{
+        //    //Console.Clear();
+        //    //Book book = new Book(ChooseType(), Helper.GetTitle(), Helper.GetAuthor()); ;
+        //    //Console.Clear();
+        //    //return book;
+        //}
 
         public static BookType ChooseType()
         {

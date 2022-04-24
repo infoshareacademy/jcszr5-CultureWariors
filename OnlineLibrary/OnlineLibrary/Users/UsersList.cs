@@ -48,16 +48,16 @@
                 Console.Clear();
                 Console.WriteLine("Wprowadź hasło: ");
                 password = Console.ReadLine();
-                if (Helper.CreateUserValidation(username, password, Users))
-                {
-                    RegularUser user = new RegularUser(username, password);
-                    Console.Clear();
-                    return user;
-                }
-                else
-                {
-                    return null;
-                }
+                //if (Helper.CreateUserValidation(username, password, Users))
+                //{
+                //    RegularUser user = new RegularUser(username, password);
+                //    Console.Clear();
+                //    return user;
+                //}
+                //else
+                //{
+                //    return null;
+                //}
             }
 
         }
