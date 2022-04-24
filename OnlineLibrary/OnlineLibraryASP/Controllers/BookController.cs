@@ -56,70 +56,67 @@ namespace OnlineLibraryASP.Controllers
         // GET: BookController/Create
         public ActionResult Create()
         {
-            ViewData["AuthorId"] = new SelectList(_authorService.GetAll(), "Id", "Name");
-            //var vm = new CreateRentViewModel()
-            //{
-            //    Books = _bookService.GetAll(),
-            //    Users = _bookService.GetAll()
-            //};
-
-
-            //return View(vm);
-            return View();
+            BookCreateViewModel bookVM = new()
+            {
+                Book = new(),
+                AuthorsList = _authorService.GetAll().Select(c => new SelectListItem
+                {
+                    Text = c.Name,
+                    Value = c.Id.ToString()
+                })
+            };
+            
+            return View(bookVM);
         }
 
         // POST: BookController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Book model)
-         {
-            //model.Author = _authorService.GetById(model.AuthorId);
-            try
+        public ActionResult Create(BookCreateViewModel bookVM)
+        {
+            if (ModelState.IsValid)
             {
-
-                //    if (!ModelState.IsValid)
-                //    {
-                //        return View(model);
-                //    }
-
-                _bookService.Create(model);
-                return RedirectToAction(nameof(Index));
+                _bookService.Create(bookVM.Book);
             }
-            catch
-            {
-                return View();
-            }
-            ViewData["AuthorId"] = new SelectList(_authorService.GetAll(), "Id", "Surname", model.AuthorId);
+            return RedirectToAction("Index");
+
+
+
         }
-        
 
         // GET: BookController/Edit/5
         public ActionResult Edit(int id)
         {
-            ViewData["AuthorId"] = new SelectList(_authorService.GetAll(), "Id", "Name");
-            var model = _bookService.GetById(id);
-            return View(model);
+
+            var book = _bookService.GetById(id);
+            BookCreateViewModel bookVM = new()
+            {
+                Book = book,
+                AuthorsList = _authorService.GetAll().Select(c => new SelectListItem
+                {
+                    Text = c.Name,
+                    Value = c.Id.ToString()
+                })
+            };
+
+            return View(bookVM);
         }
 
         // POST: BookController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Book model)
+        public ActionResult Edit(int id, BookCreateViewModel model)
         {
-            try
+            if (ModelState.IsValid)
             {
-                //if (!ModelState.IsValid)
-                //{
-                //    return View(model);
-                //}
-                _bookService.Update(model);
+
+
+                _bookService.Update(model.Book);
                 return RedirectToAction(nameof(Index));
             }
+            return View();
 
-            catch
-            {
-                return View();
-            }
+            
         }
 
         // GET: MeetingController/Delete/5

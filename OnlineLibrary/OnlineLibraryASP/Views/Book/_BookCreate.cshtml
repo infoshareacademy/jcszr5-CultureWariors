@@ -1,28 +1,32 @@
 ﻿@using OnlineLibrary.BLL.Enums
 @using OnlineLibrary.BLL.Models
-@model Book
+@model OnlineLibraryASP.ViewModels.BookCreateViewModel
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<input asp-for="Book.Id" hidden />
             <div class="form-group">
-                <label asp-for="Title" class="control-label">Tytuł</label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+                <label asp-for="Book.Title" class="control-label">Tytuł</label>
+                <input asp-for="Book.Title" class="form-control" />
+                <span asp-validation-for="Book.Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AuthorId" class="control-label">Autor</label>
-                <select asp-for="AuthorId" class ="form-control" asp-items="ViewBag.AuthorId"></select>
+                <label asp-for="Book.AuthorId" class="control-label">Autor</label>
+                <select asp-for="Book.AuthorId" class ="form-control" asp-items="@Model.AuthorsList" class="form-select">
+                    <option disabled selected>--Select Category--</option>
+        </select>
+        <span asp-validation-for="Book.AuthorId" class="text-danger"></span>
                 
             </div>
             <div class="form-group">
-                <label asp-for="BookType" class="control-label">Kategoria</label>
-                <select asp-for="BookType" asp-items="Html.GetEnumSelectList<BookType>()" class="form-control">
+                <label asp-for="Book.BookType" class="control-label">Kategoria</label>
+                <select asp-for="Book.BookType" asp-items="Html.GetEnumSelectList<BookType>()" class="form-control">
                     <option selected="selected" value="">Wybierz</option>
                 </select>
-                <span asp-validation-for="BookType" class="text-danger"></span>
+                <span asp-validation-for="Book.BookType" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PublicationDate" class="control-label">Data publikacji</label>
-                <input asp-for="PublicationDate" class="form-control" />
-                <span asp-validation-for="PublicationDate" class="text-danger"></span>
+                <label asp-for="Book.PublicationDate" class="control-label">Data publikacji</label>
+                <input asp-for="Book.PublicationDate" class="form-control" />
+                <span asp-validation-for="Book.PublicationDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Zapisz" class="btn btn-primary" />

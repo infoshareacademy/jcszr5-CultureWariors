@@ -1,4 +1,5 @@
-﻿using OnlineLibrary.BLL.Enums;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using OnlineLibrary.BLL.Enums;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnlineLibrary.BLL.Models
@@ -10,6 +11,7 @@ namespace OnlineLibrary.BLL.Models
         [StringLength(maximumLength: 100, MinimumLength = 1)]
         public string Title { get; set; }
         public int AuthorId { get; set; }
+        [ValidateNever]
         public virtual Author Author { get; set; }
         
         [Display(Name = "Book type")]
