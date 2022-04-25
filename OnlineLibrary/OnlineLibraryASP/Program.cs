@@ -3,15 +3,18 @@ using OnlineLibrary.BLL.Repositories;
 using OnlineLibrary.BLL.Services;
 using OnlineLibraryASP;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using OnlineLibrary.BLL.Utility;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("BookContextConnection");;
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");;
 
 builder.Services.AddDbContext<BookContext>(options =>
     options.UseSqlServer(connectionString));;
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddDefaultTokenProviders()
     .AddEntityFrameworkStores<BookContext>();;
+builder.Services.AddSingleton<IEmailSender, EmailSender>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -44,6 +47,7 @@ app.UseRouting();
 app.UseAuthentication();;
 
 app.UseAuthorization();
+app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",
