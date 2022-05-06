@@ -1,0 +1,28 @@
+D:\Materiały z kursu\CultureWariors\jcszr5-CultureWariors\OnlineLibrary\OnlineLibrary.BLL\obj\Debug\net6.0\OnlineLibrary.BLL.GeneratedMSBuildEditorConfig.editorconfig
+D:\Materiały z kursu\CultureWariors\jcszr5-CultureWariors\OnlineLibrary\OnlineLibrary.BLL\obj\Debug\net6.0\OnlineLibrary.BLL.AssemblyInfoInputs.cache
+D:\Materiały z kursu\CultureWariors\jcszr5-CultureWariors\OnlineLibrary\OnlineLibrary.BLL\obj\Debug\net6.0\OnlineLibrary.BLL.AssemblyInfo.cs
+D:\Materiały z kursu\CultureWariors\jcszr5-CultureWariors\OnlineLibrary\OnlineLibrary.BLL\obj\Debug\net6.0\OnlineLibrary.BLL.csproj.CoreCompileInputs.cache
+D:\Materiały z kursu\CultureWariors\jcszr5-CultureWariors\OnlineLibrary\OnlineLibrary.BLL\bin\Debug\net6.0\OnlineLibrary.BLL.deps.json
+D:\Materiały z kursu\CultureWariors\jcszr5-CultureWariors\OnlineLibrary\OnlineLibrary.BLL\bin\Debug\net6.0\OnlineLibrary.BLL.runtimeconfig.json
+D:\Materiały z kursu\CultureWariors\jcszr5-CultureWariors\OnlineLibrary\OnlineLibrary.BLL\bin\Debug\net6.0\OnlineLibrary.BLL.dll
+D:\Materiały z kursu\CultureWariors\jcszr5-CultureWariors\OnlineLibrary\OnlineLibrary.BLL\bin\Debug\net6.0\ref\OnlineLibrary.BLL.dll
+D:\Materiały z kursu\CultureWariors\jcszr5-CultureWariors\OnlineLibrary\OnlineLibrary.BLL\bin\Debug\net6.0\OnlineLibrary.BLL.pdb
+D:\Materiały z kursu\CultureWariors\jcszr5-CultureWariors\OnlineLibrary\OnlineLibrary.BLL\obj\Debug\net6.0\OnlineLibrary.BLL.dll
+D:\Materiały z kursu\CultureWariors\jcszr5-CultureWariors\OnlineLibrary\OnlineLibrary.BLL\obj\Debug\net6.0\ref\OnlineLibrary.BLL.dll
+D:\Materiały z kursu\CultureWariors\jcszr5-CultureWariors\OnlineLibrary\OnlineLibrary.BLL\obj\Debug\net6.0\OnlineLibrary.BLL.pdb
+D:\Materiały z kursu\CultureWariors\jcszr5-CultureWariors\OnlineLibrary\OnlineLibrary.BLL\obj\Debug\net6.0\OnlineLibrary.BLL.genruntimeconfig.cache
+D:\Materiały z kursu\CultureWariors\jcszr5-CultureWariors\OnlineLibrary\OnlineLibrary.BLL\obj\Debug\net6.0\OnlineLibrary.BLL.csproj.AssemblyReference.cache
+C:\Users\podla\Desktop\isa_onlineLibrary\OnlineLibrary.BLL\bin\Debug\net6.0\OnlineLibrary.BLL.deps.json
+C:\Users\podla\Desktop\isa_onlineLibrary\OnlineLibrary.BLL\bin\Debug\net6.0\OnlineLibrary.BLL.runtimeconfig.json
+C:\Users\podla\Desktop\isa_onlineLibrary\OnlineLibrary.BLL\bin\Debug\net6.0\OnlineLibrary.BLL.dll
+C:\Users\podla\Desktop\isa_onlineLibrary\OnlineLibrary.BLL\bin\Debug\net6.0\OnlineLibrary.BLL.pdb
+C:\Users\podla\Desktop\isa_onlineLibrary\OnlineLibrary.BLL\obj\Debug\net6.0\OnlineLibrary.BLL.csproj.AssemblyReference.cache
+C:\Users\podla\Desktop\isa_onlineLibrary\OnlineLibrary.BLL\obj\Debug\net6.0\OnlineLibrary.BLL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\podla\Desktop\isa_onlineLibrary\OnlineLibrary.BLL\obj\Debug\net6.0\OnlineLibrary.BLL.AssemblyInfoInputs.cache
+C:\Users\podla\Desktop\isa_onlineLibrary\OnlineLibrary.BLL\obj\Debug\net6.0\OnlineLibrary.BLL.AssemblyInfo.cs
+C:\Users\podla\Desktop\isa_onlineLibrary\OnlineLibrary.BLL\obj\Debug\net6.0\OnlineLibrary.BLL.csproj.CoreCompileInputs.cache
+C:\Users\podla\Desktop\isa_onlineLibrary\OnlineLibrary.BLL\obj\Debug\net6.0\OnlineLibrary.BLL.dll
+C:\Users\podla\Desktop\isa_onlineLibrary\OnlineLibrary.BLL\obj\Debug\net6.0\refint\OnlineLibrary.BLL.dll
+C:\Users\podla\Desktop\isa_onlineLibrary\OnlineLibrary.BLL\obj\Debug\net6.0\OnlineLibrary.BLL.pdb
+C:\Users\podla\Desktop\isa_onlineLibrary\OnlineLibrary.BLL\obj\Debug\net6.0\OnlineLibrary.BLL.genruntimeconfig.cache
+C:\Users\podla\Desktop\isa_onlineLibrary\OnlineLibrary.BLL\obj\Debug\net6.0\ref\OnlineLibrary.BLL.dll

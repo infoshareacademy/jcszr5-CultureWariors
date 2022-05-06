@@ -1,0 +1,36 @@
+﻿@using OnlineLibrary.BLL.Models
+@model Book
+<h4>Książka</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            <label asp-for="Id"></label>
+        </dt>
+        <dd class = "col-sm-10">
+            @Model.Id
+        </dd>
+        <dt class = "col-sm-2">
+            <label asp-for="Title">Tytuł</label>
+        </dt>
+        <dd class = "col-sm-10">
+            @Model.Title
+        </dd>
+        <dt class = "col-sm-2">
+            <label asp-for="Author.Name">Autor</label>
+        </dt>
+        <dd class = "col-sm-10">
+            @Model.Author.Name
+        </dd>
+        <dt class = "col-sm-2">
+            <label asp-for="BookType">Kategoria</label>
+        </dt>
+        <dd class = "col-sm-10">
+            @Model.BookType
+        </dd>
+        <dt class = "col-sm-2">
+            <label asp-for="PublicationDate">Data publikacji</label>
+        </dt>
+        <dd class = "col-sm-10">
+            @Model.PublicationDate
+        </dd>
+    </dl>

@@ -1,0 +1,17 @@
+﻿@model OnlineLibrary.BLL.Models.Book
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Czy na pewno chcesz usunąć książkę?</h3>
+<div>
+    <partial name="_BookDetails" model="@Model" />
+    
+    <form asp-action="Delete">
+        <input type="submit" value="Usuń" class="btn btn-danger" /> |
+        <a asp-action="Index">Powrót</a>
+    </form>
+</div>
