@@ -23,23 +23,23 @@
                 <div style="margin-top: 40px">
                     <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary" style="margin-top: 10px">Zaloguj się</button>
                 </div>
-                <div class="row justify-content-md-center">
+                <div class="row g-0" style="margin-top: 10px">
                         <div class="form-check col">
                             <label asp-for="Input.RememberMe" class="form-label">
                                 <input class="form-check-input" asp-for="Input.RememberMe" />
                                 Zapamiętaj mnie
                             </label>
                         </div>                
-                        <div class="col">
+                        <div class="col order-last" style="margin-left: 70px">
                             <a id="forgot-password" asp-page="./ForgotPassword">Zapomniałeś hasła?</a>
                         </div>
 
                 </div>
-                <div>
-                    <p>
-                    <p>Nie masz jeszcze konta?</p>
+                <div style="margin-top: 10px">
+                    
+                    <p style="margin-bottom:5px">Nie masz jeszcze konta?</p>
                     <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Zarejestruj się</a>
-                    </p>
+                    
                 </div>
             </form>
         </section>
