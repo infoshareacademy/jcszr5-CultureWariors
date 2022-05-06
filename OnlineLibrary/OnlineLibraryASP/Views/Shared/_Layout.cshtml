@@ -32,9 +32,10 @@
                 <partial name="_loginPartial"/>
             </div>
         </div>
-        <form class="d-flex">
-            <input class="form-control me-sm-2" type="text" placeholder="Search">
-            <button class="btn btn-dark my-2 my-sm-0" type="submit">Search</button>
+        <form asp-controller="Book" asp-action="Search" class="d-flex">
+            
+            <input class="form-control me-sm-2" type="text" placeholder="Czego potrzebujesz?" name="search">
+            <button class="btn btn-dark my-2 my-sm-0" type="submit">Szukaj</button>
         </form>
 
     </nav>

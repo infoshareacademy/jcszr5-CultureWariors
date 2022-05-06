@@ -49,6 +49,15 @@ namespace OnlineLibrary.BLL.Services
         {
             return _bookRepository.GetAll().Where(b=>b.Author.Name.ToLower().Contains(author.ToLower())).ToList();
         }
+        public List<Book> SearchByString(string search)
+        {
+            if (search == null)
+            {
+                return null;
+            }
+            return _bookRepository.GetAll().Where(
+                b => b.Title.ToLower().Contains(search.ToLower()) || b.Author.Name.ToLower().Contains(search.ToLower())).ToList();
+        }
 
         public Book RandomBookByAll()
         {

@@ -146,6 +146,22 @@ namespace OnlineLibraryASP.Controllers
             }
 
         }
+
+        public ActionResult Search(string search)
+        {
+            List<Book> model;
+            if (search == null)
+            {
+                 model = _bookService.GetAll();
+                
+            }
+            else
+            {
+                 model = _bookService.SearchByString(search);
+            }
+
+            return View(model);
+        }
         public IActionResult About()
         {
            var model = _bookService.GetAll();
