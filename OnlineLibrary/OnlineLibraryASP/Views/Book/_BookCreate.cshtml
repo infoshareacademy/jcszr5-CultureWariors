@@ -2,6 +2,7 @@
 @using OnlineLibrary.BLL.Models
 @model OnlineLibraryASP.ViewModels.BookCreateViewModel
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
 <input asp-for="Book.Id" hidden />
             <div class="form-group">
                 <label asp-for="Book.Title" class="control-label">Tytuł</label>
@@ -29,7 +30,20 @@
                 <span asp-validation-for="Book.PublicationDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Zapisz" class="btn btn-primary" />
+                <label asp-for="Book.ImageUrl" class="control-label">Okładka</label>
+                <input type="file" id="uploadBox" name="file" class="form-control" />
+                
+            </div>
+            <div class="form-group">
+                @if(Model.Book.Id != 0)
+    {
+        <input type="submit" value="Zapisz" class="btn btn-primary" />
+    }
+    else
+    {
+        <input type="submit" value="Zapisz" onclick="return ValidateInput()" class="btn btn-primary" />
+    }
+    
                 </div>
             <div>
                 <a asp-action="Index">Powrót</a>

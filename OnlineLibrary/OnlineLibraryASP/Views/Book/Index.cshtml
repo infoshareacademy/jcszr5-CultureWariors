@@ -27,6 +27,9 @@
 <table class="table">
     <thead>
         <tr>
+            <th>
+                Okładka
+            </th>
             
             <th>
                 <label asp-for="Books.First().Title">Tytuł</label>
@@ -47,7 +50,10 @@
     <tbody>
 @foreach (var item in Model.Books) {
         <tr>
-           
+           <td>
+               <img src="~/@item.ImageUrl"
+			width="60" height="90"   />
+           </td>
             <td>
                 @item.Title
             </td>

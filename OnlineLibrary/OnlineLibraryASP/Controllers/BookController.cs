@@ -12,11 +12,13 @@ namespace OnlineLibraryASP.Controllers
     {
         private IBookService _bookService;
         private IAuthorService _authorService;
-        public BookController(IBookService bookService,IAuthorService authorService)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public BookController(IBookService bookService,IAuthorService authorService, IWebHostEnvironment webHostEnvironment)
         {
             //_bookService = new BookService();
             _bookService = bookService;
             _authorService = authorService;
+            _webHostEnvironment = webHostEnvironment;
         }
         // GET: BookController
         public ActionResult Index(string bookType, string searchString,string searchAuthor)
@@ -72,10 +74,23 @@ namespace OnlineLibraryASP.Controllers
         // POST: BookController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(BookCreateViewModel bookVM)
+        public ActionResult Create(BookCreateViewModel bookVM, IFormFile? file)
         {
             if (ModelState.IsValid)
             {
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                if (file != null)
+                {
+                    string fileName = Guid.NewGuid().ToString();
+                    var uploads = Path.Combine(wwwRootPath, @"Images\Books");
+                    var extension = Path.GetExtension(file.FileName);
+
+                    using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+                    {
+                        file.CopyTo(fileStreams);
+                    }
+                    bookVM.Book.ImageUrl = @"Images\Books\" + fileName + extension;
+                }
                 _bookService.Create(bookVM.Book);
             }
             return RedirectToAction("Index");
@@ -105,10 +120,33 @@ namespace OnlineLibraryASP.Controllers
         // POST: BookController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, BookCreateViewModel model)
+        public ActionResult Edit(int id, BookCreateViewModel model, IFormFile? file)
         {
             if (ModelState.IsValid)
             {
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                if (file != null)
+                {
+                    string fileName = Guid.NewGuid().ToString();
+                    var uploads = Path.Combine(wwwRootPath, @"Images\Books");
+                    var extension = Path.GetExtension(file.FileName);
+
+                    if (model.Book.ImageUrl != null)
+                    {
+                        var oldImagePath = Path.Combine(wwwRootPath, model.Book.ImageUrl.TrimStart('\\'));
+                        if (System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
+
+                    }
+
+                    using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+                    {
+                        file.CopyTo(fileStreams);
+                    }
+                    model.Book.ImageUrl = @"Images\Books\" + fileName + extension;
+                }
 
 
                 _bookService.Update(model.Book);

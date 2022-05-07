@@ -11,7 +11,9 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
+        <input asp-for="Book.Id" hidden />
+        <input asp-for="Book.ImageUrl" hidden />
             <partial name="_BookCreate" model=@Model />
         </form>
     </div>
