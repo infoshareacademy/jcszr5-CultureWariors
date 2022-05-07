@@ -5,24 +5,19 @@
     ViewData["Title"] = "Books";
 }
 
-<h1>Książki</h1>
+<h1>Filtruj książki</h1>
 
-<p>
-    <a asp-action="Create">Dodaj książkę</a>
-</p>
 <form asp-controller="Book" asp-action="Index" method="get">
-    <p>
-        
-        <select asp-for="BookType" asp-items="Model.Types">
-            <option value="">Wszystkie</option>
+    <div>
+        Tytuł: <input type="text" name="SearchString" style="width: 300px"/><a asp-action="Create" class="btn btn-outline-success" style="margin-left: 60px">Dodaj książkę</a>
+        <br/>
+        Autor: <input type="text" name="SearchAuthor" style="margin-bottom: 10px;width: 300px"/>
+        <br/>
+        <select asp-for="BookType" asp-items="Model.Types" style="width: 200px">
+            <option value="">Wybierz typ</option>
         </select>
-        
-
-        Tytuł: <input type="text" name="SearchString" />
-        Autor: <input type="text" name="SearchAuthor" />
-        <input type="submit" value="Filter" />
-
-    </p>
+        <input type="submit" value="Filter" style="margin-left: 20px"/>
+    </div>
 </form>
 <table class="table">
     <thead>
@@ -41,6 +36,7 @@
             <th>
                 <label asp-for="Books.First().PublicationDate">Data publikacji</label>
             </th>
+            
             <th></th>
         </tr>
     </thead>
@@ -62,9 +58,9 @@
                 @item.PublicationDate
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a>
-                <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a>
-                <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
+                <a asp-action="Edit" class="btn btn-outline-dark" asp-route-id="@item.Id">Edytuj</a>
+                <a asp-action="Details" class="btn btn-outline-info" asp-route-id="@item.Id">Szczegóły</a>
+                <a asp-action="Delete" class="btn btn-outline-danger" asp-route-id="@item.Id">Usuń</a>
             </td>
         </tr>
 }

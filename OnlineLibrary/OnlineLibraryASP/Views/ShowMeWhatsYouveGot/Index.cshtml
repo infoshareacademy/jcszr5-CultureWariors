@@ -5,31 +5,37 @@
     ViewData["Title"] = "ShowMeWhatsYouveGot";
 }
 
-<h1>Zaraz Coś znajdziemy!</h1>
+<div class="d-flex justify-content-center">
+    <div class="col-md-4">
+        <h1 >Zaraz Coś znajdziemy!</h1>
 
-<p>
-<div class="form-group">
-    <form asp-action="Roll" >
-                 <label class="control-label">Co Cię interesuje?</label>
-                <select asp-for= "BookType" asp-items="Html.GetEnumSelectList<BookType>()" class="form-control">
-                </select>
-                 
-        <input type="submit" value="Losuj" class="btn btn-primary col-12" />
-        </form>
-        </div>
         <div>
-            <p>Lub spróbuj szczęścia!</p>
-            </div>
-        
- <div>
-    <form asp-action="RollAllCategory">
-        <input type="submit" value="Szczęśliwy traf" class="btn btn-primary mb1 bg-maroon col-12" />
-    </form>
-    <br />
-    <form asp-controller="Home" asp-action="Index">
-        <button type="submit" class="btn btn-secondary col-12">Powrót</button>
-    </form>
-            </div>
-</p>
+            <label class="control-label"style="margin-bottom: 10px">Co Cię interesuje?</label>
+            <div class="row" style="margin-bottom: 20px">
+                <form asp-action="Roll">
+                    <select asp-for="BookType" asp-items="Html.GetEnumSelectList<BookType>()" class="form-control-lg" style="margin-right: 15px;width: 50%">
+                    </select>
 
+                    <input type="submit" value="Losuj" class="btn btn-primary btn"/>
+                </form>
+            </div>
+            <div>
+                <p>Lub spróbuj szczęścia!</p>
+            </div>
 
+            <div class="row">
+                <div class="col-md-6">
+                    <form asp-action="RollAllCategory">
+                        <input type="submit" value="Szczęśliwy traf" class="btn btn-primary"/>
+                    </form>
+                </div>
+            <div class="col-md-6">
+                <form asp-controller="Home" asp-action="Index">
+                    <button type="submit" class="btn btn-secondary">Powrót</button>
+                </form>
+            </div>
+            </div>
+
+        </div>
+    </div>
+</div>

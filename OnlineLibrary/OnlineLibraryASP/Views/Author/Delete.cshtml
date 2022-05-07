@@ -4,21 +4,12 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Usuń</h1>
-
 <h3>Czy na pewno chcesz usunąć autora?</h3>
 <div>
-    <h4>Author</h4>
     <hr />
-    <dl class="row">
+    <dl class="row" style="width: 25%">
         <dt class = "col-sm-2">
-            <label asp-for="Id"></label>
-        </dt>
-        <dd class = "col-sm-10">
-            @Model.Id
-        </dd>
-        <dt class = "col-sm-2">
-            <label asp-for="Name"></label>
+            <label asp-for="Name">Autor:</label>
         </dt>
         <dd class = "col-sm-10">
             @Model.Name
@@ -26,7 +17,7 @@
     </dl>
     
     <form asp-action="Delete">
-        <input type="submit" value="Usuń" class="btn btn-danger" /> |
-        <a asp-action="Index">Powrót</a>
+        <input type="submit" value="Potwierdź" class="btn btn-danger" /> 
+        <a asp-action="Index" class="btn btn-outline-dark">Powrót</a>
     </form>
 </div>
