@@ -1,0 +1,56 @@
+﻿@model OnlineLibrary.BLL.Models.Author
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Szczegóły</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            <label asp-for="Name">Autor</label>
+        </dt>
+        <dd class = "col-sm-10">
+            @Model.Name
+        </dd>
+        <br />
+        <br />
+        <h4>Napisane książki</h4>
+        <table class="table table-hover" style="width: 60%;margin-left: 10px">
+    <thead>
+        <tr>
+            <th>
+                <label asp-for="BooksWriten.First().Title">Tytuł</label>
+            </th>
+            <th>
+                <label asp-for="BooksWriten.First().BookType">Kategoria</label>
+            </th>
+            <th>
+                <label asp-for="BooksWriten.First().PublicationDate">Data publikacji</label>
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.BooksWriten) {
+        <tr>
+            <td>
+                @item.Title
+            </td>
+            <td>
+                @item.BookType
+            </td>
+            <td>
+                @item.PublicationDate
+            </td>
+            </tr>}
+            </tbody>
+            </table>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index" class="btn btn-outline-dark">Powrót do listy autorów</a>
+</div>

@@ -1,0 +1,23 @@
+﻿@model OnlineLibrary.BLL.Models.Author
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h3>Czy na pewno chcesz usunąć autora?</h3>
+<div>
+    <hr />
+    <dl class="row" style="width: 25%">
+        <dt class = "col-sm-2">
+            <label asp-for="Name">Autor:</label>
+        </dt>
+        <dd class = "col-sm-10">
+            @Model.Name
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="submit" value="Potwierdź" class="btn btn-danger" /> 
+        <a asp-action="Index" class="btn btn-outline-dark">Powrót</a>
+    </form>
+</div>

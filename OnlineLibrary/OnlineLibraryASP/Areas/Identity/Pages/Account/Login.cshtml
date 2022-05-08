@@ -1,0 +1,52 @@
+﻿@page
+@model LoginModel
+
+<div class="d-flex justify-content-center">
+    <div class="col-md-3">
+        <section>
+            <form id="account" method="post">
+                <h2>Zaloguj się</h2>
+                <hr />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-floating">
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                    <label asp-for="Input.Email" class="form-label">E-maill</label>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating" style="margin-top: 10px;">
+                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
+                    <label asp-for="Input.Password" class="form-label">Hasło</label>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+
+                <div style="margin-top: 40px">
+                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary" style="margin-top: 10px">Zaloguj się</button>
+                </div>
+                <div class="row g-0" style="margin-top: 10px">
+                        <div class="form-check col">
+                            <label asp-for="Input.RememberMe" class="form-label">
+                                <input class="form-check-input" asp-for="Input.RememberMe" />
+                                Zapamiętaj mnie
+                            </label>
+                        </div>                
+                        <div class="col order-last" style="margin-left: 70px">
+                            <a id="forgot-password" asp-page="./ForgotPassword">Zapomniałeś hasła?</a>
+                        </div>
+
+                </div>
+                <div style="margin-top: 10px">
+                    
+                    <p style="margin-bottom:5px">Nie masz jeszcze konta?</p>
+                    <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Zarejestruj się</a>
+                    
+                </div>
+            </form>
+        </section>
+    </div>
+
+</div>
+
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}

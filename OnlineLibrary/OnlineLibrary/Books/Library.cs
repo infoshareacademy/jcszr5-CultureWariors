@@ -172,34 +172,34 @@
                     Console.Clear();
                     Console.WriteLine($"Wybrana książka: {choosenBook.Title}\nCo chcesz zrobić?\n");
                     ConsoleMessages.BookEditMenu();
-                    switch (Helper.Navigate())
-                    {
-                        case 0:
-                            return;
-                        case 1:
-                            library[choice].Type = ChooseType();
-                            Console.Clear();
-                            Console.WriteLine("Edytuj tytuł: ");
-                            library[choice].Title = Console.ReadLine();
-                            Console.WriteLine("Edytuj autora: ");
-                            library[choice].Author = Console.ReadLine();
-                            break;
-                        case 2:
-                            Console.Clear();
-                            Console.WriteLine("Edytuj tytuł: ");
-                            library[choice].Title = Console.ReadLine();
-                            break;
-                        case 3:
-                            Console.Clear();
-                            Console.WriteLine("Edytuj autora: ");
-                            library[choice].Author = Console.ReadLine();
-                            break;
-                        case 4:
-                            library[choice].Type = ChooseType();
-                            Console.Clear();
-                            break;
-                    }
-                    break;
+                    //switch (Helper.Navigate())
+                    //{
+                    //    case 0:
+                    //        return;
+                    //    case 1:
+                    //        library[choice].Type = ChooseType();
+                    //        Console.Clear();
+                    //        Console.WriteLine("Edytuj tytuł: ");
+                    //        library[choice].Title = Console.ReadLine();
+                    //        Console.WriteLine("Edytuj autora: ");
+                    //        library[choice].Author = Console.ReadLine();
+                    //        break;
+                    //    case 2:
+                    //        Console.Clear();
+                    //        Console.WriteLine("Edytuj tytuł: ");
+                    //        library[choice].Title = Console.ReadLine();
+                    //        break;
+                    //    case 3:
+                    //        Console.Clear();
+                    //        Console.WriteLine("Edytuj autora: ");
+                    //        library[choice].Author = Console.ReadLine();
+                    //        break;
+                    //    case 4:
+                    //        library[choice].Type = ChooseType();
+                    //        Console.Clear();
+                    //        break;
+                    //}
+                    //break;
 
 
                     }

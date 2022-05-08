@@ -1,0 +1,25 @@
+﻿@using OnlineLibrary.BLL.Enums
+@model OnlineLibraryASP.ViewModels.BookCreateViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edycja</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+        <input asp-for="Book.Id" hidden />
+        <input asp-for="Book.ImageUrl" hidden />
+            <partial name="_BookCreate" model=@Model />
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

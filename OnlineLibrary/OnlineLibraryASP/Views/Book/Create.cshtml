@@ -1,0 +1,33 @@
+﻿@using OnlineLibrary.BLL.Enums
+@model OnlineLibraryASP.ViewModels.BookCreateViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Stwórz książkę</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <partial name="_BookCreate" model=@Model />
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<script>
+    function ValidateInput()
+    {
+        if(document.getElementById("uploadBox").value==""){
+            Swal.fire('Nie wgrano okładki książki');
+            return false;
+        }
+        return true;
+    }
+</script>

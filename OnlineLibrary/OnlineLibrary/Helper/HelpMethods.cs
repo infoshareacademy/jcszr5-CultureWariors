@@ -1,7 +1,7 @@
 ﻿using System.Security;
     namespace OnlineLibrary
 {
-    public static class Helper
+    public static class Helping
     {
         public static bool CreateUserValidation(string username, string password, List<RegularUser> usersList)
         {

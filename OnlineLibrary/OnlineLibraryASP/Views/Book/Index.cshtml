@@ -1,0 +1,74 @@
+﻿@using OnlineLibrary.BLL.Enums
+@model OnlineLibraryASP.ViewModels.BookTypeViewModel
+
+@{
+    ViewData["Title"] = "Books";
+}
+
+<h1>Filtruj książki</h1>
+
+<form asp-controller="Book" asp-action="Index" method="get">
+    <div>
+        Tytuł: <input type="text" name="SearchString" style="width: 300px"/><a asp-action="Create" class="btn btn-outline-success" style="margin-left: 60px">Dodaj książkę</a>
+        <br/>
+        Autor: <input type="text" name="SearchAuthor" style="margin-bottom: 10px;width: 300px"/>
+        <br/>
+        <select asp-for="BookType" asp-items="Model.Types" style="width: 200px">
+            <option value="">Wybierz typ</option>
+        </select>
+        <input type="submit" value="Filter" style="margin-left: 20px"/>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Okładka
+            </th>
+            
+            <th>
+                <label asp-for="Books.First().Title">Tytuł</label>
+            </th>
+            <th>
+                <label asp-for="Books.First().Author.Name">Autor</label>
+            </th>
+            
+            <th>
+                <label asp-for="Books.First().BookType">Kategoria</label>
+            </th>
+            <th>
+                <label asp-for="Books.First().PublicationDate">Data publikacji</label>
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Books) {
+        <tr>
+           <td>
+               <img src="~/@item.ImageUrl"
+			width="60" height="90"   />
+           </td>
+            <td>
+                @item.Title
+            </td>
+            <td>
+                @item.Author.Name
+            </td>
+            
+            <td>
+                @item.BookType
+            </td>
+            <td>
+                @item.PublicationDate
+            </td>
+            <td>
+                <a asp-action="Edit" class="btn btn-outline-dark" asp-route-id="@item.Id">Edytuj</a>
+                <a asp-action="Details" class="btn btn-outline-info" asp-route-id="@item.Id">Szczegóły</a>
+                <a asp-action="Delete" class="btn btn-outline-danger" asp-route-id="@item.Id">Usuń</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

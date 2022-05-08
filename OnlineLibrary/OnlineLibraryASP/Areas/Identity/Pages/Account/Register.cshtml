@@ -1,0 +1,77 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Zarejestruj się";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-5">
+        <form id="registerForm" class= "row" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-floating py-2 col-6">
+                <input asp-for="Input.Name" class="form-control"  aria-required="true" />
+                <label asp-for="Input.Name">Nazwisko</label>
+                <span asp-validation-for="Input.Name" class="text-danger"></span>
+            </div>
+            <div class="form-floating py-2 col-6">
+                <input asp-for="Input.Surname" class="form-control"  aria-required="true" />
+                <label asp-for="Input.Surname">Imię</label>
+                <span asp-validation-for="Input.Surname" class="text-danger"></span>
+            </div>
+            <div class="form-floating col-12" style="margin-bottom: 10px">
+                <input asp-for="Input.Email" class="form-control" autocomplete="username"  aria-required="true" />
+                <label asp-for="Input.Email"></label>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-floating py-2 col-6" style="margin-bottom: 10px">
+                <input asp-for="Input.Password" class="form-control" autocomplete="new-password"  aria-required="true" />
+                <label asp-for="Input.Password">Hasło</label>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            
+            <div class="form-floating py-2 col-6">
+                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password"  aria-required="true" />
+                <label asp-for="Input.ConfirmPassword">Potwierdź</label>
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-floating col-12" style="margin-bottom: 10px" >
+                <input asp-for="Input.StreetAdress" class="form-control" aria-required="true" />
+                <label asp-for="Input.StreetAdress">Adres</label>
+                <span asp-validation-for="Input.StreetAdress" class="text-danger"></span>
+            </div>
+            <div class="form-floating py-2 col-6" >
+                <input asp-for="Input.PostalCode" class="form-control"  aria-required="true" />
+                <label asp-for="Input.PostalCode">Kod Pocztowy</label>
+                <span asp-validation-for="Input.PostalCode" class="text-danger"></span>
+            </div>
+            <div class="form-floating py-2 col-6" >
+                <input asp-for="Input.City" class="form-control"  aria-required="true" />
+                <label asp-for="Input.City">Miasto</label>
+                <span asp-validation-for="Input.City" class="text-danger"></span>
+            </div>
+            <div class="form-floating py-2 col-3" >
+                <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class=form-select >
+                    <option disabled selected>-Rola</option>
+                </select>
+            </div>
+            <div class="form-floating py-2 col-9">
+                <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary" style="margin-top: 5px">Rejestracja</button>
+            </div>
+
+        </form>
+    </div>
+    <div class="col-md-4" style="margin-top: 280px; margin-left: 170px">
+        <div class="card-body">
+            <h4 class="card-title">Witaj w naszej bibliotece!</h4>
+            <p class="card-text">Właśnie zaczynasz niesamowitą przygodę z naszą biblioteką! Nie możemy się doczekać aż 
+                wejdziesz w niesamowite światy które napotkasz na stronach książek w naszych zbiorach!</p>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -15,7 +15,7 @@ namespace OnlineLibrary
                 switch (NavigateMenu())
                 {
                     case 1:
-                        library.AddBookToLibrary(Book.CreateBook());
+                        //library.AddBookToLibrary(Book.CreateBook());
                         WriteData.WriteLibraryToFile(library);
                         break;
                     case 2:

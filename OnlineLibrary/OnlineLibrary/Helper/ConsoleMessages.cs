@@ -35,12 +35,14 @@
         public static void RegularUserMenu()
         {
             Console.Clear();
+            Console.WriteLine("MENU GŁÓWNE\n");
             Console.WriteLine("1: Przeglądaj książki");
             Console.WriteLine("2: Wyszukaj książkę po tytule lub autorze");
             Console.WriteLine("3: Dodaj książki do wypożyczenia");
             Console.WriteLine("4: Zobacz wypożyczane książki");
             Console.WriteLine("5: Zaskocz mnie!");
             Console.WriteLine("6: Powróć do ekranu logowania");
+            Console.WriteLine("\nCo chcesz zrobić? :");
         }
         public static void ChooseAnyKey()
         {
