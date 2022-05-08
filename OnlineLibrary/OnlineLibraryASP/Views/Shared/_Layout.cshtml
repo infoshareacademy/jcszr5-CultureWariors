@@ -24,17 +24,19 @@
                     @if (SignInManager.IsSignedIn(User))
                     {
                         <ul class="navbar-nav flex-grow-1">
-
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="User" asp-action="Index">Wyświetl książki</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="ShowMeWhatsYouveGot" asp-action="Index">Zaskocz Mnie!</a>
                             </li>
                             @if (@UserManager.GetUserName(User) == "admin@admin.com")
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="Book" asp-action="Index">Wyświetl książki</a>
+                                    <a class="nav-link" asp-area="" asp-controller="Book" asp-action="Index">Edytuj książki</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="Author" asp-action="Index">Autorzy</a>
+                                    <a class="nav-link" asp-area="" asp-controller="Author" asp-action="Index">Edytuj autorów</a>
                                 </li>
                             }
                         </ul>
