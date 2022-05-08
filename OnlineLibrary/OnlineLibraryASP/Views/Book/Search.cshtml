@@ -1,0 +1,57 @@
+﻿@using OnlineLibrary.BLL.Enums
+@model IEnumerable<OnlineLibrary.BLL.Models.Book>
+
+@{
+    ViewData["Title"] = "Books";
+}
+
+<h1>Znalezione książki</h1>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            
+            <th>
+                <label asp-for="First().Title">Tytuł</label>
+            </th>
+            <th>
+                <label asp-for="First().Author.Name">Autor</label>
+            </th>
+            
+            <th>
+                <label asp-for="First().BookType">Kategoria</label>
+            </th>
+            <th>
+                <label asp-for="First().PublicationDate">Data publikacji</label>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+           
+            <td>
+                @item.Title
+            </td>
+            <td>
+                @item.Author.Name
+            </td>
+            
+            <td>
+                @item.BookType
+            </td>
+            <td>
+                @item.PublicationDate
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a>
+                <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -7,19 +7,30 @@ namespace OnlineLibrary.BLL.Models
     public class Book
     {
         public int Id { get; set; }
+
+
         [Required(ErrorMessage = "Please book title")]
         [StringLength(maximumLength: 100, MinimumLength = 1)]
+
         public string Title { get; set; }
+
         public int AuthorId { get; set; }
+
         [ValidateNever]
         public virtual Author Author { get; set; }
         
         [Display(Name = "Book type")]
         public BookType BookType { get; set; }
+
         [Display(Name = "Publication Date")]
         [Required(ErrorMessage = "Please provide publication date")]
         [Range(1450, 2022, ErrorMessage = "Please provide value from range 1450-2022")]
         public int PublicationDate { get; set; }
+        [ValidateNever]
+        public string ImageUrl { get; set; }
+
+      
+
 
         //public List<Review> Reviews { get; set; }
     }

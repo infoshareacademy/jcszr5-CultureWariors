@@ -45,6 +45,14 @@ namespace OnlineLibrary.BLL.Repositories
             book.AuthorId = model.AuthorId;
             book.BookType = model.BookType;
             book.PublicationDate = model.PublicationDate;
+            if (book.ImageUrl != null)
+            {
+                book.ImageUrl = model.ImageUrl;
+            }
+            
+            
+
+            
             _context.SaveChanges();
         }
     }

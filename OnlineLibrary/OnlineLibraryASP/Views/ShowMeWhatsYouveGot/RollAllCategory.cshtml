@@ -8,36 +8,42 @@
 <div>
     <h4>Wylosowałeś</h4>
     <hr />
+     <div class="col-2 pt-4">
+			<img src="~/@Model.ImageUrl"
+			width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+		</div>
     <dl class="row">
-@*        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
+        <dt class = "col-sm-2" hidden>
+            <label asp-for="Id"></label>
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
+
+        <dd class = "col-sm-10" hidden>
+            @Model.Id
         </dd>
-*@        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
+        
+        <dt class = "col-sm-2">
+            <label asp-for="Title">Tytuł</label>
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-@*        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AuthorId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AuthorId)
-        </dd>
-*@        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BookType)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BookType)
+            @Model.Title
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PublicationDate)
+            <label asp-for="Author.Name">Autor</label>
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PublicationDate)
+            @Model.Author.Name
+        </dd>
+        <dt class = "col-sm-2">
+            <label asp-for="BookType">Kategoria</label>
+        </dt>
+        <dd class = "col-sm-10">
+            @Model.BookType
+        </dd>
+        <dt class = "col-sm-2">
+            <label asp-for="PublicationDate">Data publikacji</label>
+        </dt>
+        <dd class = "col-sm-10">
+            @Model.PublicationDate
         </dd>
     </dl>
 </div>
