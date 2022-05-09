@@ -21,7 +21,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<BookContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
-
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IAuthorService, AuthorService>();

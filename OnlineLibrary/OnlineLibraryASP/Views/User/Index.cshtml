@@ -7,7 +7,7 @@
 
 <h1>Filtruj książki</h1>
 
-<form asp-controller="Book" asp-action="Index" method="get">
+<form asp-controller="User" asp-action="Index" method="get">
     <div>
         Tytuł: <input type="text" name="SearchString" style="width: 300px"/>
         <br/>
@@ -64,8 +64,8 @@
                 @item.PublicationDate
             </td>
             <td>
-                @*<a asp-action="Rent" class="btn btn-outline-dark" asp-route-id="@item.Id">Wypożycz</a>/*@
                 <a  asp-action="Details" class="btn btn-outline-info" asp-route-id="@item.Id">Szczegóły</a>
+                <a  asp-action="Rent" class="btn btn-outline-info" asp-route-id="@item.Id">Wypożycz</a>
             </td>
         </tr>
 }

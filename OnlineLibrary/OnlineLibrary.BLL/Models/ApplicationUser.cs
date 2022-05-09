@@ -10,6 +10,10 @@ namespace OnlineLibrary.BLL.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        public ApplicationUser()
+        {
+                RentedBooks = new List<Book>();
+        }
         [Required]
         public string Name { get; set; }
 
@@ -20,5 +24,6 @@ namespace OnlineLibrary.BLL.Models
         public string? City { get; set; }
 
         public string? PostalCode { get; set; }
+        public List<Book> RentedBooks { get; set; }
     }
 }
