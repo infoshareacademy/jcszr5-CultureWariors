@@ -12,8 +12,8 @@ using OnlineLibraryASP;
 namespace OnlineLibrary.BLL.Migrations
 {
     [DbContext(typeof(BookContext))]
-    [Migration("20220425180819_addingIdentityUser")]
-    partial class addingIdentityUser
+    [Migration("20220518175013_mo")]
+    partial class mo
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -175,12 +175,10 @@ namespace OnlineLibrary.BLL.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -217,12 +215,10 @@ namespace OnlineLibrary.BLL.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -257,11 +253,18 @@ namespace OnlineLibrary.BLL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("AuthorId")
                         .HasColumnType("int");
 
                     b.Property<int>("BookType")
                         .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PublicationDate")
                         .HasColumnType("int");
@@ -273,9 +276,30 @@ namespace OnlineLibrary.BLL.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ApplicationUserId");
+
                     b.HasIndex("AuthorId");
 
                     b.ToTable("Books");
+                });
+
+            modelBuilder.Entity("OnlineLibrary.BLL.Models.ShoppingCart", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("SchopingCart");
                 });
 
             modelBuilder.Entity("OnlineLibrary.BLL.Models.ApplicationUser", b =>
@@ -354,6 +378,10 @@ namespace OnlineLibrary.BLL.Migrations
 
             modelBuilder.Entity("OnlineLibrary.BLL.Models.Book", b =>
                 {
+                    b.HasOne("OnlineLibrary.BLL.Models.ApplicationUser", null)
+                        .WithMany("RentedBooks")
+                        .HasForeignKey("ApplicationUserId");
+
                     b.HasOne("OnlineLibrary.BLL.Models.Author", "Author")
                         .WithMany("BooksWriten")
                         .HasForeignKey("AuthorId")
@@ -363,9 +391,33 @@ namespace OnlineLibrary.BLL.Migrations
                     b.Navigation("Author");
                 });
 
+            modelBuilder.Entity("OnlineLibrary.BLL.Models.ShoppingCart", b =>
+                {
+                    b.HasOne("OnlineLibrary.BLL.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OnlineLibrary.BLL.Models.Book", "book")
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("book");
+                });
+
             modelBuilder.Entity("OnlineLibrary.BLL.Models.Author", b =>
                 {
                     b.Navigation("BooksWriten");
+                });
+
+            modelBuilder.Entity("OnlineLibrary.BLL.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("RentedBooks");
                 });
 #pragma warning restore 612, 618
         }

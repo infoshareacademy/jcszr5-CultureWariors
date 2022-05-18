@@ -12,8 +12,8 @@ using OnlineLibraryASP;
 namespace OnlineLibrary.BLL.Migrations
 {
     [DbContext(typeof(BookContext))]
-    [Migration("20220506121559_CoversAdded")]
-    partial class CoversAdded
+    [Migration("20220518171945_renter")]
+    partial class renter
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -253,6 +253,9 @@ namespace OnlineLibrary.BLL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("AuthorId")
                         .HasColumnType("int");
 
@@ -272,6 +275,8 @@ namespace OnlineLibrary.BLL.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("AuthorId");
 
@@ -354,6 +359,10 @@ namespace OnlineLibrary.BLL.Migrations
 
             modelBuilder.Entity("OnlineLibrary.BLL.Models.Book", b =>
                 {
+                    b.HasOne("OnlineLibrary.BLL.Models.ApplicationUser", null)
+                        .WithMany("RentedBooks")
+                        .HasForeignKey("ApplicationUserId");
+
                     b.HasOne("OnlineLibrary.BLL.Models.Author", "Author")
                         .WithMany("BooksWriten")
                         .HasForeignKey("AuthorId")
@@ -366,6 +375,11 @@ namespace OnlineLibrary.BLL.Migrations
             modelBuilder.Entity("OnlineLibrary.BLL.Models.Author", b =>
                 {
                     b.Navigation("BooksWriten");
+                });
+
+            modelBuilder.Entity("OnlineLibrary.BLL.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("RentedBooks");
                 });
 #pragma warning restore 612, 618
         }

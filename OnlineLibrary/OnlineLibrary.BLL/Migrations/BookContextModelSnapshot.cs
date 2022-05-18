@@ -281,6 +281,25 @@ namespace OnlineLibrary.BLL.Migrations
                     b.ToTable("Books");
                 });
 
+            modelBuilder.Entity("OnlineLibrary.BLL.Models.ShoppingCart", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("SchopingCart");
+                });
+
             modelBuilder.Entity("OnlineLibrary.BLL.Models.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
@@ -368,6 +387,25 @@ namespace OnlineLibrary.BLL.Migrations
                         .IsRequired();
 
                     b.Navigation("Author");
+                });
+
+            modelBuilder.Entity("OnlineLibrary.BLL.Models.ShoppingCart", b =>
+                {
+                    b.HasOne("OnlineLibrary.BLL.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OnlineLibrary.BLL.Models.Book", "book")
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("book");
                 });
 
             modelBuilder.Entity("OnlineLibrary.BLL.Models.Author", b =>

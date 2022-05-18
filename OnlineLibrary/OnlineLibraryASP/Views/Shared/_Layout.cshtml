@@ -21,28 +21,34 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    @if (SignInManager.IsSignedIn(User))
-                    {
+
+                    
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="User" asp-action="Index">Wyświetl książki</a>
-                            </li><li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="User" asp-action="ShowMyBooks">Moje Książki</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="ShowMeWhatsYouveGot" asp-action="Index">Zaskocz Mnie!</a>
                             </li>
-                            @if (@UserManager.GetUserName(User) == "admin@admin.com")
-                            {
+                            @if (SignInManager.IsSignedIn(User))
+                             {
                                 <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="User" asp-action="ShowMyBooks">Moje Książki</a>
+                                 </li>
+
+
+                                @if (@UserManager.GetUserName(User) == "admin@admin.com")
+                                 {
+                                     <li class="nav-item">
                                     <a class="nav-link" asp-area="" asp-controller="Book" asp-action="Index">Edytuj książki</a>
-                                </li>
-                                <li class="nav-item">
+                                     </li>
+                                     <li class="nav-item">
                                     <a class="nav-link" asp-area="" asp-controller="Author" asp-action="Index">Edytuj autorów</a>
-                                </li>
-                            }
-                        </ul>
-                    }
+                                     </li>
+                                    }
+                        
+                                    }
+                                    </ul>
                 </div>
                 <partial name="_loginPartial" />
             </div>
