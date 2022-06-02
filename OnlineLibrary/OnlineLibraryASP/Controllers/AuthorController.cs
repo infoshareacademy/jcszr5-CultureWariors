@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using OnlineLibrary.BLL.Models;
 using OnlineLibrary.BLL.Services;
 
@@ -7,19 +8,27 @@ namespace OnlineLibraryASP.Controllers
 {
     public class AuthorController : Controller
     {
-        private readonly IAuthorService _authorService;
-        private readonly IBookService _bookService;
-        public AuthorController(IAuthorService authorService,IBookService bookService)
+        private IAuthorService _authorService;
+        Uri baseAdress = new Uri("https://wolnelektury.pl/api");
+        HttpClient client;
+        public AuthorController(IAuthorService authorService)
         {
+            client = new HttpClient();
+            client.BaseAddress = baseAdress;
             _authorService = authorService;
-            _bookService = bookService;
         }
-        // GET: HomeController1
+        // GET: Index
         public ActionResult Index()
         {
-            var model = _authorService.GetAll();
-            
-            return View(model);
+            List<Author> modelList = new List<Author>();
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/authors").Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                modelList = JsonConvert.DeserializeObject<List<Author>>(data);
+            }
+            return View(modelList);
         }
 
         // GET: HomeController1/Details/5
