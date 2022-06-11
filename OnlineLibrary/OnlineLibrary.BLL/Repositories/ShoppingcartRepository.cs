@@ -6,14 +6,15 @@ using OnlineLibraryASP;
 
 namespace OnlineLibrary.BLL.Repositories
 {
-    public class ShoppingCartRepository : IShoppingCartRepository
+    public class ShoppingCartRepository : Repository<ShoppingCart>, IShoppingCartRepository
     {
         private readonly BookContext _context;
+
         
-        public ShoppingCartRepository(BookContext context)
+        public ShoppingCartRepository(BookContext db) :base(db)
         {
+            _context = db;
             
-            _context = context;
         }
         public List<ShoppingCart> GetAll()
         {

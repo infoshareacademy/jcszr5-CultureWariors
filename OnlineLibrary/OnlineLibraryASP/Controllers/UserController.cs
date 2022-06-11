@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OnlineLibrary.BLL.Models;
+using OnlineLibrary.BLL.Repositories;
 using OnlineLibrary.BLL.Services;
 using OnlineLibraryASP.ViewModels;
+using System.Security.Claims;
 
 namespace OnlineLibraryASP.Controllers
 {
@@ -15,7 +18,8 @@ namespace OnlineLibraryASP.Controllers
         private IUserService _userService;
         private SignInManager<IdentityUser> _signInManager;
         private UserManager<IdentityUser> _userManager;
-        public UserController(IBookService bookService, IAuthorService authorService, IWebHostEnvironment webHostEnvironment,IUserService userService, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        private IShoppingCartRepository _shoppingCartRepository;
+        public UserController(IBookService bookService, IAuthorService authorService, IWebHostEnvironment webHostEnvironment,IUserService userService, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IShoppingCartRepository shoppingCartRepository)
         {
             //_bookService = new BookService();
             _bookService = bookService;
@@ -24,6 +28,7 @@ namespace OnlineLibraryASP.Controllers
             _userService = userService;
             _userManager = userManager;
             _signInManager = signInManager;
+            _shoppingCartRepository = shoppingCartRepository;
         }
         // GET: BookController
         public ActionResult Index(string bookType, string searchString, string searchAuthor)
@@ -54,10 +59,26 @@ namespace OnlineLibraryASP.Controllers
         }
         // GET: BookController/Details/5
         
-        public ActionResult Details(int id)
+        public ActionResult Details(int bookId)
         {
-            var model = _bookService.GetById(id);
-            return View(model);
+            ShoppingCart cartObj = new()
+            {
+                Book = _bookService.GetById(bookId)
+            };
+            
+            return View(cartObj);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public ActionResult Details(ShoppingCart shoppingCart)
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            shoppingCart.ApplicationUserId = claim.Value;
+            _shoppingCartRepository.Create(shoppingCart);
+            
+            return RedirectToAction(nameof(Index));
         }
 
         [Route("rent/{id:int}")]

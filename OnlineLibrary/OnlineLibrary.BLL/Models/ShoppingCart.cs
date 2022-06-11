@@ -16,7 +16,7 @@ namespace OnlineLibrary.BLL.Models
 
         [ForeignKey("Id")]
         [ValidateNever]
-        public Book book { get; set; }
+        public Book Book { get; set; }
 
 
         public string ApplicationUserId { get; set; }

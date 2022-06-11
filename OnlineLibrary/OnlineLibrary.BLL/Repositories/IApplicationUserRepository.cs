@@ -2,7 +2,7 @@
 
 namespace OnlineLibrary.BLL.Repositories
 {
-    public interface IApplicationUserRepository
+    public interface IApplicationUserRepository :IRepository<ApplicationUser>
     {
         public List<ApplicationUser> GetAll();
 

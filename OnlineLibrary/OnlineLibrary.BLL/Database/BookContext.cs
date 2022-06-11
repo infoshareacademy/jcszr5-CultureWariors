@@ -15,8 +15,6 @@ namespace OnlineLibraryASP
         public DbSet<Author> Authors { get; set; }
         public DbSet<ShoppingCart> ShoppingCart { get; set; }
 
-
-
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
        

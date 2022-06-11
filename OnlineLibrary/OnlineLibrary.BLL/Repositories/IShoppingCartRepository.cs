@@ -2,7 +2,7 @@
 
 namespace OnlineLibrary.BLL.Repositories
 {
-    public interface IShoppingCartRepository
+    public interface IShoppingCartRepository : IRepository<ShoppingCart>
     {
         public List<ShoppingCart> GetAll();
         public void Create(ShoppingCart cart);
