@@ -10,6 +10,7 @@ using System.Security.Claims;
 
 namespace OnlineLibraryASP.Controllers
 {
+    [Area("Reader")]
     public class UserController : Controller
     {
         private IBookService _bookService;

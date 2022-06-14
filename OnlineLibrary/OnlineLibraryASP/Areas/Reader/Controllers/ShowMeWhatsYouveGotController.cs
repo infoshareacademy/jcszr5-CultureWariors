@@ -6,6 +6,7 @@ using OnlineLibrary.BLL.Services;
 
 namespace OnlineLibraryASP.Controllers
 {
+    [Area("Reader")]
     public class ShowMeWhatsYouveGotController : Controller
     {
         private IBookService _bookservice;

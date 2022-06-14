@@ -5,6 +5,7 @@ using System.Diagnostics;
 
 namespace OnlineLibraryASP.Controllers
 {
+    [Area("Reader")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

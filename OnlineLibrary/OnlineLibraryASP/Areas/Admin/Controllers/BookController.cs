@@ -1,13 +1,18 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OnlineLibrary.BLL.Enums;
 using OnlineLibrary.BLL.Models;
 using OnlineLibrary.BLL.Services;
+using OnlineLibrary.BLL.Utility;
 using OnlineLibraryASP.ViewModels;
 
 namespace OnlineLibraryASP.Controllers
 {
+
+    [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class BookController : Controller
     {
         private IBookService _bookService;
