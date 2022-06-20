@@ -26,7 +26,7 @@ namespace OnlineLibrary.BLL.Repositories
         {
             _context.Add(cart);
             
-            _context.SaveChanges();
+            
         }
         
         public ShoppingCart GetById(int id)

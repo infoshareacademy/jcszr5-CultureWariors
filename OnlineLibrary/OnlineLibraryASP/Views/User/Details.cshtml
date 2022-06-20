@@ -6,7 +6,7 @@
 }
 
 <h1>Szczegóły</h1>
-
+<form method="post">
 <h4>Książka</h4>
     <hr />
     <div class="col-2 pt-4">
@@ -49,8 +49,9 @@
     </dl>
 <div>
     <a asp-action="Index" class="btn btn-outline-dark">Powrót</a>
-    <form method="post">
+    
         <input hidden asp-for="Book.Id" />
-        <button type="submit" value="Dodaj do koszyka" class="btn btn-primary"></button>
-    </form>
+        <button type="submit" value="Dodaj do koszyka" class="btn btn-primary">Dodaj do wózka</button>
+   
 </div>
+ </form>

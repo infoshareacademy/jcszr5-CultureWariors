@@ -63,6 +63,7 @@ namespace OnlineLibraryASP.Controllers
         {
             ShoppingCart cartObj = new()
             {
+                BookId = bookId,
                 Book = _bookService.GetById(bookId)
             };
             
