@@ -20,15 +20,8 @@ namespace OnlineLibraryASP.Controllers
         // GET: Index
         public ActionResult Index()
         {
-            List<Author> modelList = new List<Author>();
-            HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/authors").Result;
-
-            if (response.IsSuccessStatusCode)
-            {
-                string data = response.Content.ReadAsStringAsync().Result;
-                modelList = JsonConvert.DeserializeObject<List<Author>>(data);
-            }
-            return View(modelList);
+            var model = _authorService.GetAll();
+            return View(model);
         }
 
         // GET: HomeController1/Details/5
@@ -115,6 +108,27 @@ namespace OnlineLibraryASP.Controllers
             {
                 return View();
             }
+        }
+        
+        public ActionResult Refresh()
+        {
+            var authorsDb = _authorService.GetAll();
+            List<Author> modelList = new List<Author>();
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/authors").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                modelList = JsonConvert.DeserializeObject<List<Author>>(data);
+            }
+            foreach (var author in modelList)
+            {
+                if (!authorsDb.Select(a => a.Name).Contains(author.Name))
+                {
+                    _authorService.Create(author);
+                }
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }
