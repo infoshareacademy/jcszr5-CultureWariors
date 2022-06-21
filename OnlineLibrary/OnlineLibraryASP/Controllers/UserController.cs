@@ -66,7 +66,7 @@ namespace OnlineLibraryASP.Controllers
                 BookId = bookId,
                 Book = _bookService.GetById(bookId)
             };
-            
+
             return View(cartObj);
         }
         [HttpPost]
@@ -77,8 +77,9 @@ namespace OnlineLibraryASP.Controllers
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
             shoppingCart.ApplicationUserId = claim.Value;
+            shoppingCart.Book = null;
             _shoppingCartRepository.Create(shoppingCart);
-            
+
             return RedirectToAction(nameof(Index));
         }
 

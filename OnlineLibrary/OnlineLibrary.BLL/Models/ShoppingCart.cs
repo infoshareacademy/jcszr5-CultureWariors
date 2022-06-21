@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,7 @@ namespace OnlineLibrary.BLL.Models
 
         public int BookId { get; set; }
 
-        [ForeignKey("Id")]
+        [ForeignKey("BookId")]
         [ValidateNever]
         public Book Book { get; set; }
 

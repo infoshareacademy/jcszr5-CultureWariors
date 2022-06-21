@@ -12,8 +12,8 @@ using OnlineLibraryASP;
 namespace OnlineLibrary.BLL.Migrations
 {
     [DbContext(typeof(BookContext))]
-    [Migration("20220518175013_mo")]
-    partial class mo
+    [Migration("20220621195540_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -286,7 +286,10 @@ namespace OnlineLibrary.BLL.Migrations
             modelBuilder.Entity("OnlineLibrary.BLL.Models.ShoppingCart", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ApplicationUserId")
                         .IsRequired()
@@ -299,7 +302,9 @@ namespace OnlineLibrary.BLL.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.ToTable("SchopingCart");
+                    b.HasIndex("BookId");
+
+                    b.ToTable("ShoppingCart");
                 });
 
             modelBuilder.Entity("OnlineLibrary.BLL.Models.ApplicationUser", b =>
@@ -399,15 +404,15 @@ namespace OnlineLibrary.BLL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("OnlineLibrary.BLL.Models.Book", "book")
+                    b.HasOne("OnlineLibrary.BLL.Models.Book", "Book")
                         .WithMany()
-                        .HasForeignKey("Id")
+                        .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("ApplicationUser");
 
-                    b.Navigation("book");
+                    b.Navigation("Book");
                 });
 
             modelBuilder.Entity("OnlineLibrary.BLL.Models.Author", b =>

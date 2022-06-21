@@ -6,12 +6,12 @@ using OnlineLibraryASP;
 
 namespace OnlineLibrary.BLL.Repositories
 {
-    public class ShoppingCartRepository : Repository<ShoppingCart>, IShoppingCartRepository
+    public class ShoppingCartRepository : IShoppingCartRepository
     {
         private readonly BookContext _context;
 
         
-        public ShoppingCartRepository(BookContext db) :base(db)
+        public ShoppingCartRepository(BookContext db) 
         {
             _context = db;
             
@@ -26,12 +26,12 @@ namespace OnlineLibrary.BLL.Repositories
         {
             _context.Add(cart);
             
-            
+            _context.SaveChanges();
         }
         
         public ShoppingCart GetById(int id)
         {
-            return _context.ShoppingCart.FirstOrDefault(c => c.Id == id);
+            return  _context.ShoppingCart.FirstOrDefault(c => c.Id == id);
         }
         public void Delete(int id)
         {
