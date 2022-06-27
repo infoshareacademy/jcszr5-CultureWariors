@@ -9,7 +9,6 @@
 
 <h4>Książka</h4>
     <hr />
-    <form method="post">
     <div class="col-2 pt-4">
 			<img src="~/@Model.Book.ImageUrl"
 			width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
@@ -48,10 +47,11 @@
             @Model.Book.PublicationDate
         </dd>
     </dl>
+    
 <div>
     <a asp-action="Index" class="btn btn-outline-dark">Powrót</a>
-    
-      
-        <button type="submit" value="Dodaj do koszyka" class="btn btn-primary"> dodaj do wózka</button>
+    <form method="post">
+        <input hidden asp-for="Book.Id" />
+        <button type="submit" value="Dodaj do koszyka" class="btn btn-primary">Dodaj do wózka</button>
     </form>
 </div>
