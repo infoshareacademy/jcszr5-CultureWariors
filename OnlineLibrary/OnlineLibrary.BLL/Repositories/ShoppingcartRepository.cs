@@ -31,7 +31,7 @@ namespace OnlineLibrary.BLL.Repositories
         
         public ShoppingCart GetById(int id)
         {
-            return _context.ShoppingCart.FirstOrDefault(c => c.Id == id);
+            return _context.ShoppingCart.FirstOrDefault(c => c.ShoppingCartId == id);
         }
         public void Delete(int id)
         {

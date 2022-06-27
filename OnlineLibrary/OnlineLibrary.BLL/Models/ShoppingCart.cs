@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,8 @@ namespace OnlineLibrary.BLL.Models
 {
     public class ShoppingCart
     {
-        public int Id { get; set; }
+        [Key]
+        public int ShoppingCartId { get; set; }
 
         public int BookId { get; set; }
 
