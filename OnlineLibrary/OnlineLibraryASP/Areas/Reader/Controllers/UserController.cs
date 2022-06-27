@@ -64,6 +64,7 @@ namespace OnlineLibraryASP.Controllers
         {
             ShoppingCart cartObj = new()
             {
+                BookId = bookId,
                 Book = _bookService.GetById(bookId)
             };
             
@@ -77,6 +78,7 @@ namespace OnlineLibraryASP.Controllers
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
             shoppingCart.ApplicationUserId = claim.Value;
+            shoppingCart.Book = null;
             _shoppingCartRepository.Create(shoppingCart);
             
             return RedirectToAction(nameof(Index));
