@@ -16,7 +16,7 @@ namespace OnlineLibrary.BLL.Models
 
         public int BookId { get; set; }
 
-        [ForeignKey("Id")]
+        [ForeignKey("BookId")]
         [ValidateNever]
         public Book Book { get; set; }
 

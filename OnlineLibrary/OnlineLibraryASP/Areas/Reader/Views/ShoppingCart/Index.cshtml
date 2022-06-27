@@ -1,0 +1,66 @@
+﻿@model IEnumerable<OnlineLibrary.BLL.Models.ShoppingCart>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Wózek</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Okładka
+            </th>
+            
+            <th>
+                <label asp-for="First().Book.Title">Tytuł</label>
+            </th>
+            <th>
+                <label asp-for="First().Book.Author.Name">Autor</label>
+            </th>
+            
+            <th>
+                <label asp-for="First().Book.BookType">Kategoria</label>
+            </th>
+            <th>
+                <label asp-for="First().Book.PublicationDate">Data publikacji</label>
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+               <img src="~/@item.Book.ImageUrl"
+			width="60" height="90"   />
+           </td>
+            <td>
+                @item.Book.Title
+            </td>
+            <td>
+                @item.Book.Author.Name
+            </td>
+            <td>
+                @item.Book.BookType
+            </td>
+ 
+            <td>
+                @item.Book.PublicationDate
+            </td>
+            <td>
+                
+                <a asp-action="Delete" class="btn btn-outline-danger" asp-route-id="@item.ShoppingCartId">Delete</a>
+            </td>
+        </tr>
+}
+
+    </tbody>
+   			
+</table>
+<div class="col-sm-12 col-lg-4 col-md-6 offset-lg-8 offset-md-6 ">
+						<a asp-action="Rent" class="btn btn-success form-control">Wypożycz</a>
+					</div>

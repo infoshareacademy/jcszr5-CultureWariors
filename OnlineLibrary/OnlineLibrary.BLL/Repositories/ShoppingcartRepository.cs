@@ -18,7 +18,11 @@ namespace OnlineLibrary.BLL.Repositories
         }
         public List<ShoppingCart> GetAll()
         {
-            var carts = _context.ShoppingCart.ToList();
+
+            var carts = _context.ShoppingCart.Include(b=>b.Book)
+                .Include(b=>b.ApplicationUser)
+                .Include(b=>b.Book.Author)
+                .ToList();
             
             return carts;
         }
@@ -35,8 +39,8 @@ namespace OnlineLibrary.BLL.Repositories
         }
         public void Delete(int id)
         {
-            var book = GetById(id);
-            _context.ShoppingCart.Remove(book);
+            var shoppingCart = GetById(id);
+            _context.ShoppingCart.Remove(shoppingCart);
             _context.SaveChanges();
         }
         
