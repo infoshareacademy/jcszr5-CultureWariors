@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 using OnlineLibrary.BLL.Enums;
 using OnlineLibrary.BLL.Models;
 using OnlineLibrary.BLL.Services;
@@ -13,39 +15,53 @@ namespace OnlineLibraryASP.Controllers
         private IBookService _bookService;
         private IAuthorService _authorService;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public BookController(IBookService bookService,IAuthorService authorService, IWebHostEnvironment webHostEnvironment)
+        Uri baseAdress = new Uri("https://wolnelektury.pl/api");
+        HttpClient client;
+        private readonly IMapper _mapper;
+
+        public BookController(IBookService bookService, IAuthorService authorService,
+            IWebHostEnvironment webHostEnvironment, IMapper mapper)
         {
             //_bookService = new BookService();
             _bookService = bookService;
             _authorService = authorService;
             _webHostEnvironment = webHostEnvironment;
+            client = new HttpClient();
+            client.BaseAddress = baseAdress;
+            _mapper = mapper;
         }
+
         // GET: BookController
-        public ActionResult Index(string bookType, string searchString,string searchAuthor)
+        public ActionResult Index(string bookType, string searchString, string searchAuthor)
         {
             var typeQuery = _bookService.GetAll().Select(b => b.BookType.ToString()).ToList();
             var books = _bookService.GetAll().GroupBy(x => x.Title).Select(y => y.First()).ToList();
+            //var bookFromApi = _mapper.Map<IList<BookFromApi>>(books);
+            //return View(bookFromApi);
 
 
             if (!String.IsNullOrEmpty(searchString))
             {
                 books = _bookService.SearchByTitle(searchString);
             }
+
             if (!String.IsNullOrEmpty(bookType))
             {
-               books = _bookService.SearchByType(bookType);
+                books = _bookService.SearchByType(bookType);
             }
+
             if (!String.IsNullOrEmpty(searchAuthor))
             {
-                books= _bookService.SearchByAuthor(searchAuthor);
+                books = _bookService.SearchByAuthor(searchAuthor);
             }
+
             var bookTypeVM = new BookTypeViewModel
             {
                 Types = new SelectList(typeQuery.Distinct().ToList()),
                 Books = books
             };
             return View(bookTypeVM);
-            
+
         }
 
         // GET: BookController/Details/5
@@ -67,7 +83,7 @@ namespace OnlineLibraryASP.Controllers
                     Value = c.Id.ToString()
                 })
             };
-            
+
             return View(bookVM);
         }
 
@@ -85,14 +101,18 @@ namespace OnlineLibraryASP.Controllers
                     var uploads = Path.Combine(wwwRootPath, @"Images\Books");
                     var extension = Path.GetExtension(file.FileName);
 
-                    using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+                    using (var fileStreams =
+                           new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
                     {
                         file.CopyTo(fileStreams);
                     }
+
                     bookVM.Book.ImageUrl = @"Images\Books\" + fileName + extension;
                 }
+
                 _bookService.Create(bookVM.Book);
             }
+
             return RedirectToAction("Index");
 
 
@@ -141,10 +161,12 @@ namespace OnlineLibraryASP.Controllers
 
                     }
 
-                    using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+                    using (var fileStreams =
+                           new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
                     {
                         file.CopyTo(fileStreams);
                     }
+
                     model.Book.ImageUrl = @"Images\Books\" + fileName + extension;
                 }
 
@@ -152,9 +174,10 @@ namespace OnlineLibraryASP.Controllers
                 _bookService.Update(model.Book);
                 return RedirectToAction(nameof(Index));
             }
+
             return View();
 
-            
+
         }
 
         // GET: MeetingController/Delete/5
@@ -190,20 +213,43 @@ namespace OnlineLibraryASP.Controllers
             List<Book> model;
             if (search == null)
             {
-                 model = _bookService.GetAll();
-                
+                model = _bookService.GetAll();
+
             }
             else
             {
-                 model = _bookService.SearchByString(search);
+                model = _bookService.SearchByString(search);
             }
 
             return View(model);
         }
+
         public IActionResult About()
         {
-           var model = _bookService.GetAll();
+            var model = _bookService.GetAll();
             return View(model);
+        }
+
+        public ActionResult Refresh()
+        {
+            var booksDb = _bookService.GetAll();
+            List<Book> modelList = new List<Book>();
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/books").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                modelList = JsonConvert.DeserializeObject<List<Book>>(data);
+            }
+
+            foreach (var book in modelList)
+            {
+                if (!booksDb.Select(a => a.Title).Contains(book.Title))
+                {
+                    _bookService.Create(book);
+                }
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }
