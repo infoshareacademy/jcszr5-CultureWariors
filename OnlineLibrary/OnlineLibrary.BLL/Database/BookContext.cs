@@ -17,7 +17,9 @@ namespace OnlineLibraryASP
 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
-       
+        public DbSet<RentedBook> RentedBooks { get; set; }
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
