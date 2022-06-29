@@ -28,8 +28,14 @@
                             @if (User.IsInRole(SD.Role_Admin))
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="Admin" asp-controller="Book" asp-action="Index">Wyświetl książki</a>
+                                    <a class="nav-link" asp-area="Admin" asp-controller="Admin" asp-action="ToRent">Zarządzanie</a>
+                                     </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Admin" asp-controller="Book" asp-action="Index">Książki</a>
                             </li>
+                            <li class="nav-item">
+                                    <a class="nav-link" asp-area="Admin" asp-controller="Author" asp-action="Index">Autorzy</a>
+                                </li>
                         }
                         else
                         {
@@ -41,28 +47,20 @@
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="Reader" asp-controller="ShowMeWhatsYouveGot" asp-action="Index">Zaskocz Mnie!</a>
                             </li>
-                            @if (SignInManager.IsSignedIn(User))
-                             {
-                                <li class="nav-item">
+                            @if (User.IsInRole(SD.Role_Reader))
+                        {
+                            <li class="nav-item">
                                 <a class="nav-link" asp-area="Reader" asp-controller="User" asp-action="ShowMyBooks">Moje Książki</a>
-                                 </li>
-                                 <li class="nav-item">
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" asp-area="Reader" asp-controller="ShoppingCart" asp-action="Index">Moj Wózek</a>
-                                 </li>
+                            </li>
 
 
-                                @if (User.IsInRole(SD.Role_Admin))
-                                 {
-                                     <li class="nav-item">
-                                    <a class="nav-link" asp-area="Admin" asp-controller="Book" asp-action="Index">Edytuj książki</a>
-                                     </li>
-                                     <li class="nav-item">
-                                    <a class="nav-link" asp-area="Admin" asp-controller="Author" asp-action="Index">Edytuj autorów</a>
-                                     </li>
-                                    }
                         
-                                    }
-                                    </ul>
+
+                        }
+                    </ul>
                 </div>
                 <partial name="_loginPartial" />
             </div>

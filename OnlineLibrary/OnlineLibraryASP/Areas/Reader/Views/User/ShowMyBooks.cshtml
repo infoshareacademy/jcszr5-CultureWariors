@@ -1,5 +1,5 @@
 ﻿@using OnlineLibrary.BLL.Enums
-@model IEnumerable<OnlineLibrary.BLL.Models.Book>
+@model IEnumerable<OnlineLibrary.BLL.Models.RentedBook>
 
 @{
     ViewData["Title"] = "Books";
@@ -13,17 +13,19 @@
             </th>
             
             <th>
-                <label asp-for="First().Title">Tytuł</label>
+                <label asp-for="First().Book.Title">Tytuł</label>
             </th>
             <th>
-                <label asp-for="First().Author.Name">Autor</label>
-            </th>
-            
-            <th>
-                <label asp-for="First().BookType">Kategoria</label>
+                <label asp-for="First().Book.Author.Name">Autor</label>
             </th>
             <th>
-                <label asp-for="First().PublicationDate">Data publikacji</label>
+                <label asp-for="First().Status">Status</label>
+            </th>
+            <th>
+                <label asp-for="First().RentedTime">Wypożyczona</label>
+            </th>
+            <th>
+                <label asp-for="First().ReturnTime">Data zwrotu</label>
             </th>
             
             <th></th>
@@ -33,24 +35,27 @@
 @foreach (var item in Model) {
         <tr>
            <td>
-               <img src="~/@item.ImageUrl"
+               <img src="~/@item.Book.ImageUrl"
 			width="60" height="90"   />
            </td>
             <td>
-                @item.Title
+                @item.Book.Title
             </td>
             <td>
-                @item.Author.Name
+                @item.Book.Author.Name
             </td>
             
             <td>
-                @item.BookType
+                @item.Status
             </td>
             <td>
-                @item.PublicationDate
+                @item.RentedTime
             </td>
             <td>
-                <a  asp-action="ReturnRent" class="btn btn-outline-info" asp-route-id="@item.Id">Oddaj</a>
+                @item.ReturnTime
+            </td>
+            <td>
+                <a  asp-action="Details" class="btn btn-outline-info" asp-route-id="@item.Book.Id">Szczegóły</a>
             </td>
         </tr>
 }

@@ -13,6 +13,15 @@ namespace OnlineLibrary.BLL.Services
 
         public void Rent(IEnumerable<ShoppingCart> shoppingCarts);
 
-        public void ChangeStatus(RentedBook book);
+        //public void RelaseBook(RentedBook book);
+
+        public RentedBook GetById(int id);
+
+        public void ReadyBooks(RentedBook book);
+
+        public void RentingBooks(RentedBook book);
+
+        public void ReturningBooks(RentedBook book);
+
     }
 }

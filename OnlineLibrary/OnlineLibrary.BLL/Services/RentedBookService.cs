@@ -6,20 +6,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OnlineLibrary.BLL.Enums;
+using System.Security.Claims;
 
 namespace OnlineLibrary.BLL.Services
 {
-    public class RentedBookService :IRentedBookService
-    { 
-        
-        private readonly IRentedBookRepository _rentRepository;
+    public class RentedBookService : IRentedBookService
+    {
 
-        public RentedBookService(IRentedBookRepository rentRepository)
+        private readonly IRentedBookRepository _rentRepository;
+        private readonly IShoppingCartRepository _shoppingCartRepository;
+
+        public RentedBookService(IRentedBookRepository rentRepository, IShoppingCartRepository shoppingCartRepository)
         {
             _rentRepository = rentRepository;
+            _shoppingCartRepository = shoppingCartRepository;
 
         }
 
+        public RentedBook GetById(int id)
+        {
+            return _rentRepository.GetById(id);
+        }
         public List<RentedBook> GetAll()
         {
             return _rentRepository.GetAll();
@@ -29,7 +36,7 @@ namespace OnlineLibrary.BLL.Services
         {
             foreach (var cart in shoppingCarts)
             {
-               var book = new RentedBook
+                var book = new RentedBook
                 {
                     BookId = cart.BookId,
                     ApplicationUserId = cart.ApplicationUserId,
@@ -37,12 +44,23 @@ namespace OnlineLibrary.BLL.Services
                 };
 
                 _rentRepository.Create(book);
+                
             }
+            _shoppingCartRepository.ClearCart(shoppingCarts);
 
         }
-        public void ChangeStatus(RentedBook book)
+        public void ReadyBooks(RentedBook book)
         {
-            _rentRepository.UpdateStatus(book);
+            _rentRepository.ToRelasing(book);
+        }
+        public void RentingBooks(RentedBook book)
+        {
+            _rentRepository.ToRenting(book);
+        }
+        public void ReturningBooks(RentedBook book)
+        {
+            _rentRepository.ToReturnig(book);
+
         }
 
     }

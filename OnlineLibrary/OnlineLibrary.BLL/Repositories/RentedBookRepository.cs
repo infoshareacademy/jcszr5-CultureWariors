@@ -47,13 +47,45 @@ namespace OnlineLibrary.BLL.Repositories
             _context.SaveChanges();
         }
 
-        public void UpdateStatus(RentedBook model)
+        //public void Relasing(RentedBook model)
+        //{
+        //    var book = GetById(model.Id);
+        //    book.Status = model.Status;
+        //    book.RentedTime = DateTime.Today;
+        //    book.ReturnTime = DateTime.Today.AddDays(14);
+            
+
+        //    _context.SaveChanges();
+
+        //}
+        public void ToRelasing(RentedBook model)
         {
             var book = GetById(model.Id);
-            book.Status = model.Status;
+            book.Status = Enums.BookStatus.Ready;
+            
+
+
+            _context.SaveChanges();
+
+        }
+        public void ToRenting(RentedBook model)
+        {
+            var book = GetById(model.Id);
+            book.Status = Enums.BookStatus.Rented;
             book.RentedTime = DateTime.Today;
             book.ReturnTime = DateTime.Today.AddDays(14);
-            
+
+
+            _context.SaveChanges();
+
+        }
+        public void ToReturnig(RentedBook model)
+        {
+            var book = GetById(model.Id);
+            book.Status = Enums.BookStatus.Returned;
+            book.RentedTime = null;
+            book.ReturnTime = DateTime.Today;
+                
 
             _context.SaveChanges();
 

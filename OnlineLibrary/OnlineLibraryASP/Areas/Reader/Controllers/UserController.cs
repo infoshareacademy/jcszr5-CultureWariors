@@ -20,7 +20,8 @@ namespace OnlineLibraryASP.Controllers
         private SignInManager<IdentityUser> _signInManager;
         private UserManager<IdentityUser> _userManager;
         private IShoppingCartRepository _shoppingCartRepository;
-        public UserController(IBookService bookService, IAuthorService authorService, IWebHostEnvironment webHostEnvironment,IUserService userService, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IShoppingCartRepository shoppingCartRepository)
+        private readonly IRentedBookService _rentedBookService;
+        public UserController(IBookService bookService, IAuthorService authorService, IWebHostEnvironment webHostEnvironment,IUserService userService, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IShoppingCartRepository shoppingCartRepository, IRentedBookService rentedBookService)
         {
             //_bookService = new BookService();
             _bookService = bookService;
@@ -30,7 +31,18 @@ namespace OnlineLibraryASP.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
             _shoppingCartRepository = shoppingCartRepository;
+            _rentedBookService = rentedBookService;
         }
+
+        private string GetUserIdString()
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            var myCart = claim.Value;
+            return myCart;
+
+        }
+
         // GET: BookController
         public ActionResult Index(string bookType, string searchString, string searchAuthor)
         {
@@ -84,30 +96,19 @@ namespace OnlineLibraryASP.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [Route("rent/{id:int}")]
-        public ActionResult Rent(int id)
-        {
-            var model = _bookService.GetById(id);
-            return View(model);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Route("rent/{id:int}")]
-        public ActionResult Rent(int id,Book book)
-        {
-            var rentedBook = _bookService.GetById(id);
-            var userId = _userManager.GetUserId(User);
-            var appUser = _userService.GetById(userId);
-            _userService.RentBook(rentedBook,appUser);
-            return RedirectToAction(nameof(ShowMyBooks));
-        }
+        
         public ActionResult ShowMyBooks()
         {
-            var userId = _userManager.GetUserId(User);
-            var model = _userService.GetUserRentedBooks(userId);
-            return View(model);
+
+            var userCart = _rentedBookService.GetAll()
+                .Where(s => s.ApplicationUserId == GetUserIdString())
+                .OrderBy(r=>r.Status).ThenBy(r=>r.RentedTime);
+
+            return View(userCart);
+            
         }
+
+
         [Route("return/{id:int}")]
         public ActionResult ReturnRent(int id)
         {

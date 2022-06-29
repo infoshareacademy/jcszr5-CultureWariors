@@ -43,6 +43,13 @@ namespace OnlineLibrary.BLL.Repositories
             _context.ShoppingCart.Remove(shoppingCart);
             _context.SaveChanges();
         }
-        
+        public void ClearCart(IEnumerable<ShoppingCart> cart)
+        {
+            foreach (var cartItem in cart)
+            {
+                _context.ShoppingCart.Remove(cartItem);
+                _context.SaveChanges();
+            }
+        }
     }
 }

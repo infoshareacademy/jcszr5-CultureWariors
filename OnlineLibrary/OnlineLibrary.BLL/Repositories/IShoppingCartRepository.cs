@@ -9,5 +9,6 @@ namespace OnlineLibrary.BLL.Repositories
         public ShoppingCart GetById(int id);
         public void Delete(int id);
 
+        public void ClearCart(IEnumerable<ShoppingCart> cart);
     }
 }

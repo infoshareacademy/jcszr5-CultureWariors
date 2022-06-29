@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineLibrary.BLL.Models;
 using OnlineLibrary.BLL.Repositories;
+using OnlineLibrary.BLL.Services;
 using System.Security.Claims;
 
 namespace OnlineLibraryASP.Areas.Reader.Controllers
@@ -10,28 +11,33 @@ namespace OnlineLibraryASP.Areas.Reader.Controllers
     public class ShoppingCartController : Controller
     {
         private readonly IShoppingCartRepository _shoppingCartRepository;
-        public ShoppingCartController(IShoppingCartRepository shoppingCartRepository)
+        private readonly IRentedBookService _RentedBookService;
+        public ShoppingCartController(IShoppingCartRepository shoppingCartRepository, IRentedBookService rentedBookService)
         {
             _shoppingCartRepository = shoppingCartRepository;
-
+            _RentedBookService = rentedBookService;
         }
 
-
-        // GET: ShoppingCartController
-        public ActionResult Index()
+        private string GetUserIdString()
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
             var myCart = claim.Value;
-            var userCart = _shoppingCartRepository.GetAll().Where(s=>s.ApplicationUserId==myCart);
+            return myCart;
+
+        }
+
+
+        public ActionResult Index()
+        {
+
+            var userCart = _shoppingCartRepository.GetAll().Where(s => s.ApplicationUserId == GetUserIdString());
 
             return View(userCart);
         }
 
-        
 
-        
-       
+
 
         // GET: ShoppingCartController/Edit/5
         public ActionResult Delete(int id)
@@ -42,7 +48,20 @@ namespace OnlineLibraryASP.Areas.Reader.Controllers
            
         }
 
-       
+        // GET: ShoppingCartController
+        
+
+        
+        public ActionResult Rent()
+        {
+            var userCart = _shoppingCartRepository.GetAll().Where(s => s.ApplicationUserId == GetUserIdString());
+            _RentedBookService.Rent(userCart);
+            
+
+
+
+            return View();
+        }
 
        
     }

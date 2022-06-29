@@ -1,0 +1,96 @@
+﻿@using OnlineLibrary.BLL.Enums
+@model IEnumerable<OnlineLibrary.BLL.Models.RentedBook>
+
+    
+<p>
+    <a asp-action="ToRent" class="btn btn-outline-secondary">Do Przygotowania</a>
+
+
+    <a asp-action="ToRelase" class="btn btn-outline-secondary">Do wyporzyczenia</a>
+
+    <a asp-action="ToReturn" class="btn btn-outline-secondary">Do oddania</a>
+
+    <a asp-action="History" class="btn btn-outline-secondary">Historia</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <label asp-for="First().ApplicationUser.Name">Nazwisko</label>
+            </th>
+            <th>
+                <label asp-for="First().ApplicationUser.Surname">Imię</label>
+            </th>
+            <th>
+                <label asp-for="First().Book.Title">Tytuł</label>
+            </th>
+            <th>
+                <label asp-for="First().Book.Author">Autor</label>
+            </th>
+            <th>
+                <label asp-for="First().RentedTime">Wypożyczono</label>
+            </th>
+            <th>
+                <label asp-for="First().ReturnTime">Zwroto</label>
+            </th>
+            
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+           <td>
+               @item.ApplicationUser.Name
+           </td>
+            <td>
+                @item.ApplicationUser.Surname
+            </td>
+            <td>
+                @item.Book.Title
+            </td>
+            
+            <td>
+                @item.Book.Author.Name
+            </td>
+            <td>
+                @item.RentedTime
+            </td>
+            <td>
+                @item.ReturnTime
+            </td>
+            
+            
+                    @switch (item.Status)
+                    {
+                        case BookStatus.Processing:
+                        <td>
+                        <a  asp-action="ReadyToRelase" class="btn btn-outline-info" asp-route-id="@item.Id">Przygotowano</a>
+                        </td>
+                        break;
+
+                        case BookStatus.Ready:
+                        <td>
+                        <a  asp-action="Renting" class="btn btn-outline-info" asp-route-id="@item.Id">Wydano</a>
+                        </td>
+                        break;
+
+                        case BookStatus.Rented:
+                        <td>
+                        <a  asp-action="Returning" class="btn btn-outline-info" asp-route-id="@item.Id">Zwrócono</a>
+                        </td>
+                        break;
+
+                        case BookStatus.Returned:
+                        
+                        break;
+
+                    }
+                
+            
+        </tr>
+}
+    </tbody>
+</table>
