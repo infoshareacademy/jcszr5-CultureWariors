@@ -15,6 +15,7 @@ namespace OnlineLibrary.BLL.Models
         public string epoch { get; set; }
         public string genre { get; set; }
         public string simple_thumb { get; set; }
+        public Author bookAuthor { get; set; }
 
     }
 }

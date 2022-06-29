@@ -226,29 +226,52 @@ namespace OnlineLibraryASP.Controllers
 
         public IActionResult About()
         {
+            List<GenresFromApi> modelList = new List<GenresFromApi>();
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/genres").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                modelList = JsonConvert.DeserializeObject<List<GenresFromApi>>(data);
+            }
             var model = _bookService.GetAll();
-            return View(model);
+            var aboutModel = new BookAboutViewModel()
+            {
+                books = model,
+                genres = new()
+            };
+            foreach(var genreName in modelList)
+            {
+                aboutModel.genres.Add(genreName.name);
+            }
+            return View(aboutModel);
         }
 
         public ActionResult Refresh()
         {
             var booksDb = _bookService.GetAll();
-            List<Book> modelList = new List<Book>();
+            List<BookFromApi> modelList = new List<BookFromApi>();
             HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/books").Result;
             if (response.IsSuccessStatusCode)
             {
                 string data = response.Content.ReadAsStringAsync().Result;
-                modelList = JsonConvert.DeserializeObject<List<Book>>(data);
+                modelList = JsonConvert.DeserializeObject<List<BookFromApi>>(data);
             }
-
-            foreach (var book in modelList)
+            var authors = _authorService.GetAll();
+            foreach(var book in modelList)
             {
-                if (!booksDb.Select(a => a.Title).Contains(book.Title))
+                book.bookAuthor = authors.FirstOrDefault(a=>a.Name.Equals(book.author));
+            }
+            var mappedBooks = _mapper.Map<List<Book>>(modelList);
+            foreach (var book in mappedBooks)
+            {
+                if (book.Author != null)
                 {
-                    _bookService.Create(book);
+                    if (!booksDb.Select(a => a.Title).Contains(book.Title))
+                    {
+                        _bookService.Create(book);
+                    }
                 }
             }
-
             return RedirectToAction("Index");
         }
     }

@@ -44,7 +44,7 @@ namespace OnlineLibrary.BLL.Repositories
             book.Title = model.Title;
             book.AuthorId = model.AuthorId;
             book.BookType = model.BookType;
-            book.PublicationDate = model.PublicationDate;
+            book.Epoch = model.Epoch;
             if (book.ImageUrl != null)
             {
                 book.ImageUrl = model.ImageUrl;

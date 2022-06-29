@@ -12,8 +12,8 @@ using OnlineLibraryASP;
 namespace OnlineLibrary.BLL.Migrations
 {
     [DbContext(typeof(BookContext))]
-    [Migration("20220518171945_renter")]
-    partial class renter
+    [Migration("20220629113125_book")]
+    partial class book
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -259,20 +259,23 @@ namespace OnlineLibrary.BLL.Migrations
                     b.Property<int>("AuthorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("BookType")
-                        .HasColumnType("int");
+                    b.Property<string>("BookType")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Epoch")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PublicationDate")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -281,6 +284,25 @@ namespace OnlineLibrary.BLL.Migrations
                     b.HasIndex("AuthorId");
 
                     b.ToTable("Books");
+                });
+
+            modelBuilder.Entity("OnlineLibrary.BLL.Models.ShoppingCart", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("SchopingCart");
                 });
 
             modelBuilder.Entity("OnlineLibrary.BLL.Models.ApplicationUser", b =>
@@ -370,6 +392,25 @@ namespace OnlineLibrary.BLL.Migrations
                         .IsRequired();
 
                     b.Navigation("Author");
+                });
+
+            modelBuilder.Entity("OnlineLibrary.BLL.Models.ShoppingCart", b =>
+                {
+                    b.HasOne("OnlineLibrary.BLL.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OnlineLibrary.BLL.Models.Book", "book")
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("book");
                 });
 
             modelBuilder.Entity("OnlineLibrary.BLL.Models.Author", b =>

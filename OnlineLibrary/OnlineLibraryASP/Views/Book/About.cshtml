@@ -1,5 +1,6 @@
 ﻿@using OnlineLibrary.BLL.Enums
-@model IEnumerable<OnlineLibrary.BLL.Models.Book>
+@using OnlineLibraryASP.ViewModels
+@model BookAboutViewModel
 
 
 
@@ -17,7 +18,7 @@
     <thead>
         <tr>
             <th>
-               <label asp-for="First().BookType">Gatunek</label>
+               <label asp-for="books.First().BookType">Gatunek</label>
             </th>
             <th>
                 Ilość
@@ -25,7 +26,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var AAA in Enum.GetNames(typeof(BookType))) 
+        @foreach (var AAA in Model.genres) 
 {
         <tr>
             <td>
@@ -36,10 +37,10 @@
 
                         int i = 0;
 
-                        foreach(var book in Model)
+                        foreach(var book in Model.books)
                         {
 
-                            if (book.BookType.ToString() == AAA)
+                            if (book.BookType == AAA)
                             {
                                 
                                 i++;
