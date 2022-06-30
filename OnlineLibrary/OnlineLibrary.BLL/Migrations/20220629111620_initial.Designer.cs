@@ -12,8 +12,8 @@ using OnlineLibraryASP;
 namespace OnlineLibrary.BLL.Migrations
 {
     [DbContext(typeof(BookContext))]
-    [Migration("20220518175013_mo")]
-    partial class mo
+    [Migration("20220629111620_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -259,15 +259,19 @@ namespace OnlineLibrary.BLL.Migrations
                     b.Property<int>("AuthorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("BookType")
-                        .HasColumnType("int");
+                    b.Property<string>("BookType")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Epoch")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PublicationDate")
-                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
