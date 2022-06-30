@@ -15,7 +15,7 @@ namespace OnlineLibrary.BLL.Models
 
         [ValidateNever]
         public virtual Author Author { get; set; }
-        
+
         [Display(Name = "Book type")]
         [Required(ErrorMessage = "Please provide book type")]
         [StringLength(maximumLength: 100, MinimumLength = 1)]
@@ -26,7 +26,6 @@ namespace OnlineLibrary.BLL.Models
         [ValidateNever]
         public string ImageUrl { get; set; }
 
-      
 
 
         //public List<Review> Reviews { get; set; }

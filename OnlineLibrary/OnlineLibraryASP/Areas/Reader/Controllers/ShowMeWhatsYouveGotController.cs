@@ -54,11 +54,11 @@ namespace OnlineLibraryASP.Controllers
             return View(bookTypeVM);
         }
 
-        
+
         public ActionResult Roll(string bookType)
         {
-          var model= _bookservice.RandomBookByCategory(bookType);
-            
+            var model = _bookservice.RandomBookByCategory(bookType);
+
             return View(model);
         }
 

@@ -1,0 +1,63 @@
+﻿@using OnlineLibrary.BLL.Enums
+@model IEnumerable<OnlineLibrary.BLL.Models.RentedBook>
+
+@{
+    ViewData["Title"] = "Books";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Okładka
+            </th>
+            
+            <th>
+                <label asp-for="First().Book.Title">Tytuł</label>
+            </th>
+            <th>
+                <label asp-for="First().Book.Author.Name">Autor</label>
+            </th>
+            <th>
+                <label asp-for="First().Status">Status</label>
+            </th>
+            <th>
+                <label asp-for="First().RentedTime">Wypożyczona</label>
+            </th>
+            <th>
+                <label asp-for="First().ReturnTime">Data zwrotu</label>
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+           <td>
+               <img src="~/@item.Book.ImageUrl"
+			width="60" height="90"   />
+           </td>
+            <td>
+                @item.Book.Title
+            </td>
+            <td>
+                @item.Book.Author.Name
+            </td>
+            
+            <td>
+                @item.Status
+            </td>
+            <td>
+                @item.RentedTime
+            </td>
+            <td>
+                @item.ReturnTime
+            </td>
+            <td>
+                <a  asp-action="Details" class="btn btn-outline-info" asp-route-id="@item.Book.Id">Szczegóły</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

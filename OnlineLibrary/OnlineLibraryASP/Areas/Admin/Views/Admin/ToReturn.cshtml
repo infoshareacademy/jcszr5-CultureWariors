@@ -1,0 +1,9 @@
+﻿@using OnlineLibrary.BLL.Enums
+@model IEnumerable<OnlineLibrary.BLL.Models.RentedBook>
+
+@{
+    ViewData["Title"] = "Books";
+}
+
+<h1>Do zwrotu</h1>
+<partial name="_BookManagment" model=@Model />

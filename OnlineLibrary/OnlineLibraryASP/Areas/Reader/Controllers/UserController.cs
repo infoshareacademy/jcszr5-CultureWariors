@@ -1,12 +1,16 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OnlineLibrary.BLL.Models;
+using OnlineLibrary.BLL.Repositories;
 using OnlineLibrary.BLL.Services;
 using OnlineLibraryASP.ViewModels;
+using System.Security.Claims;
 
 namespace OnlineLibraryASP.Controllers
 {
+    [Area("Reader")]
     public class UserController : Controller
     {
         private IBookService _bookService;
@@ -15,7 +19,9 @@ namespace OnlineLibraryASP.Controllers
         private IUserService _userService;
         private SignInManager<IdentityUser> _signInManager;
         private UserManager<IdentityUser> _userManager;
-        public UserController(IBookService bookService, IAuthorService authorService, IWebHostEnvironment webHostEnvironment,IUserService userService, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        private IShoppingCartRepository _shoppingCartRepository;
+        private readonly IRentedBookService _rentedBookService;
+        public UserController(IBookService bookService, IAuthorService authorService, IWebHostEnvironment webHostEnvironment,IUserService userService, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IShoppingCartRepository shoppingCartRepository, IRentedBookService rentedBookService)
         {
             //_bookService = new BookService();
             _bookService = bookService;
@@ -24,7 +30,19 @@ namespace OnlineLibraryASP.Controllers
             _userService = userService;
             _userManager = userManager;
             _signInManager = signInManager;
+            _shoppingCartRepository = shoppingCartRepository;
+            _rentedBookService = rentedBookService;
         }
+
+        private string GetUserIdString()
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            var myCart = claim.Value;
+            return myCart;
+
+        }
+
         // GET: BookController
         public ActionResult Index(string bookType, string searchString, string searchAuthor)
         {
@@ -54,36 +72,43 @@ namespace OnlineLibraryASP.Controllers
         }
         // GET: BookController/Details/5
         
-        public ActionResult Details(int id)
+        public ActionResult Details(int bookId)
         {
-            var model = _bookService.GetById(id);
-            return View(model);
+            ShoppingCart cartObj = new()
+            {
+                BookId = bookId,
+                Book = _bookService.GetById(bookId)
+            };
+            
+            return View(cartObj);
         }
-
-        [Route("rent/{id:int}")]
-        public ActionResult Rent(int id)
-        {
-            var model = _bookService.GetById(id);
-            return View(model);
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Route("rent/{id:int}")]
-        public ActionResult Rent(int id,Book book)
+        [Authorize]
+        public ActionResult Details(ShoppingCart shoppingCart)
         {
-            var rentedBook = _bookService.GetById(id);
-            var userId = _userManager.GetUserId(User);
-            var appUser = _userService.GetById(userId);
-            _userService.RentBook(rentedBook,appUser);
-            return RedirectToAction(nameof(ShowMyBooks));
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            shoppingCart.ApplicationUserId = claim.Value;
+            shoppingCart.Book = null;
+            _shoppingCartRepository.Create(shoppingCart);
+            
+            return RedirectToAction(nameof(Index));
         }
+
+        
         public ActionResult ShowMyBooks()
         {
-            var userId = _userManager.GetUserId(User);
-            var model = _userService.GetUserRentedBooks(userId);
-            return View(model);
+
+            var userCart = _rentedBookService.GetAll()
+                .Where(s => s.ApplicationUserId == GetUserIdString())
+                .OrderBy(r=>r.Status).ThenBy(r=>r.RentedTime);
+
+            return View(userCart);
+            
         }
+
+
         [Route("return/{id:int}")]
         public ActionResult ReturnRent(int id)
         {

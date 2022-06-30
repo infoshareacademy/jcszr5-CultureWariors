@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -6,10 +7,14 @@ using Newtonsoft.Json;
 using OnlineLibrary.BLL.Enums;
 using OnlineLibrary.BLL.Models;
 using OnlineLibrary.BLL.Services;
+using OnlineLibrary.BLL.Utility;
 using OnlineLibraryASP.ViewModels;
 
 namespace OnlineLibraryASP.Controllers
 {
+
+    [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class BookController : Controller
     {
         private IBookService _bookService;
@@ -19,49 +24,40 @@ namespace OnlineLibraryASP.Controllers
         HttpClient client;
         private readonly IMapper _mapper;
 
-        public BookController(IBookService bookService, IAuthorService authorService,
-            IWebHostEnvironment webHostEnvironment, IMapper mapper)
+        public BookController(IBookService bookService,IAuthorService authorService, IWebHostEnvironment webHostEnvironment, IMapper mapper)
         {
             //_bookService = new BookService();
             _bookService = bookService;
             _authorService = authorService;
             _webHostEnvironment = webHostEnvironment;
-            client = new HttpClient();
-            client.BaseAddress = baseAdress;
             _mapper = mapper;
         }
-
         // GET: BookController
-        public ActionResult Index(string bookType, string searchString, string searchAuthor)
+        public ActionResult Index(string bookType, string searchString,string searchAuthor)
         {
             var typeQuery = _bookService.GetAll().Select(b => b.BookType.ToString()).ToList();
             var books = _bookService.GetAll().GroupBy(x => x.Title).Select(y => y.First()).ToList();
-            //var bookFromApi = _mapper.Map<IList<BookFromApi>>(books);
-            //return View(bookFromApi);
 
 
             if (!String.IsNullOrEmpty(searchString))
             {
                 books = _bookService.SearchByTitle(searchString);
             }
-
             if (!String.IsNullOrEmpty(bookType))
             {
-                books = _bookService.SearchByType(bookType);
+               books = _bookService.SearchByType(bookType);
             }
-
             if (!String.IsNullOrEmpty(searchAuthor))
             {
-                books = _bookService.SearchByAuthor(searchAuthor);
+                books= _bookService.SearchByAuthor(searchAuthor);
             }
-
             var bookTypeVM = new BookTypeViewModel
             {
                 Types = new SelectList(typeQuery.Distinct().ToList()),
                 Books = books
             };
             return View(bookTypeVM);
-
+            
         }
 
         // GET: BookController/Details/5
@@ -83,7 +79,7 @@ namespace OnlineLibraryASP.Controllers
                     Value = c.Id.ToString()
                 })
             };
-
+            
             return View(bookVM);
         }
 
@@ -101,18 +97,14 @@ namespace OnlineLibraryASP.Controllers
                     var uploads = Path.Combine(wwwRootPath, @"Images\Books");
                     var extension = Path.GetExtension(file.FileName);
 
-                    using (var fileStreams =
-                           new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+                    using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
                     {
                         file.CopyTo(fileStreams);
                     }
-
                     bookVM.Book.ImageUrl = @"Images\Books\" + fileName + extension;
                 }
-
                 _bookService.Create(bookVM.Book);
             }
-
             return RedirectToAction("Index");
 
 
@@ -161,12 +153,10 @@ namespace OnlineLibraryASP.Controllers
 
                     }
 
-                    using (var fileStreams =
-                           new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+                    using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
                     {
                         file.CopyTo(fileStreams);
                     }
-
                     model.Book.ImageUrl = @"Images\Books\" + fileName + extension;
                 }
 
@@ -174,10 +164,9 @@ namespace OnlineLibraryASP.Controllers
                 _bookService.Update(model.Book);
                 return RedirectToAction(nameof(Index));
             }
-
             return View();
 
-
+            
         }
 
         // GET: MeetingController/Delete/5
@@ -213,17 +202,16 @@ namespace OnlineLibraryASP.Controllers
             List<Book> model;
             if (search == null)
             {
-                model = _bookService.GetAll();
-
+                 model = _bookService.GetAll();
+                
             }
             else
             {
-                model = _bookService.SearchByString(search);
+                 model = _bookService.SearchByString(search);
             }
 
             return View(model);
         }
-
         public IActionResult About()
         {
             List<GenresFromApi> modelList = new List<GenresFromApi>();
@@ -239,7 +227,7 @@ namespace OnlineLibraryASP.Controllers
                 books = model,
                 genres = new()
             };
-            foreach(var genreName in modelList)
+            foreach (var genreName in modelList)
             {
                 aboutModel.genres.Add(genreName.name);
             }
@@ -257,9 +245,9 @@ namespace OnlineLibraryASP.Controllers
                 modelList = JsonConvert.DeserializeObject<List<BookFromApi>>(data);
             }
             var authors = _authorService.GetAll();
-            foreach(var book in modelList)
+            foreach (var book in modelList)
             {
-                book.bookAuthor = authors.FirstOrDefault(a=>a.Name.Equals(book.author));
+                book.bookAuthor = authors.FirstOrDefault(a => a.Name.Equals(book.author));
             }
             var mappedBooks = _mapper.Map<List<Book>>(modelList);
             foreach (var book in mappedBooks)

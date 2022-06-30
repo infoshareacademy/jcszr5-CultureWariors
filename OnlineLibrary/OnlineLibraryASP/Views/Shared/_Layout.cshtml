@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using OnlineLibrary.BLL.Utility
 
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
@@ -24,31 +25,42 @@
 
                     
                         <ul class="navbar-nav flex-grow-1">
+                            @if (User.IsInRole(SD.Role_Admin))
+                        {
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="User" asp-action="Index">Wyświetl książki</a>
+                                    <a class="nav-link" asp-area="Admin" asp-controller="Admin" asp-action="ToRent">Zarządzanie</a>
+                                     </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Admin" asp-controller="Book" asp-action="Index">Książki</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="ShowMeWhatsYouveGot" asp-action="Index">Zaskocz Mnie!</a>
+                                    <a class="nav-link" asp-area="Admin" asp-controller="Author" asp-action="Index">Autorzy</a>
+                                </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Reader" asp-controller="User" asp-action="Index">Wyświetl książki</a>
                             </li>
-                            @if (SignInManager.IsSignedIn(User))
-                             {
-                                <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="User" asp-action="ShowMyBooks">Moje Książki</a>
-                                 </li>
+                        }
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Reader" asp-controller="ShowMeWhatsYouveGot" asp-action="Index">Zaskocz Mnie!</a>
+                            </li>
+                            @if (User.IsInRole(SD.Role_Reader))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Reader" asp-controller="User" asp-action="ShowMyBooks">Moje Książki</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Reader" asp-controller="ShoppingCart" asp-action="Index">Moj Wózek</a>
+                            </li>
 
 
-                                @if (@UserManager.GetUserName(User) == "admin@admin.com")
-                                 {
-                                     <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="Book" asp-action="Index">Edytuj książki</a>
-                                     </li>
-                                     <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="Author" asp-action="Index">Edytuj autorów</a>
-                                     </li>
-                                    }
                         
-                                    }
-                                    </ul>
+
+                        }
+                    </ul>
                 </div>
                 <partial name="_loginPartial" />
             </div>
@@ -70,7 +82,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="footer">
-            &copy; 2022 - Culture Warriors - <a asp-area="" asp-controller="Book" asp-action="About">O bibliotece</a>
+            &copy; 2022 - Culture Warriors - <a asp-area="Reader" asp-controller="User" asp-action="About">O bibliotece</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
