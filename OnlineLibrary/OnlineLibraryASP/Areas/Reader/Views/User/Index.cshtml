@@ -37,7 +37,7 @@
                 <label asp-for="Books.First().BookType">Kategoria</label>
             </th>
             <th>
-                <label asp-for="Books.First().PublicationDate">Data publikacji</label>
+                <label asp-for="Books.First().Epoch">Data publikacji</label>
             </th>
             
             <th></th>
@@ -61,7 +61,7 @@
                 @item.BookType
             </td>
             <td>
-                @item.PublicationDate
+                @item.Epoch
             </td>
             <td>
                 <a  asp-action="Details" class="btn btn-outline-info" asp-route-bookId="@item.Id">Szczegóły</a>

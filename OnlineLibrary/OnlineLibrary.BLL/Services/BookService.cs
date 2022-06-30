@@ -43,7 +43,7 @@ namespace OnlineLibrary.BLL.Services
         }
         public List<Book> SearchByType(string type)
         {
-            return _bookRepository.GetAll().Where(b => b.BookType.ToString().Contains(type)).ToList();
+            return _bookRepository.GetAll().Where(b => b.BookType.Contains(type)).ToList();
         }
         public List<Book> SearchByAuthor(string author)
         {
@@ -65,7 +65,7 @@ namespace OnlineLibrary.BLL.Services
             return Randomizer(selected);
         }
 
-        public Book RandomBookByCategory(BookType bookType)
+        public Book RandomBookByCategory(string bookType)
         {
             var selected = _bookRepository.GetAll()
             .Where(b => b.BookType == bookType)

@@ -14,7 +14,7 @@ namespace OnlineLibrary.BLL.Services
         public List<Book> SearchByType(string type);
         public List<Book> SearchByAuthor(string author);
         public List<Book> SearchByString(string search);
-        public Book RandomBookByCategory(BookType bookType);
+        public Book RandomBookByCategory(string bookType);
         public Book RandomBookByAll();
     }
 }

@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 using OnlineLibrary.BLL.Enums;
 using OnlineLibrary.BLL.Models;
 using OnlineLibrary.BLL.Services;
@@ -18,12 +20,17 @@ namespace OnlineLibraryASP.Controllers
         private IBookService _bookService;
         private IAuthorService _authorService;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public BookController(IBookService bookService,IAuthorService authorService, IWebHostEnvironment webHostEnvironment)
+        Uri baseAdress = new Uri("https://wolnelektury.pl/api");
+        HttpClient client;
+        private readonly IMapper _mapper;
+
+        public BookController(IBookService bookService,IAuthorService authorService, IWebHostEnvironment webHostEnvironment, IMapper mapper)
         {
             //_bookService = new BookService();
             _bookService = bookService;
             _authorService = authorService;
             _webHostEnvironment = webHostEnvironment;
+            _mapper = mapper;
         }
         // GET: BookController
         public ActionResult Index(string bookType, string searchString,string searchAuthor)
@@ -207,8 +214,53 @@ namespace OnlineLibraryASP.Controllers
         }
         public IActionResult About()
         {
-           var model = _bookService.GetAll();
-            return View(model);
+            List<GenresFromApi> modelList = new List<GenresFromApi>();
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/genres").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                modelList = JsonConvert.DeserializeObject<List<GenresFromApi>>(data);
+            }
+            var model = _bookService.GetAll();
+            var aboutModel = new BookAboutViewModel()
+            {
+                books = model,
+                genres = new()
+            };
+            foreach (var genreName in modelList)
+            {
+                aboutModel.genres.Add(genreName.name);
+            }
+            return View(aboutModel);
+        }
+
+        public ActionResult Refresh()
+        {
+            var booksDb = _bookService.GetAll();
+            List<BookFromApi> modelList = new List<BookFromApi>();
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/books").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                modelList = JsonConvert.DeserializeObject<List<BookFromApi>>(data);
+            }
+            var authors = _authorService.GetAll();
+            foreach (var book in modelList)
+            {
+                book.bookAuthor = authors.FirstOrDefault(a => a.Name.Equals(book.author));
+            }
+            var mappedBooks = _mapper.Map<List<Book>>(modelList);
+            foreach (var book in mappedBooks)
+            {
+                if (book.Author != null)
+                {
+                    if (!booksDb.Select(a => a.Title).Contains(book.Title))
+                    {
+                        _bookService.Create(book);
+                    }
+                }
+            }
+            return RedirectToAction("Index");
         }
     }
 }

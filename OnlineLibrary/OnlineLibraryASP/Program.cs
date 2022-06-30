@@ -30,6 +30,7 @@ builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository
 builder.Services.AddScoped<IShoppingCartRepository, ShoppingCartRepository>();
 builder.Services.AddScoped<IRentedBookRepository, RentedBookRepository>();
 builder.Services.AddScoped<IRentedBookService,RentedBookService>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
