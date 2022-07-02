@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 using OnlineLibrary.BLL.Models;
 using OnlineLibrary.BLL.Repositories;
 using OnlineLibrary.BLL.Services;
@@ -21,6 +23,9 @@ namespace OnlineLibraryASP.Controllers
         private UserManager<IdentityUser> _userManager;
         private IShoppingCartRepository _shoppingCartRepository;
         private readonly IRentedBookService _rentedBookService;
+        Uri baseAdress = new Uri("https://wolnelektury.pl/api");
+        HttpClient client;
+        
         public UserController(IBookService bookService, IAuthorService authorService, IWebHostEnvironment webHostEnvironment,IUserService userService, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IShoppingCartRepository shoppingCartRepository, IRentedBookService rentedBookService)
         {
             //_bookService = new BookService();
@@ -32,6 +37,10 @@ namespace OnlineLibraryASP.Controllers
             _signInManager = signInManager;
             _shoppingCartRepository = shoppingCartRepository;
             _rentedBookService = rentedBookService;
+            
+            client = new HttpClient();
+            client.BaseAddress = baseAdress;
+
         }
 
         private string GetUserIdString()
@@ -127,6 +136,28 @@ namespace OnlineLibraryASP.Controllers
             var appUser = _userService.GetById(userId);
             _userService.ReturnBook(rentedBook, appUser);
             return RedirectToAction(nameof(ShowMyBooks));
+        }
+
+        public IActionResult About()
+        {
+            List<GenresFromApi> modelList = new List<GenresFromApi>();
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/genres").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                modelList = JsonConvert.DeserializeObject<List<GenresFromApi>>(data);
+            }
+            var model = _bookService.GetAll();
+            var aboutModel = new BookAboutViewModel()
+            {
+                books = model,
+                genres = new()
+            };
+            foreach (var genreName in modelList)
+            {
+                aboutModel.genres.Add(genreName.name);
+            }
+            return View(aboutModel);
         }
     }
 }

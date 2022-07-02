@@ -1,0 +1,60 @@
+﻿@using OnlineLibrary.BLL.Enums
+@using OnlineLibraryASP.ViewModels
+@model BookAboutViewModel
+
+
+
+@{
+    ViewData["Title"] = "About";
+}
+
+<h1>O Bibliotece</h1>
+
+<p>
+    Biblioteka została wykonana przez zespół Culture Warriors!
+</p>
+<p>W zbiorach biblioteki znajduje się</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               <label asp-for="books.First().BookType">Gatunek</label>
+            </th>
+            <th>
+                Ilość
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var AAA in Model.genres) 
+{
+        <tr>
+            <td>
+               @AAA
+            </td>
+            <td>    
+                    @{
+
+                        int i = 0;
+
+                        foreach(var book in Model.books)
+                        {
+
+                            if (book.BookType == AAA)
+                            {
+                                
+                                i++;
+                            }
+
+                        }
+                    }
+                    @i
+                    
+                    
+
+            </td>
+          
+        </tr>
+}
+    </tbody>
+</table>
