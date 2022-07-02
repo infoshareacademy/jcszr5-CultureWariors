@@ -22,22 +22,22 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                Okładka
+            <th style="width: 100px">
+                              <label asp-for="Books.First().ImageUrl">Okładka</label>
             </th>
             
-            <th>
+            <th style="width: 300px">
                 <label asp-for="Books.First().Title">Tytuł</label>
             </th>
-            <th>
+            <th style="width: 200px">
                 <label asp-for="Books.First().Author.Name">Autor</label>
             </th>
             
-            <th>
+            <th style="width: 200px">
                 <label asp-for="Books.First().BookType">Kategoria</label>
             </th>
-            <th>
-                <label asp-for="Books.First().Epoch">Data publikacji</label>
+            <th style="width: 200px">
+                <label asp-for="Books.First().Epoch">Epoka</label>
             </th>
             
             <th></th>
@@ -46,25 +46,25 @@
     <tbody>
 @foreach (var item in Model.Books) {
         <tr>
-           <td>
+           <td style="width: 100px">
                <img src="@item.ImageUrl"
 			width="60" height="90"   />
            </td>
-            <td>
+            <td style="width: 300px">
                 @item.Title
             </td>
-            <td>
+            <td style="width: 200px">
                 @item.Author.Name
             </td>
             
-            <td>
+            <td style="width: 200px">
                 @item.BookType
             </td>
-            <td>
+            <td style="width: 200px">
                 @item.Epoch
             </td>
             <td>
-                <a  asp-action="Details" class="btn btn-outline-info" asp-route-bookId="@item.Id">Szczegóły</a>
+                <a  asp-action="Details" class="btn btn-outline-info" asp-route-bookId="@item.Id" style="margin-left: 100px">Szczegóły</a>
 
             </td>
         </tr>

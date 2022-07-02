@@ -7,51 +7,57 @@
 
 <h1>Szczegóły</h1>
 
-<h4>Książka</h4>
-    <hr />
-    <div class="col-2 pt-4">
-			<img src="~/@Model.Book.ImageUrl"
-			width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
-		</div>
-    <dl class="row">
-        <dt class = "col-sm-2" hidden>
+<dl class="row">
+    <div class="col-2 pt-2">
+        <img src="@Model.Book.ImageUrl"
+             width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+    </div>
+    <div class="col-10">
+        <dt class="col-sm-2" hidden>
             <label asp-for="ShoppingCartId"></label>
         </dt>
-
-        <dd class = "col-sm-10" hidden>
-            @Model.Book.Id
+        <dd class="col-sm-10" hidden>
+            @Model.ShoppingCartId
         </dd>
-        
-        <dt class = "col-sm-2">
-            <label asp-for="Book.Title">Tytuł</label>
-        </dt>
-        <dd class = "col-sm-10">
-            @Model.Book.Title
-        </dd>
-        <dt class = "col-sm-2">
-            <label asp-for="Book.Author.Name">Autor</label>
-        </dt>
-        <dd class = "col-sm-10">
-            @Model.Book.Author.Name
-        </dd>
-        <dt class = "col-sm-2">
-            <label asp-for="Book.BookType">Kategoria</label>
-        </dt>
-        <dd class = "col-sm-10">
-            @Model.Book.BookType
-        </dd>
-        <dt class = "col-sm-2">
-            <label asp-for="Book.Epoch">Data publikacji</label>
-        </dt>
-        <dd class = "col-sm-10">
-            @Model.Book.Epoch
-        </dd>
-    </dl>
+        <div class="row">
+            <dt class="col-2">
+                <label asp-for="Book.Title">Tytuł</label>
+            </dt>
+            <dd class="col-3">
+                @Model.Book.Title
+            </dd>
+        </div>
+        <div class="row">
+            <dt class="col-2">
+                <label asp-for="Book.Author.Name">Autor</label>
+            </dt>
+            <dd class="col-3">
+                @Model.Book.Author.Name
+            </dd>
+        </div>
+        <div class="row">
+            <dt class="col-2">
+                <label asp-for="Book.BookType">Kategoria</label>
+            </dt>
+            <dd class="col-3">
+                @Model.Book.BookType
+            </dd>
+        </div>
+        <div class="row">
+            <dt class="col-2">
+                <label asp-for="Book.Epoch">Epoka</label>
+            </dt>
+            <dd class="col-3">
+                @Model.Book.Epoch
+            </dd>
+        </div>
+        <div style="margin-top: 50px">
+            <a asp-action="Index" class="btn btn-outline-dark" style="margin-bottom: 10px">Powrót</a>
+            <form method="post">
+                <input hidden asp-for="Book.Id" />
+                <button type="submit" value="Dodaj do koszyka" class="btn btn-primary">Dodaj do wózka</button>
+            </form>
+        </div>
+    </div>
+</dl>
     
-<div>
-    <a asp-action="Index" class="btn btn-outline-dark">Powrót</a>
-    <form method="post">
-        <input hidden asp-for="Book.Id" />
-        <button type="submit" value="Dodaj do koszyka" class="btn btn-primary">Dodaj do wózka</button>
-    </form>
-</div>
