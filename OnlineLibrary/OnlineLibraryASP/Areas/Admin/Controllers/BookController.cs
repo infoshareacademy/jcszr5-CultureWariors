@@ -26,11 +26,14 @@ namespace OnlineLibraryASP.Controllers
 
         public BookController(IBookService bookService,IAuthorService authorService, IWebHostEnvironment webHostEnvironment, IMapper mapper)
         {
+
             //_bookService = new BookService();
             _bookService = bookService;
             _authorService = authorService;
             _webHostEnvironment = webHostEnvironment;
             _mapper = mapper;
+            client = new HttpClient();
+            client.BaseAddress = baseAdress;
         }
         // GET: BookController
         public ActionResult Index(string bookType, string searchString,string searchAuthor)

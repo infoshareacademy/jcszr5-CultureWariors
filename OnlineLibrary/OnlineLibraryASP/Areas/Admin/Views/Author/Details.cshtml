@@ -28,7 +28,7 @@
                 <label asp-for="BooksWriten.First().BookType">Kategoria</label>
             </th>
             <th>
-                <label asp-for="BooksWriten.First().PublicationDate">Data publikacji</label>
+                <label asp-for="BooksWriten.First().Epoch">Data publikacji</label>
             </th>
             
             <th></th>
@@ -44,7 +44,7 @@
                 @item.BookType
             </td>
             <td>
-                @item.PublicationDate
+                @item.Epoch
             </td>
             </tr>}
             </tbody>
