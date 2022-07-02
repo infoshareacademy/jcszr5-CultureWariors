@@ -47,7 +47,7 @@
 @foreach (var item in Model.Books) {
         <tr>
            <td>
-               <img src="~/@item.ImageUrl"
+               <img src="@item.ImageUrl"
 			width="60" height="90"   />
            </td>
             <td>
@@ -65,7 +65,7 @@
             </td>
             <td>
                 <a  asp-action="Details" class="btn btn-outline-info" asp-route-bookId="@item.Id">Szczegóły</a>
-                <a  asp-action="Rent" class="btn btn-outline-info" asp-route-bookId="@item.Id">Wypożycz</a>
+
             </td>
         </tr>
 }
