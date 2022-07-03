@@ -6,11 +6,61 @@
 
 
 <h2>Czy na pewno chcesz usunąć książkę?</h2>
-<div>
-    <partial name="_BookDetails" model="@Model" />
-    
-    <form asp-action="Delete">
-        <input type="submit" value="Usuń" class="btn btn-danger" /> 
-        <a asp-action="Index"class="btn btn-outline-dark">Powrót</a>
-    </form>
-</div>
+
+<dl class="row">
+    <div class="col-2 pt-2">
+        <img src="@Model.ImageUrl"
+             width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+    </div>
+    <div class="col-10">
+        <dt class="col-sm-2" hidden>
+            <label asp-for="Id"></label>
+        </dt>
+        <dd class="col-sm-10" hidden>
+            @Model.Id
+        </dd>
+        <div class="row">
+            <dt class="col-2">
+                <label asp-for="Title">Tytuł</label>
+            </dt>
+            <dd class="col-3">
+                @Model.Title
+            </dd>
+        </div>
+        <div class="row">
+            <dt class="col-2">
+                <label asp-for="Author.Name">Autor</label>
+            </dt>
+            <dd class="col-3">
+                @Model.Author.Name
+            </dd>
+        </div>
+        <div class="row">
+            <dt class="col-2">
+                <label asp-for="BookType">Kategoria</label>
+            </dt>
+            <dd class="col-3">
+                @Model.BookType
+            </dd>
+        </div>
+        <div class="row">
+            <dt class="col-2">
+                <label asp-for="Epoch">Epoka</label>
+            </dt>
+            <dd class="col-3">
+                @Model.Epoch
+            </dd>
+        </div>
+        <div style="margin-top:100px">
+            <form asp-action="Delete">
+                <input type="submit" value="Potwierdź" class="btn btn-danger" /> 
+                <a asp-action="Index" class="btn btn-outline-dark">Powrót</a>
+            </form>
+        </div>
+    </div>
+</dl>
+
+
+
+        
+
