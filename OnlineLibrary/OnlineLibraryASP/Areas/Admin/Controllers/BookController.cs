@@ -89,23 +89,23 @@ namespace OnlineLibraryASP.Controllers
         // POST: BookController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(BookCreateViewModel bookVM, IFormFile? file)
+        public ActionResult Create(BookCreateViewModel bookVM)
         {
             if (ModelState.IsValid)
             {
-                string wwwRootPath = _webHostEnvironment.WebRootPath;
-                if (file != null)
-                {
-                    string fileName = Guid.NewGuid().ToString();
-                    var uploads = Path.Combine(wwwRootPath, @"Images\Books");
-                    var extension = Path.GetExtension(file.FileName);
+                //string wwwRootPath = _webHostEnvironment.WebRootPath;
+                //if (file != null)
+                //{
+                //    string fileName = Guid.NewGuid().ToString();
+                //    var uploads = Path.Combine(wwwRootPath, @"Images\Books");
+                //    var extension = Path.GetExtension(file.FileName);
 
-                    using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
-                    {
-                        file.CopyTo(fileStreams);
-                    }
-                    bookVM.Book.ImageUrl = @"~\Images\Books\" + fileName + extension;
-                }
+                //    using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+                //    {
+                //        file.CopyTo(fileStreams);
+                //    }
+                //    bookVM.Book.ImageUrl = @"~\Images\Books\" + fileName + extension;
+                //}
                 _bookService.Create(bookVM.Book);
             }
             return RedirectToAction("Index");

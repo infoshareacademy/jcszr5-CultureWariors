@@ -28,9 +28,9 @@
                 <span asp-validation-for="Book.Epoch" class="text-danger"></span>
             </div>
 <div class="form-group">
-                <label asp-for="Book.ImageUrl" class="control-label">Okładka</label>
-                <input type="file" id="uploadBox" name="file" class="form-control" style="margin-bottom: 10px" />
-                
+                <label asp-for="Book.ImageUrl" class="control-label">Link do obrazu</label>
+                <input asp-for="Book.ImageUrl"  class="form-control" />
+                <span asp-validation-for="Book.ImageUrl" class="text-danger"></span>
             </div>
 <div class="form-group">
 
