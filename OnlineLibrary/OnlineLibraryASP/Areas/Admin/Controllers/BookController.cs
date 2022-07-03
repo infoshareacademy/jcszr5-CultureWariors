@@ -104,7 +104,7 @@ namespace OnlineLibraryASP.Controllers
                     {
                         file.CopyTo(fileStreams);
                     }
-                    bookVM.Book.ImageUrl = @"Images\Books\" + fileName + extension;
+                    bookVM.Book.ImageUrl = @"~\Images\Books\" + fileName + extension;
                 }
                 _bookService.Create(bookVM.Book);
             }

@@ -19,10 +19,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="Book.BookType" class="control-label">Kategoria</label>
-                <select asp-for="Book.BookType" asp-items="Html.GetEnumSelectList<BookType>()" class="form-control">
-                    <option selected="selected" value="">Wybierz</option>
-                </select>
+                <input asp-for="Book.BookType"  class="form-control" />
                 <span asp-validation-for="Book.BookType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.Epoch" class="control-label">Epoka</label>
+                <input asp-for="Book.Epoch"  class="form-control" />
+                <span asp-validation-for="Book.Epoch" class="text-danger"></span>
             </div>
 <div class="form-group">
                 <label asp-for="Book.ImageUrl" class="control-label">Okładka</label>
