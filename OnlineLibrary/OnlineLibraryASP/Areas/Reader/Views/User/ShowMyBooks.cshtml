@@ -18,17 +18,18 @@
             <th>
                 <label asp-for="First().Book.Author.Name">Autor</label>
             </th>
-            <th>
-                <label asp-for="First().Status">Status</label>
-            </th>
+            
             <th>
                 <label asp-for="First().RentedTime">Wypożyczona</label>
             </th>
             <th>
                 <label asp-for="First().ReturnTime">Data zwrotu</label>
             </th>
-            
-            <th></th>
+            <th>
+                <label asp-for="First().Status">Status</label>
+            </th>
+            @*
+            <th></th>*@
         </tr>
     </thead>
     <tbody>
@@ -45,9 +46,7 @@
                 @item.Book.Author.Name
             </td>
             
-            <td>
-                @item.Status
-            </td>
+            
             <td>
                 @item.RentedTime
             </td>
@@ -55,8 +54,11 @@
                 @item.ReturnTime
             </td>
             <td>
-                <a  asp-action="Details" class="btn btn-outline-info" asp-route-id="@item.Book.Id">Szczegóły</a>
+                @item.Status
             </td>
+            @*<td>
+                <a  asp-action="Details" class="btn btn-outline-info" asp-route-id="@item.Book.Id">Szczegóły</a>
+            </td>*@
         </tr>
 }
     </tbody>

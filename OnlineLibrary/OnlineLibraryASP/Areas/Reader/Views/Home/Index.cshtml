@@ -1,8 +1,22 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@using OnlineLibrary.BLL.Utility
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Witaj w bibliotece online!</h1>
-    <p><a href="https://localhost:7281/Identity/Account/Login">Zaloguj się</a> aby wyświetlić zbiory.</p>
+    @if (User.IsInRole(SD.Role_Reader))
+    {
+       <p>Dzień dobry czytelniku!</p>
+    }
+    else if (User.IsInRole(SD.Role_Admin))
+    {
+        <p>Dzień dobry Adminie!</p>
+    }
+    else
+    {
+        <p><a href="https://localhost:7281/Identity/Account/Login">Zaloguj się</a> aby wyświetlić zbiory.</p>
+    }
+    
 </div>
